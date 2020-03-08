@@ -71,19 +71,19 @@
 			background: DarkSlateGray
 
 		&.spades
-			color: darkslategray;
+			color: darkslategray
 
 		&.clubs
-			color: darkslategray;
+			color: darkslategray
 
 			&.fourColor
 				color: forestgreen
 
 		&.hearts
-			color: orangered;
+			color: orangered
 		
 		&.diamonds
-			color: orangered;
+			color: orangered
 
 			&.fourColor
 				color: royalblue
