@@ -1,16 +1,15 @@
-<script>
-	import draw from 'two-to-seven-triple-draw';
-	const Card = draw.Card;
+<script lang="ts">
+	import { Card } from 'two-to-seven-triple-draw';
 
-	export let bridge = false;
-	export let fourColor = false
-	export let card = null;
+	export let bridge: boolean = false;
+	export let fourColor: boolean = false
+	export let card: Card = null;
+	export let shadow: boolean = false;
 
 	const labels = ['top', 'bottom',];
 
 	$: empty = (card === undefined);
-	$: hidden = (card === null);
-	$: shadow = (card === 'shadow');
+	$: hidden = (card === null && !shadow);
 	$: visible = !(empty || hidden || shadow);
 
 	$: rank = visible && card.toString(Card.StringType.ShortValue).replace('T', '10');
@@ -29,7 +28,7 @@
 	class:visible
 >
 	{#each labels as label}
-		<div class='{label} label'>
+		<div aria-hidden="true" class='{label} label'>
 			<div class='rank'>{rank}</div>
 			<div class='suit'>{suit}&#xFE0E;</div>
 		</div>

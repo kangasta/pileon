@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Card from './Card.svelte';
 
 	export let bridge=false;
@@ -23,11 +23,11 @@
 	on:click={onClick}
 >
 	<Card card={topCard} bridge={bridge} fourColor={fourColor}/>
-	{#each shadows as shadow, i}
+	{#each shadows as _, i}
 		<div
 			class='shadow-container'
 			style='transform: {getTranslate(i/numShadows*numCards)}'>
-				<Card card='shadow'/>
+				<Card shadow/>
 		</div>
 	{/each}
 </div>
