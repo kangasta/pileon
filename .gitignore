@@ -1,4 +1,7 @@
+/coverage/
 /node_modules/
-/public/build/
 
-.DS_Store
+/public/build/
+/public/index.html
+/public/sw*
+/public/workbox*

@@ -3,41 +3,66 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import typescript from '@rollup/plugin-typescript';
+import css from 'rollup-plugin-css-only';
+import { config } from 'dotenv';
+import replace from '@rollup/plugin-replace';
+import copy from 'rollup-plugin-copy'
+import { generateSW } from 'rollup-plugin-workbox';
 
 import autoPreprocess from 'svelte-preprocess';
 
 const production = !process.env.ROLLUP_WATCH;
+const env = config().parsed;
+const public_url = env.PUBLIC_URL
 
 export default {
-	input: 'src/main.js',
+	input: 'src/main.ts',
 	output: {
-		sourcemap: true,
+		sourcemap: !production,
 		format: 'iife',
 		name: 'app',
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		copy({
+			targets: [
+				{
+					src: 'src/index.html',
+					dest: 'public/',
+					transform: (contents) => contents.toString().replace(/__PUBLIC_URL__/g, (public_url || ''))
+				},
+			],
+		}),
+		replace({
+			process: JSON.stringify({
+				env: {
+					isProd: production,
+					...env
+				}
+			}),
+		}),
+		generateSW({
+			globDirectory: "public/",
+			globPatterns: [
+				"**/*.{css,js,png,html,json}"
+			],
+			swDest: "public/sw.js",
+			navigateFallback: `${public_url}/index.html`,
+		}),
 		svelte({
 			preprocess: autoPreprocess(),
-			// enable run-time checks when not in production
-			dev: !production,
-			// we'll extract any component CSS out into
-			// a separate file - better for performance
-			css: css => {
-				css.write('public/build/bundle.css');
-			}
 		}),
-
-		// If you have external dependencies installed from
-		// npm, you'll most likely need these plugins. In
-		// some cases you'll need additional configuration -
-		// consult the documentation for details:
-		// https://github.com/rollup/plugins/tree/master/packages/commonjs
+		css({ output: 'bundle.css' }),
 		resolve({
 			browser: true,
 			dedupe: ['svelte']
 		}),
 		commonjs(),
+		typescript({
+			sourceMap: !production,
+			inlineSources: !production
+		}),
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated

@@ -1,3 +1,9 @@
 # pakka
 
-[![Build Status](https://travis-ci.org/kangasta/pakka.svg?branch=master)](https://travis-ci.org/kangasta/pakka)
+## Development
+
+Create production build by running npm run build.
+
+```sh
+npm run build
+```

@@ -1,15 +1,12 @@
-<script>
+<script lang="ts">
 	import Deck from './Deck.svelte';
-	import draw from 'two-to-seven-triple-draw';
-
-	const DeckUtils = draw.Deck;
+	import { Deck as DeckUtils, Card} from 'two-to-seven-triple-draw';
 
 	let source = new DeckUtils();
 	let numCards = source.cardsRemaining;
-	let card = null;
+	let card: Card = null;
 
 	function onClick() {
-		console.log('asd')
 		if (card !== undefined) {
 			// updateCard
 			card = source.pop();
@@ -26,11 +23,10 @@
 	<Deck onClick={onClick} topCard={card} numCards={numCards} fourColor={false}/>
 </main>
 
-<style>
-	main {
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
+<style lang="sass">
+	main
+		position: fixed
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
 </style>
