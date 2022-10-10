@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Deck from './Deck.svelte';
+	import Footer from './Footer.svelte';
 	import { Deck as DeckUtils, Card} from 'two-to-seven-triple-draw';
 
 	let source = new DeckUtils();
@@ -22,11 +23,12 @@
 <main>
 	<Deck onClick={onClick} topCard={card} numCards={numCards} fourColor={false}/>
 </main>
+<Footer />
 
 <style lang="sass">
 	main
-		position: fixed
-		top: 50%
-		left: 50%
-		transform: translate(-50%, -50%)
+		flex: 1
+		display: flex
+		align-items: center
+		justify-content: center
 </style>
