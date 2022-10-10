@@ -56,36 +56,36 @@
 
 		&.visible
 			border-width: 0
-			background-color: white
+			background-color: var(--background-card)
 
 		&.hidden:not(.visible)
 			border: $borderWidth white solid
 			background: repeating-linear-gradient(60deg, transparent, transparent 0.35em, white 0.05em, white 0.4em), repeating-linear-gradient(-60deg, orangered, orangered 0.35em, white 0.05em, white 0.4em)
 
 		&.empty:not(.visible)
-			border: DarkSlateGray $borderWidth solid
+			border: var(--text-primary) $borderWidth solid
 			background: transparent
 
 		&.shadow:not(.visible)
-			background: DarkSlateGray
+			background: var(--text-primary)
 
 		&.spades
-			color: darkslategray
+			color: var(--text-black)
 
 		&.clubs
-			color: darkslategray
+			color: var(--text-black)
 
 			&.fourColor
-				color: forestgreen
+				color: var(--text-green)
 
 		&.hearts
-			color: orangered
+			color: var(--text-red)
 		
 		&.diamonds
-			color: orangered
+			color: var(--text-red)
 
 			&.fourColor
-				color: royalblue
+				color: var(--text-blue)
 
 	.label
 		visibility: hidden
@@ -111,7 +111,7 @@
 			font-size: 1.13em
 
 	.center.face
-		background: navajowhite
+		background: var(--background-highlight)
 		border-radius: 0.25em
 		position: absolute
 		padding: 0.1em
@@ -123,5 +123,4 @@
 
 		.card.bridge &
 			width: 1.7em
-
 </style>
