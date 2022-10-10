@@ -2,7 +2,8 @@
 	const getFromEnv = (key: string): string => {
 		try {
 			// @ts-ignore
-			const value = process.env[key] ?? "";
+			const { env } = process ?? {};
+			const value = env[key] ?? "";
 			return String(value);
 		} catch (_) {
 			return "";
@@ -23,7 +24,8 @@
 </footer>
 
 <style>
-	a, span {
+	a,
+	span {
 		margin-right: 0.5rem;
 	}
 
