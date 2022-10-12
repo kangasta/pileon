@@ -8,7 +8,8 @@ on:
     - main
 
 jobs:
-  build:
+  test:
+    name: Lint and build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -19,4 +20,5 @@ jobs:
       run: npm ci
     - name: Build production bundle
       run: |
+        npm run lint
         npm run build
