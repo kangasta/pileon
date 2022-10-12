@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Card } from "two-to-seven-triple-draw";
+  import Suit from "./Suit.svelte";
 
   export let bridge: boolean = false;
   export let fourColor: boolean = false;
@@ -14,13 +15,12 @@
 
   $: rank =
     visible && card.toString(Card.StringType.ShortValue).replace("T", "10");
-  $: suit = visible && card.toString(Card.StringType.EmojiSuit);
-  $: suitClass = visible && card.toString(Card.StringType.LongSuit);
+  $: suit = visible && card.toString(Card.StringType.LongSuit);
   $: face = visible && card.num % 13 > 9;
 </script>
 
 <div
-  class="card {suitClass}"
+  class="card {suit}"
   class:bridge
   class:fourColor
   class:empty
@@ -30,8 +30,8 @@
 >
   {#each labels as label}
     <div aria-hidden="true" class="{label} label">
-      <div class="rank">{rank}</div>
-      <div class="suit">{suit}&#xFE0E;</div>
+      <div class="rank rank-{rank}">{rank}</div>
+      <div class="suit"><Suit {suit} /></div>
     </div>
     <div class="center" class:face />
   {/each}
@@ -91,11 +91,13 @@
 		visibility: hidden
 
 	.visible .label
-		visibility: visible
-		letter-spacing: -0.15em
-		padding: 0.1em
+		align-items: center
+		display: flex
+		flex-direction: column
+		padding: 0.2em 0.1em
 		position: absolute
-		text-align: center
+		row-gap: 0.3em
+		visibility: visible
 		width: 1em
 
 		&.bottom
@@ -107,8 +109,12 @@
 			left: 0
 			top: 0
 
+		.rank.rank-10
+			letter-spacing: -0.15em
+			padding-right: 0.25em
+
 		.suit
-			font-size: 1.13em
+			font-size: 0.8em
 
 	.center.face
 		background: var(--background-highlight)
