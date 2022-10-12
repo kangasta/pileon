@@ -5,7 +5,19 @@
 
 ## Development
 
-Create production build by running npm run build.
+Lint code by running `npm run lint`.
+
+```sh
+npm run build
+```
+
+Automatically format code by running `npm run format`.
+
+```sh
+npm run format
+```
+
+Create production build by running `npm run build`.
 
 ```sh
 npm run build
