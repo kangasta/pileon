@@ -1,6 +1,6 @@
 {
-  "name": "svelte-app",
-  "version": "1.0.0",
+  "name": "pakka",
+  "version": "0.1.0",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
@@ -13,6 +13,8 @@
     "@rollup/plugin-replace": "^4.0.0",
     "@rollup/plugin-typescript": "^8.5.0",
     "@tsconfig/svelte": "^3.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
     "dotenv": "^16.0.3",
     "eslint": "^8.24",
     "eslint-plugin-svelte3": "^4.0.0",
