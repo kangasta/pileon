@@ -24,11 +24,6 @@
 </footer>
 
 <style>
-  a,
-  span {
-    margin-right: 0.5rem;
-  }
-
   footer {
     font-size: 1rem;
     padding: 2rem 0 1rem 0;
