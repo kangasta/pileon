@@ -16,10 +16,10 @@
 
 <footer>
 	<a href="https://github.com/kangasta/pakka.git" target="_blank">
-		Source code
+		kangasta / pakka
 	</a>
 	{#if commit || tag}
-		<span>Version: {tag} {commit}</span>
+		<span>at {tag} {commit}</span>
 	{/if}
 </footer>
 
