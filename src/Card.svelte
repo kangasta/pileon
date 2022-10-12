@@ -1,43 +1,43 @@
 <script lang="ts">
-	import { Card } from 'two-to-seven-triple-draw';
+  import { Card } from "two-to-seven-triple-draw";
 
-	export let bridge: boolean = false;
-	export let fourColor: boolean = false
-	export let card: Card = null;
-	export let shadow: boolean = false;
+  export let bridge: boolean = false;
+  export let fourColor: boolean = false;
+  export let card: Card = null;
+  export let shadow: boolean = false;
 
-	const labels = ['top', 'bottom',];
+  const labels = ["top", "bottom"];
 
-	$: empty = (card === undefined);
-	$: hidden = (card === null && !shadow);
-	$: visible = !(empty || hidden || shadow);
+  $: empty = card === undefined;
+  $: hidden = card === null && !shadow;
+  $: visible = !(empty || hidden || shadow);
 
-	$: rank = visible && card.toString(Card.StringType.ShortValue).replace('T', '10');
-	$: suit = visible && card.toString(Card.StringType.EmojiSuit);
-	$: suitClass = visible && card.toString(Card.StringType.LongSuit);
-	$: face = visible && (card.num % 13) > 9;
+  $: rank =
+    visible && card.toString(Card.StringType.ShortValue).replace("T", "10");
+  $: suit = visible && card.toString(Card.StringType.EmojiSuit);
+  $: suitClass = visible && card.toString(Card.StringType.LongSuit);
+  $: face = visible && card.num % 13 > 9;
 </script>
 
 <div
-	class='card {suitClass}'
-	class:bridge
-	class:fourColor
-	class:empty
-	class:hidden
-	class:shadow
-	class:visible
+  class="card {suitClass}"
+  class:bridge
+  class:fourColor
+  class:empty
+  class:hidden
+  class:shadow
+  class:visible
 >
-	{#each labels as label}
-		<div aria-hidden="true" class='{label} label'>
-			<div class='rank'>{rank}</div>
-			<div class='suit'>{suit}&#xFE0E;</div>
-		</div>
-		<div class='center' class:face/>
-	{/each}
-
+  {#each labels as label}
+    <div aria-hidden="true" class="{label} label">
+      <div class="rank">{rank}</div>
+      <div class="suit">{suit}&#xFE0E;</div>
+    </div>
+    <div class="center" class:face />
+  {/each}
 </div>
 
-<style lang='sass'>
+<style lang="sass">
 	$borderWidth: 0.2em
 
 	.card
