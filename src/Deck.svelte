@@ -51,7 +51,7 @@
   $: shadows =
     topCard === undefined
       ? []
-      : isShuffling
+      : shuffling
       ? [...Array(numShadows)].map((_, i) => ({
           card: null,
           shadow: false,
@@ -65,7 +65,7 @@
           shadow: true,
           transform: getShadowTranslate(i, numCards, numDecks, numShadows),
         }));
-  $: isShuffling = shuffleAnimationStep > 0;
+  $: shuffling = shuffleAnimationStep > 0;
   $: if (
     topCard === null &&
     numCards === 52 * numDecks &&
@@ -75,10 +75,23 @@
     shuffleAnimationStep = shuffleAnimationSteps + 2;
     handleShuffleStep();
   }
+
+  $: onKeyDown = (e: KeyboardEvent) => {
+    if (["Space", "Enter"].includes(e.code)) {
+      onClick();
+    }
+  };
 </script>
 
-<div class="deck" on:click={onClick}>
-  {#if !isShuffling}
+<div
+  class="deck"
+  class:shuffling
+  role="button"
+  on:keydown={onKeyDown}
+  on:click={onClick}
+  tabindex="0"
+>
+  {#if !shuffling}
     <Card card={topCard} {bridge} {fourColor} />
   {/if}
   {#each shadows as { card, shadow, transform }}
@@ -89,17 +102,26 @@
 </div>
 
 <style lang="sass">
-	.deck
-		position: relative
-		width: 5em
-		height: 7em
-		margin: 0.5em
-		margin-bottom: 1em
-	
-	.shadow-container
-		z-index: -10
-		left: 0
-		top: 0
-		position: absolute
-		transition: transform 250ms
+  .deck
+    position: relative
+    width: 5em
+    height: 7em
+    margin: 0.5em
+    margin-bottom: 1em
+
+  .deck:focus-visible
+    border-radius: 0.25em
+    outline: 4px solid black
+    outline-offset: 4px
+    transition: outline 125ms
+
+    &.shuffling
+      outline-color: rgba(0, 0, 0, 0.25)
+
+  .shadow-container
+    z-index: -10
+    left: 0
+    top: 0
+    position: absolute
+    transition: transform 250ms
 </style>
