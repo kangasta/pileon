@@ -38,95 +38,95 @@
 </div>
 
 <style lang="sass">
-	$borderWidth: 0.2em
+  $borderWidth: 0.2em
 
-	.card
-		border-radius: 0.25em
-		box-sizing: border-box
-		display: inline-block
-		font-family: sans-serif
-		position: relative
-		user-select: none
+  .card
+    border-radius: 0.25em
+    box-sizing: border-box
+    display: inline-block
+    font-family: sans-serif
+    position: relative
+    user-select: none
 
-		width: 5em
-		height: 7em
+    width: 5em
+    height: 7em
 
-		&.bridge
-			width: 4.5em
+    &.bridge
+      width: 4.5em
 
-		&.visible
-			border-width: 0
-			background-color: var(--background-card)
+    &.visible
+      border-width: 0
+      background-color: var(--background-card)
 
-		&.hidden:not(.visible)
-			border: $borderWidth white solid
-			background: repeating-linear-gradient(60deg, transparent, transparent 0.35em, white 0.05em, white 0.4em), repeating-linear-gradient(-60deg, orangered, orangered 0.35em, white 0.05em, white 0.4em)
+    &.hidden:not(.visible)
+      border: $borderWidth white solid
+      background: repeating-linear-gradient(60deg, transparent, transparent 0.35em, white 0.05em, white 0.4em), repeating-linear-gradient(-60deg, orangered, orangered 0.35em, white 0.05em, white 0.4em)
 
-		&.empty:not(.visible)
-			border: var(--text-primary) $borderWidth solid
-			background: transparent
+    &.empty:not(.visible)
+      border: var(--text-primary) $borderWidth solid
+      background: transparent
 
-		&.shadow:not(.visible)
-			background: var(--text-primary)
+    &.shadow:not(.visible)
+      background: var(--text-primary)
 
-		&.spades
-			color: var(--text-black)
+    &.spades
+      color: var(--text-black)
 
-		&.clubs
-			color: var(--text-black)
+    &.clubs
+      color: var(--text-black)
 
-			&.fourColor
-				color: var(--text-green)
+      &.fourColor
+        color: var(--text-green)
 
-		&.hearts
-			color: var(--text-red)
-		
-		&.diamonds
-			color: var(--text-red)
+    &.hearts
+      color: var(--text-red)
 
-			&.fourColor
-				color: var(--text-blue)
+    &.diamonds
+      color: var(--text-red)
 
-	.label
-		visibility: hidden
+      &.fourColor
+        color: var(--text-blue)
 
-	.visible .label
-		align-items: center
-		display: flex
-		flex-direction: column
-		padding: 0.2em 0.1em
-		position: absolute
-		row-gap: 0.3em
-		visibility: visible
-		width: 1em
+  .label
+    visibility: hidden
 
-		&.bottom
-			bottom: 0
-			right: 0
-			transform: rotate(180deg)
+  .visible .label
+    align-items: center
+    display: flex
+    flex-direction: column
+    padding: 0.2em 0.1em
+    position: absolute
+    row-gap: 0.3em
+    visibility: visible
+    width: 1em
 
-		&.top
-			left: 0
-			top: 0
+    &.bottom
+      bottom: 0
+      right: 0
+      transform: rotate(180deg)
 
-		.rank.rank-10
-			letter-spacing: -0.15em
-			padding-right: 0.25em
+    &.top
+      left: 0
+      top: 0
 
-		.suit
-			font-size: 0.8em
+    .rank.rank-10
+      letter-spacing: -0.15em
+      padding-right: 0.25em
 
-	.center.face
-		background: var(--background-highlight)
-		border-radius: 0.25em
-		position: absolute
-		padding: 0.1em
-		height: 5.5em
-		left: 50%
-		top: 50%
-		transform: translate(-50%,-50%)
-		width: 2em
+    .suit
+      font-size: 0.8em
 
-		.card.bridge &
-			width: 1.7em
+  .center.face
+    background: var(--background-highlight)
+    border-radius: 0.25em
+    position: absolute
+    padding: 0.1em
+    height: 5.5em
+    left: 50%
+    top: 50%
+    transform: translate(-50%,-50%)
+    width: 2em
+
+    .card.bridge &
+      width: 1.7em
 </style>

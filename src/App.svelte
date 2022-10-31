@@ -26,9 +26,9 @@
 <Footer />
 
 <style lang="sass">
-	main
-		flex: 1
-		display: flex
-		align-items: center
-		justify-content: center
+  main
+    flex: 1
+    display: flex
+    align-items: center
+    justify-content: center
 </style>

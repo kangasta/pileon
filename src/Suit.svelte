@@ -24,6 +24,6 @@
 </svg>
 
 <style lang="sass">
-	svg
-		height: 1em
+  svg
+    height: 1em
 </style>
