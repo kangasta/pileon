@@ -81,9 +81,11 @@
       onClick();
     }
   };
+  $: deckLabel = topCard === undefined ? "Shuffle the deck" : "Draw a card";
 </script>
 
 <div
+  aria-label={deckLabel}
   class="deck"
   class:shuffling
   role="button"
@@ -91,14 +93,16 @@
   on:click={onClick}
   tabindex="0"
 >
-  {#if !shuffling}
-    <Card card={topCard} {bridge} {fourColor} />
-  {/if}
-  {#each shadows as { card, shadow, transform }}
-    <div class="shadow-container" style="transform: {transform}">
-      <Card {card} {shadow} {bridge} />
-    </div>
-  {/each}
+  <div aria-atomic="true" aria-live="polite">
+    {#if !shuffling}
+      <Card card={topCard} {bridge} {fourColor} />
+    {/if}
+    {#each shadows as { card, shadow, transform }}
+      <div class="shadow-container" style="transform: {transform}">
+        <Card {card} {shadow} {bridge} />
+      </div>
+    {/each}
+  </div>
 </div>
 
 <style lang="sass">

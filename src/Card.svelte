@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Card } from "two-to-seven-triple-draw";
+  import ScreenReaderOnly from "./ScreenReaderOnly.svelte";
   import Suit from "./Suit.svelte";
 
   export let bridge: boolean = false;
@@ -17,6 +18,7 @@
     visible && card.toString(Card.StringType.ShortValue).replace("T", "10");
   $: suit = visible && card.toString(Card.StringType.LongSuit);
   $: face = visible && card.num % 13 > 9;
+  $: text = visible && card.toString(Card.StringType.Long);
 </script>
 
 <div
@@ -28,6 +30,9 @@
   class:shadow
   class:visible
 >
+  {#if visible}
+    <ScreenReaderOnly>{text}</ScreenReaderOnly>
+  {/if}
   {#each labels as label}
     <div aria-hidden="true" class="{label} label">
       <div class="rank rank-{rank}">{rank}</div>
