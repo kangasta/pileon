@@ -52,6 +52,7 @@
     font-family: sans-serif
     position: relative
     user-select: none
+    transition: width 250ms
 
     width: 5em
     height: 7em

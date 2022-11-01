@@ -1,11 +1,10 @@
 <script lang="ts">
+  import { settings } from "./stores";
   import Card from "./Card.svelte";
 
-  export let bridge = false;
   export let numCards = 52;
   export let numDecks = 1;
   export let topCard = null;
-  export let fourColor = false;
   export let numShadows = 10;
   export let shuffleAnimationSteps = 4;
   export let shuffleAnimationMaxDistanceEm = 0.8;
@@ -48,6 +47,8 @@
     }
   }
 
+  $: bridge = $settings.size === "bridge";
+  $: fourColor = $settings.colors === "four-color";
   $: shadows =
     topCard === undefined
       ? []
@@ -87,6 +88,7 @@
 <div
   aria-label={deckLabel}
   class="deck"
+  class:bridge
   class:shuffling
   role="button"
   on:keydown={onKeyDown}
@@ -112,6 +114,9 @@
     height: 7em
     margin: 0.5em
     margin-bottom: 1em
+
+    &.bridge
+      width: 4.5em
 
   .deck:focus-visible
     border-radius: 0.25em
