@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { settings } from "./stores";
+  import { settings } from "../stores";
   import Card from "./Card.svelte";
 
   export let numCards = 52;
