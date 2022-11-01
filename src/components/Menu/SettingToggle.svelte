@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { settings } from "./stores";
+  import { settings } from "../../stores";
 
   export let target: string;
   export let value: string;
