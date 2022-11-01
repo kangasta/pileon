@@ -1,6 +1,7 @@
 <script lang="ts">
   import Deck from "./Deck.svelte";
   import Footer from "./Footer.svelte";
+  import Menu from "./Menu.svelte";
   import { Deck as DeckUtils, Card } from "two-to-seven-triple-draw";
 
   let source = new DeckUtils();
@@ -20,8 +21,9 @@
   }
 </script>
 
+<Menu />
 <main>
-  <Deck {onClick} topCard={card} {numCards} fourColor={false} />
+  <Deck {onClick} topCard={card} {numCards} />
 </main>
 <Footer />
 
