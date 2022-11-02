@@ -110,11 +110,15 @@
 
 <style lang="sass">
   .deck
+    cursor: pointer
     position: relative
     width: 5em
     height: 7em
     margin: 0.5em
     margin-bottom: 1em
+
+    &.shuffling
+      cursor: default
 
     &.bridge
       width: 4.5em

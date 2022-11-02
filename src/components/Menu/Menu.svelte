@@ -44,8 +44,13 @@
       </tr>
     </table>
   </div>
-  <div on:click={onClick}>
-    <button aria-labelledby={labelId} class:open on:click={onClick}>
+  <div on:click={onClick} class="clickable">
+    <button
+      aria-labelledby={labelId}
+      class="clickable"
+      class:open
+      on:click={onClick}
+    >
       <svg viewBox="0 0 16 16 ">
         <path
           fill="none"
@@ -64,6 +69,9 @@
 <style lang="sass">
   .menu
     text-align: center
+
+  .clickable
+    cursor: pointer
 
   .content
     font-size: 1rem

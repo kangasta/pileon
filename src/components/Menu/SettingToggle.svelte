@@ -31,10 +31,12 @@
     color: inherit
     padding: 0
     text-decoration: underline
+    cursor: pointer
 
     &.pressed
+      cursor: default
       text-decoration: none
-    
+
     &:focus-visible
       outline: 3px solid black
       outline-offset: 2px
