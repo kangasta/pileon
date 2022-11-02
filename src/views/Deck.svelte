@@ -4,7 +4,7 @@
   import { Deck as DeckUtils, Card } from "two-to-seven-triple-draw";
   import { defaultAppearanceFn, setCardAppearance } from "../utils/card";
 
-  setCardAppearance(defaultAppearanceFn)
+  setCardAppearance(defaultAppearanceFn);
 
   let source = new DeckUtils();
   let numCards = source.cardsRemaining;
