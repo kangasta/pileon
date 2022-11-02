@@ -2,7 +2,7 @@ import { writable } from "svelte/store";
 
 const settingsKey = "settings";
 
-interface ISettings {
+export interface ISettings {
   colors: "default" | "standard" | "four-color";
   size: "default" | "bridge" | "poker";
 }

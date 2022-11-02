@@ -2,9 +2,9 @@
   import { settings } from "../stores";
   import Deck from "../components/Deck.svelte";
   import { Deck as DeckUtils, Card } from "two-to-seven-triple-draw";
+  import { defaultAppearanceFn, setCardAppearance } from "../utils/card";
 
-  $: bridge = $settings.size === "bridge";
-  $: fourColor = $settings.colors === "four-color";
+  setCardAppearance(defaultAppearanceFn)
 
   let source = new DeckUtils();
   let numCards = source.cardsRemaining;
@@ -24,7 +24,7 @@
 </script>
 
 <main>
-  <Deck {onClick} topCard={card} {numCards} {bridge} {fourColor} />
+  <Deck {onClick} topCard={card} {numCards} />
 </main>
 
 <style lang="sass">

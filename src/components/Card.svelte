@@ -1,10 +1,13 @@
 <script lang="ts">
   import { Card } from "two-to-seven-triple-draw";
+  import { getCardAppearance } from "../utils/card";
   import ScreenReaderOnly from "./ScreenReaderOnly.svelte";
   import Suit from "./Suit.svelte";
 
-  export let bridge: boolean = false;
-  export let fourColor: boolean = false;
+  const cardAppearance = getCardAppearance();
+  $: bridge = $cardAppearance.bridge
+  $: fourColor = $cardAppearance.fourColor
+
   export let card: Card = null;
   export let empty: boolean = false;
   export let shadow: boolean = false;
