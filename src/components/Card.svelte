@@ -6,11 +6,12 @@
   export let bridge: boolean = false;
   export let fourColor: boolean = false;
   export let card: Card = null;
+  export let empty: boolean = false;
   export let shadow: boolean = false;
+  export let stack: "left" = undefined;
 
   const labels = ["top", "bottom"];
 
-  $: empty = card === undefined;
   $: hidden = card === null && !shadow;
   $: visible = !(empty || hidden || shadow);
 
@@ -22,7 +23,7 @@
 </script>
 
 <div
-  class="card {suit}"
+  class="card {suit} stack-{stack}"
   class:bridge
   class:fourColor
   class:empty
@@ -56,6 +57,9 @@
 
     width: 5em
     height: 7em
+
+    &.stack-left
+      box-shadow: -3px 0 2.5px rgba(47, 79, 79, 0.666)
 
     &.bridge
       width: 4.5em

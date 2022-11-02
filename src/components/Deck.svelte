@@ -96,7 +96,7 @@
 >
   <div aria-atomic="true" aria-live="polite">
     {#if !shuffling}
-      <Card card={topCard} {bridge} {fourColor} />
+      <Card card={topCard} empty={topCard === undefined} {bridge} {fourColor} />
     {/if}
     {#each shadows as { card, shadow, transform }}
       <div class="shadow-container" style="transform: {transform}">
