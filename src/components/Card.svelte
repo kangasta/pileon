@@ -5,8 +5,8 @@
   import Suit from "./Suit.svelte";
 
   const cardAppearance = getCardAppearance();
-  $: bridge = $cardAppearance.bridge
-  $: fourColor = $cardAppearance.fourColor
+  $: bridge = $cardAppearance.bridge;
+  $: fourColor = $cardAppearance.fourColor;
 
   export let card: Card = null;
   export let empty: boolean = false;

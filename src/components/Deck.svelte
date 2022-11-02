@@ -3,7 +3,7 @@
   import Card from "./Card.svelte";
 
   const cardAppearance = getCardAppearance();
-  $: bridge = $cardAppearance.bridge
+  $: bridge = $cardAppearance.bridge;
 
   export let numCards = 52;
   export let numDecks = 1;

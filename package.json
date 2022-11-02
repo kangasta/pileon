@@ -5,8 +5,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "eslint": "eslint .",
-    "format": "prettier --write --plugin-search-dir=. src/**/*.html src/**/*.svelte src/**/*.ts",
-    "format:check": "prettier --check --plugin-search-dir=. src/**/*.html src/**/*.svelte src/**/*.ts",
+    "format": "prettier --write --plugin-search-dir=. **{.html,.svelte,.ts}",
+    "format:check": "prettier --check --plugin-search-dir=. **{.html,.svelte,.ts}",
     "lint": "npm run format:check && npm run eslint",
     "start": "sirv public"
   },

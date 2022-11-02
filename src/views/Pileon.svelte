@@ -1,42 +1,56 @@
 <script lang="ts">
   import type { ISettings } from "../stores";
-  import Stack from "../components/Stack/Stack.svelte";
+  import Stack from "../components/Stack.svelte";
   import { setCardAppearance } from "../utils/card";
-  import {getStackDataTransfer} from "../utils/stack";
-  import {canDropFn, deal, getDonePiles, isDraggableFn} from "../utils/pileon";
+  import { getStackDataTransfer } from "../utils/stack";
+  import {
+    canDropFn,
+    deal,
+    getDonePiles,
+    isDraggableFn,
+  } from "../utils/pileon";
 
   setCardAppearance((settings: ISettings) => ({
     bridge: settings.size !== "poker",
     fourColor: settings.colors === "four-color",
-  }))
+  }));
 
   let piles = deal();
-  let donePiles: number[] = []
+  let donePiles: number[] = [];
 
   const handleDrop = (index: number) => (e: DragEvent) => {
     e.preventDefault();
 
-    const {sourceStack, cards} = getStackDataTransfer(e)
+    const { sourceStack, cards } = getStackDataTransfer(e);
 
     if (sourceStack === index) {
-      return
+      return;
     }
 
     if (!canDropFn(cards, piles[index])) {
-      return
+      return;
     }
 
-    piles[sourceStack] = piles[sourceStack].slice(0, piles[sourceStack].length - cards.length)
-    piles[index] = [...piles[index], ...cards]
+    piles[sourceStack] = piles[sourceStack].slice(
+      0,
+      piles[sourceStack].length - cards.length
+    );
+    piles[index] = [...piles[index], ...cards];
 
-    donePiles = getDonePiles(piles)
-  }
+    donePiles = getDonePiles(piles);
+  };
 </script>
 
 <main class="pileon">
   {#each piles as pile, index}
     <div class="pile">
-      <Stack cards={pile} closed={donePiles.includes(index)} {index} {isDraggableFn} on:drop={handleDrop(index)}/>
+      <Stack
+        cards={pile}
+        closed={donePiles.includes(index)}
+        {index}
+        {isDraggableFn}
+        on:drop={handleDrop(index)}
+      />
     </div>
   {/each}
 </main>
