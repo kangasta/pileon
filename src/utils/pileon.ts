@@ -1,4 +1,9 @@
 import { Deck, Card } from "two-to-seven-triple-draw";
+import { stackWidthEm } from "./stack";
+
+export const tableWidthEm = (bridge: boolean) =>
+  stackWidthEm(4, bridge) * 5 + 0.666 * 10;
+export const tableHeightEm = () => 7 * 3 + 0.5 * 6;
 
 /** Deal initial pileon solitaire cards: 13 stacks of 4 cards and 2 empty stacks. */
 export const deal = (): Card[][] => {

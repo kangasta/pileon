@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Card as ICard } from "two-to-seven-triple-draw";
   import Card from "./Card.svelte";
-  import { setStackDataTransfer } from "../utils/stack";
+  import { setStackDataTransfer, stackWidthEm } from "../utils/stack";
   import { getCardAppearance } from "../utils/card";
 
   const cardAppearance = getCardAppearance();
@@ -13,7 +13,7 @@
   export let index = 0;
   export let isDraggableFn: (cards: ICard[]) => boolean = () => false;
 
-  $: style = `width: ${(bridge ? 4.5 : 5) + (capacity - 1) * 1.125}em`;
+  $: style = `width: ${stackWidthEm(capacity, bridge)}em`;
   $: draggable = !closed && isDraggableFn(cards);
   $: hidden = closed && cards.length === 1;
 
