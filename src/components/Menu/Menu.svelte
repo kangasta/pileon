@@ -16,6 +16,15 @@
   <div class="content" class:open>
     <table>
       <tr>
+        <th>Game:</th>
+        <td
+          ><SettingToggle target="game" value="deck" /> / <SettingToggle
+            target="game"
+            value="pileon"
+          />
+        </td>
+      </tr>
+      <tr>
         <th>Colors:</th>
         <td
           ><SettingToggle target="colors" value="default" /> / <SettingToggle
