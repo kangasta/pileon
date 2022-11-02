@@ -3,10 +3,11 @@
   import Pileon from "./views/Pileon.svelte";
   import Footer from "./components/Footer.svelte";
   import Menu from "./components/Menu/Menu.svelte";
+  import { settings } from "./stores";
 
-  const View = location.hash.toLowerCase() === "#pileon" ? Pileon : Deck;
+  $: View = $settings.game === "pileon" ? Pileon : Deck;
 </script>
 
 <Menu />
-<View />
+<svelte:component this={View} />
 <Footer />

@@ -3,11 +3,13 @@ import { writable } from "svelte/store";
 const settingsKey = "settings";
 
 export interface ISettings {
+  game: "deck" | "pileon";
   colors: "default" | "standard" | "four-color";
   size: "default" | "bridge" | "poker";
 }
 
 const defaultSettings: ISettings = {
+  game: "deck",
   colors: "default",
   size: "default",
 };
