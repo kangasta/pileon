@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { settings } from "../stores";
   import Card from "./Card.svelte";
 
+  export let bridge = false;
+  export let fourColor = false;
   export let numCards = 52;
   export let numDecks = 1;
   export let topCard = null;
@@ -47,8 +48,6 @@
     }
   }
 
-  $: bridge = $settings.size === "bridge";
-  $: fourColor = $settings.colors === "four-color";
   $: shadows =
     topCard === undefined
       ? []
