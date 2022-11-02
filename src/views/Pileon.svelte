@@ -47,8 +47,8 @@
 
   let tableWidthPx: number;
   let tableHeightPx: number;
-  $: fontSizeW = (tableWidthPx - 100) / tableWidthEm(bridge);
-  $: fontSizeH = (tableHeightPx - 50) / tableHeightEm();
+  $: fontSizeW = (tableWidthPx - 200) / tableWidthEm(bridge);
+  $: fontSizeH = (tableHeightPx - 100) / tableHeightEm();
   $: style = `font-size: ${Math.min(fontSizeW, fontSizeH)}px`;
 </script>
 
