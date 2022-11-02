@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { getCardAppearance } from "../utils/card";
   import Card from "./Card.svelte";
 
-  export let bridge = false;
-  export let fourColor = false;
+  const cardAppearance = getCardAppearance();
+  $: bridge = $cardAppearance.bridge
+
   export let numCards = 52;
   export let numDecks = 1;
   export let topCard = null;
@@ -96,11 +98,11 @@
 >
   <div aria-atomic="true" aria-live="polite">
     {#if !shuffling}
-      <Card card={topCard} empty={topCard === undefined} {bridge} {fourColor} />
+      <Card card={topCard} empty={topCard === undefined} />
     {/if}
     {#each shadows as { card, shadow, transform }}
       <div class="shadow-container" style="transform: {transform}">
-        <Card {card} {shadow} {bridge} />
+        <Card {card} {shadow} />
       </div>
     {/each}
   </div>

@@ -1,8 +1,14 @@
 <script lang="ts">
-  import type { Card as ICard } from "two-to-seven-triple-draw";
+  import type { ISettings } from "../stores";
   import Stack from "../components/Stack/Stack.svelte";
+  import { setCardAppearance } from "../utils/card";
   import {getStackDataTransfer} from "../utils/stack";
   import {canDropFn, deal, getDonePiles, isDraggableFn} from "../utils/pileon";
+
+  setCardAppearance((settings: ISettings) => ({
+    bridge: settings.size !== "poker",
+    fourColor: settings.colors === "four-color",
+  }))
 
   let piles = deal();
   let donePiles: number[] = []
