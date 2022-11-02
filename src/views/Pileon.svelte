@@ -1,20 +1,36 @@
 <script lang="ts">
+  import type { Card as ICard } from "two-to-seven-triple-draw";
   import Stack from "../components/Stack/Stack.svelte";
-  import { Deck as DeckUtils, Card } from "two-to-seven-triple-draw";
-
-  const deal = (): Card[][] => {
-    const source = new DeckUtils();
-    const piles: Card[][] = [...Array(13)].map(() => source.popN(4));
-    return piles.concat([[], []] as Card[][]);
-  };
+  import {getStackDataTransfer} from "../utils/stack";
+  import {canDropFn, deal, getDonePiles, isDraggableFn} from "../utils/pileon";
 
   let piles = deal();
+  let donePiles: number[] = []
+
+  const handleDrop = (index: number) => (e: DragEvent) => {
+    e.preventDefault();
+
+    const {sourceStack, cards} = getStackDataTransfer(e)
+
+    if (sourceStack === index) {
+      return
+    }
+
+    if (!canDropFn(cards, piles[index])) {
+      return
+    }
+
+    piles[sourceStack] = piles[sourceStack].slice(0, piles[sourceStack].length - cards.length)
+    piles[index] = [...piles[index], ...cards]
+
+    donePiles = getDonePiles(piles)
+  }
 </script>
 
 <main class="pileon">
-  {#each piles as pile}
+  {#each piles as pile, index}
     <div class="pile">
-      <Stack cards={pile} />
+      <Stack cards={pile} closed={donePiles.includes(index)} {index} {isDraggableFn} on:drop={handleDrop(index)}/>
     </div>
   {/each}
 </main>
