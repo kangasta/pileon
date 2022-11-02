@@ -1,12 +1,14 @@
 <script lang="ts">
   import type { ISettings } from "../stores";
   import Stack from "../components/Stack.svelte";
-  import { setCardAppearance } from "../utils/card";
+  import { getCardAppearance, setCardAppearance } from "../utils/card";
   import { getStackDataTransfer } from "../utils/stack";
   import {
     canDropFn,
     deal,
     getDonePiles,
+    tableHeightEm,
+    tableWidthEm,
     isDraggableFn,
   } from "../utils/pileon";
 
@@ -39,9 +41,23 @@
 
     donePiles = getDonePiles(piles);
   };
+
+  const cardAppearance = getCardAppearance();
+  $: bridge = $cardAppearance.bridge;
+
+  let tableWidthPx: number;
+  let tableHeightPx: number;
+  $: fontSizeW = (tableWidthPx - 100) / tableWidthEm(bridge);
+  $: fontSizeH = (tableHeightPx - 50) / tableHeightEm();
+  $: style = `font-size: ${Math.min(fontSizeW, fontSizeH)}px`;
 </script>
 
-<main class="pileon">
+<main
+  bind:clientWidth={tableWidthPx}
+  bind:clientHeight={tableHeightPx}
+  class="pileon"
+  {style}
+>
   {#each piles as pile, index}
     <div class="pile">
       <Stack
@@ -59,12 +75,13 @@
   .pileon
     flex: 1
     flex-wrap: wrap
-    font-size: 0.6em
+    font-size: 0.7em
     display: flex
     align-items: center
     justify-content: center
     max-width: 100vw
 
   .pile
-    margin: 1em
+    margin: 0.5em 0.666em
+    flex-basis: 17.5%
 </style>
