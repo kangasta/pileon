@@ -13,7 +13,7 @@
   export let index = 0;
   export let isDraggableFn: (cards: ICard[]) => boolean = () => false;
 
-  $: style = `width: ${(bridge ? 4.5 : 5) + capacity * 1.125}em`;
+  $: style = `width: ${(bridge ? 4.5 : 5) + (capacity - 1) * 1.125}em`;
   $: draggable = !closed && isDraggableFn(cards);
   $: hidden = closed && cards.length === 1;
 
