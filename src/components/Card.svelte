@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Card } from "two-to-seven-triple-draw";
   import { getCardAppearance } from "../utils/card";
+  import CenterPattern from "./CenterPattern.svelte";
   import ScreenReaderOnly from "./ScreenReaderOnly.svelte";
   import Suit from "./Suit.svelte";
 
@@ -42,7 +43,7 @@
       <div class="rank rank-{rank}">{rank}</div>
       <div class="suit"><Suit {suit} /></div>
     </div>
-    <div class="center" class:face />
+    <div class="center" class:face><CenterPattern {suit} {rank} /></div>
   {/each}
 </div>
 
@@ -129,17 +130,19 @@
     .suit
       font-size: 0.8em
 
-  .center.face
-    background: var(--background-highlight)
+  .center
     border-radius: 0.25em
-    position: absolute
-    padding: 0.1em
     height: 5.5em
     left: 50%
+    padding: 0.1em
+    position: absolute
     top: 50%
     transform: translate(-50%,-50%)
     width: 2em
 
     .card.bridge &
       width: 1.7em
+
+    &.face
+      background: var(--background-highlight)
 </style>

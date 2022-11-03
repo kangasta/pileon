@@ -1,5 +1,6 @@
 <script lang="ts">
   export let suit: string = null;
+  export let flip: boolean = false;
 
   const getPath = (suit: string) => {
     switch (suit) {
@@ -19,11 +20,14 @@
   $: path = getPath(suit);
 </script>
 
-<svg viewBox="0 0 16 20">
+<svg class:flip viewBox="0 0 16 20">
   <path d={path} fill="CurrentColor" />
 </svg>
 
 <style lang="sass">
   svg
     height: 1em
+
+    &.flip
+      transform: scaleY(-1)
 </style>
