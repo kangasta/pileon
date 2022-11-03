@@ -33,6 +33,7 @@
 
 <style lang="sass">
   .center-pattern
+    box-sizing: border-box
     display: flex
     flex-direction: column
     font-size: 0.5em
