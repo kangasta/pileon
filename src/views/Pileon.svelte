@@ -47,8 +47,8 @@
 
   let tableWidthPx: number;
   let tableHeightPx: number;
-  $: fontSizeW = (tableWidthPx - 200) / tableWidthEm(bridge);
-  $: fontSizeH = (tableHeightPx - 100) / tableHeightEm();
+  $: fontSizeW = (tableWidthPx * 0.95) / tableWidthEm(bridge);
+  $: fontSizeH = (tableHeightPx * 0.95) / tableHeightEm();
   $: style = `font-size: ${Math.min(fontSizeW, fontSizeH)}px`;
 </script>
 
@@ -83,5 +83,5 @@
 
   .pile
     margin: 0.5em 0.666em
-    flex-basis: 17.5%
+    flex-basis: 16.7% /* Just above 1/6 */
 </style>
