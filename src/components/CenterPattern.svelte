@@ -1,4 +1,5 @@
 <script lang="ts">
+  import FaceCardIcon from "./FaceCardIcon.svelte";
   import Suit from "./Suit.svelte";
 
   export let suit: string;
@@ -19,16 +20,27 @@
   const getPattern = (rank: string): string[] => patterns[rank] ?? [];
 
   const grow = (line: string) => (line.toUpperCase() === line ? "grow" : "");
+
+  $: face = ["J", "Q", "K"].includes(rank);
 </script>
 
-<div class="center-pattern">
-  {#each getPattern(rank) as line}
-    <div class="row {grow(line)}">
-      {#each line.split("") as char}
-        <span><Suit {suit} flip={char.toLowerCase() === "d"} /></span>
-      {/each}
+<div class="center-pattern" class:face>
+  {#if Object.keys(patterns).includes(rank)}
+    {#each getPattern(rank) as line}
+      <div class="row {grow(line)}">
+        {#each line.split("") as char}
+          <span><Suit {suit} flip={char.toLowerCase() === "d"} /></span>
+        {/each}
+      </div>
+    {/each}
+  {:else}
+    <div class="row grow">
+      <span><FaceCardIcon {rank} /></span>
     </div>
-  {/each}
+    <div class="row grow">
+      <span><FaceCardIcon flip {rank} /></span>
+    </div>
+  {/if}
 </div>
 
 <style lang="sass">
@@ -40,6 +52,9 @@
     height: 100%
     padding: 0 0.25em
     width: 100%
+
+  .face .row
+    font-size: 2.25em
 
   .row
     align-items: center
