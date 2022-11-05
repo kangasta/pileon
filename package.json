@@ -5,10 +5,10 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "eslint": "eslint .",
-    "format": "prettier --write --plugin-search-dir=. **{.html,.svelte,.ts}",
-    "format:check": "prettier --check --plugin-search-dir=. **{.html,.svelte,.ts}",
-    "lint": "npm run format:check && npm run eslint",
-    "start": "sirv public"
+    "start": "sirv public",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "lint": "prettier --plugin-search-dir . --check . && eslint .",
+    "format": "prettier --plugin-search-dir . --write ."
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.2",
