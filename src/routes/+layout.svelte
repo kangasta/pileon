@@ -15,6 +15,15 @@
   });
 </script>
 
-<Menu />
-<slot />
-<Footer />
+<div class="layout">
+  <Menu />
+  <slot />
+  <Footer />
+</div>
+
+<style lang="sass">
+  .layout
+    display: flex
+    min-height: 100vh
+    flex-direction: column
+</style>

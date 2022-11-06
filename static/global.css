@@ -26,9 +26,6 @@ body {
   padding: 1px 0 0 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
 }
 
 @media (max-width: 5em) and (max-height: 7em) {
