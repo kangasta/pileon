@@ -2,7 +2,10 @@
   import Deck from "$lib/components/Deck.svelte";
   import { Deck as DeckUtils, Card } from "two-to-seven-triple-draw";
   import { defaultAppearanceFn, setCardAppearance } from "$lib/utils/card";
+  import { onMount } from "svelte";
+  import { setLatestGame } from "$lib/stores";
 
+  onMount(setLatestGame("deck"));
   setCardAppearance(defaultAppearanceFn);
 
   let source = new DeckUtils();

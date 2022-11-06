@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ISettings } from "$lib/stores";
+  import { setLatestGame, type ISettings } from "$lib/stores";
   import Stack from "$lib/components/Stack.svelte";
   import { getCardAppearance, setCardAppearance } from "$lib/utils/card";
   import { getStackDataTransfer } from "$lib/utils/stack";
@@ -11,6 +11,9 @@
     tableWidthEm,
     isDraggableFn,
   } from "../utils/pileon";
+  import { onMount } from "svelte";
+
+  onMount(setLatestGame("pileon"));
 
   setCardAppearance((settings: ISettings) => ({
     bridge: settings.size !== "poker",
