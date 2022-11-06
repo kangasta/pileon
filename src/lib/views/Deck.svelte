@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { settings } from "$lib/stores";
   import Deck from "$lib/components/Deck.svelte";
   import { Deck as DeckUtils, Card } from "two-to-seven-triple-draw";
   import { defaultAppearanceFn, setCardAppearance } from "$lib/utils/card";

@@ -10,8 +10,8 @@
   $: fourColor = $cardAppearance.fourColor;
 
   export let card: Card = null;
-  export let empty: boolean = false;
-  export let shadow: boolean = false;
+  export let empty = false;
+  export let shadow = false;
   export let stack: "left" = undefined;
 
   const labels = ["top", "bottom"];
