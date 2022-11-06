@@ -64,8 +64,11 @@ a:visited {
   color: var(--text-primary);
 }
 
-a:hover,
-a:focus {
-  outline: none;
+a:hover {
   text-decoration-style: double;
+}
+
+a:focus-visible {
+  border-radius: 0.5em;
+  outline: 3px solid black;
 }

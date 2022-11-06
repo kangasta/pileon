@@ -17,12 +17,7 @@
     <table>
       <tr>
         <th>Game:</th>
-        <td
-          ><SettingToggle target="game" value="deck" /> / <SettingToggle
-            target="game"
-            value="pileon"
-          />
-        </td>
+        <td><a href="/deck">Deck</a> / <a href="/pileon">Pileon</a> </td>
       </tr>
       <tr>
         <th>Colors:</th>

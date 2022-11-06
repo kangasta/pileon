@@ -1,7 +1,8 @@
-/coverage/
-/node_modules/
-
-/public/build/
-/public/index.html
-/public/sw*
-/public/workbox*
+coverage
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example

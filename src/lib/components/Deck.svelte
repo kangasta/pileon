@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { getCardAppearance } from "../utils/card";
-  import Card from "./Card.svelte";
+  import { getCardAppearance } from "$lib/utils/card";
+  import Card from "$lib/components/Card.svelte";
 
   const cardAppearance = getCardAppearance();
   $: bridge = $cardAppearance.bridge;

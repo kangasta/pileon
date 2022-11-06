@@ -1,21 +1,22 @@
 <script lang="ts">
   const getFromEnv = (key: string): string => {
     try {
-      // @ts-ignore
-      const { env } = process ?? {};
-      const value = env[key] ?? "";
-      return String(value);
+      return import.meta.env[key] ?? "";
     } catch (_) {
       return "";
     }
   };
 
-  const tag = getFromEnv("TAG");
-  const commit = getFromEnv("COMMIT").slice(0, 8);
+  const tag = getFromEnv("VITE_TAG");
+  const commit = getFromEnv("VITE_COMMIT").slice(0, 8);
 </script>
 
 <footer>
-  <a href="https://github.com/kangasta/pakka.git" target="_blank">
+  <a
+    href="https://github.com/kangasta/pakka.git"
+    target="_blank"
+    rel="noreferrer"
+  >
     kangasta / pakka
   </a>
   {#if commit || tag}

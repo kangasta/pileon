@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { Card as ICard } from "two-to-seven-triple-draw";
-  import Card from "./Card.svelte";
-  import { setStackDataTransfer, stackWidthEm } from "../utils/stack";
-  import { getCardAppearance } from "../utils/card";
+  import Card from "$lib/components/Card.svelte";
+  import { setStackDataTransfer, stackWidthEm } from "$lib/utils/stack";
+  import { getCardAppearance } from "$lib/utils/card";
 
   const cardAppearance = getCardAppearance();
   $: bridge = $cardAppearance.bridge;

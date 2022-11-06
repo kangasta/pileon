@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Suit from "./Suit.svelte";
+  import Suit from "$lib/components/Suit.svelte";
 
   export let suit: string;
   export let rank: string;

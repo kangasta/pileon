@@ -17,7 +17,7 @@ jobs:
       - name: Build static file bundle
         run: |
           echo 'PUBLIC_URL="https://kangasta.github.io/pakka"' > .env
-          echo "COMMIT=\"${GITHUB_SHA}\"" >> .env
+          echo "VITE_COMMIT=\"${GITHUB_SHA}\"" >> .env
           npm run build
           cp public/index.html public/404.html
       - name: Deploy to pages

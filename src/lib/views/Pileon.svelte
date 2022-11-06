@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { ISettings } from "../stores";
-  import Stack from "../components/Stack.svelte";
-  import { getCardAppearance, setCardAppearance } from "../utils/card";
-  import { getStackDataTransfer } from "../utils/stack";
+  import type { ISettings } from "$lib/stores";
+  import Stack from "$lib/components/Stack.svelte";
+  import { getCardAppearance, setCardAppearance } from "$lib/utils/card";
+  import { getStackDataTransfer } from "$lib/utils/stack";
   import {
     canDropFn,
     deal,
