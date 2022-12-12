@@ -1,4 +1,5 @@
 <script lang="ts">
+  import IconButton from "./IconButton.svelte";
   import SettingToggle from "./SettingToggle.svelte";
 
   let open = false;
@@ -44,34 +45,12 @@
       </tr>
     </table>
   </div>
-  <div on:click={onClick} class="clickable">
-    <button
-      aria-labelledby={labelId}
-      class="clickable"
-      class:open
-      on:click={onClick}
-    >
-      <svg viewBox="0 0 16 16 ">
-        <path
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1"
-          d="M 4 6 l 4 4 l 4 -4"
-        />
-      </svg>
-    </button>
-    <div class="label" id={labelId}>{label}</div>
-  </div>
+  <IconButton icon={open ? "ChevronUp" : "ChevronDown"} {label} {onClick} />
 </div>
 
 <style lang="sass">
   .menu
     text-align: center
-
-  .clickable
-    cursor: pointer
 
   .content
     font-size: 1rem
@@ -95,28 +74,4 @@
 
       th
         text-align: left
-
-  button
-    appearance: none
-    background: transparent
-    border: 0px none
-    color: inherit
-    padding: 0
-    margin: 1rem 1rem 0rem 1rem
-
-    &:focus-visible
-      outline: 3px solid black
-      border-radius: 0.5em
-
-    &.open svg
-      transform: scaleY(-1)
-
-    svg
-      height: 2rem
-      transition: transform 250ms
-
-  div.label
-    font-size: 1rem
-    font-weight: 600
-    margin-top: -0.75rem
 </style>
