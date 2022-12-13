@@ -1,5 +1,7 @@
 <script lang="ts">
-  import type { ISettings } from "../stores";
+  import { onDestroy, onMount } from "svelte";
+
+  import { actions, type ISettings } from "../stores";
   import Stack from "../components/Stack.svelte";
   import { getCardAppearance, setCardAppearance } from "../utils/card";
   import { getStackDataTransfer } from "../utils/stack";
@@ -17,8 +19,17 @@
     fourColor: settings.colors === "four-color",
   }));
 
-  let piles = deal();
-  let donePiles: number[] = [];
+  let pilesHistory = [deal()];
+  const undo = (e: MouseEvent) => {
+    e.stopPropagation();
+
+    if (pilesHistory.length > 1) {
+      pilesHistory = pilesHistory.slice(0, pilesHistory.length - 1);
+    }
+  };
+
+  $: piles = pilesHistory[pilesHistory.length - 1];
+  $: donePiles = getDonePiles(piles);
 
   const handleDrop = (index: number) => (e: DragEvent) => {
     e.preventDefault();
@@ -29,17 +40,21 @@
       return;
     }
 
-    if (!canDropFn(cards, piles[index])) {
+    const nextPiles = pilesHistory[pilesHistory.length - 1].map((pile) => [
+      ...pile,
+    ]);
+
+    if (!canDropFn(cards, nextPiles[index])) {
       return;
     }
 
-    piles[sourceStack] = piles[sourceStack].slice(
+    nextPiles[sourceStack] = nextPiles[sourceStack].slice(
       0,
-      piles[sourceStack].length - cards.length
+      nextPiles[sourceStack].length - cards.length
     );
-    piles[index] = [...piles[index], ...cards];
+    nextPiles[index] = [...nextPiles[index], ...cards];
 
-    donePiles = getDonePiles(piles);
+    pilesHistory = [...pilesHistory, nextPiles];
   };
 
   const cardAppearance = getCardAppearance();
@@ -50,6 +65,14 @@
   $: fontSizeW = (tableWidthPx * 0.95) / tableWidthEm(bridge);
   $: fontSizeH = (tableHeightPx * 0.95) / tableHeightEm();
   $: style = `font-size: ${Math.min(fontSizeW, fontSizeH)}px`;
+
+  onMount(() => {
+    actions.update((prev) => ({ ...prev, undo }));
+  });
+
+  onDestroy(() => {
+    actions.update((prev) => ({ ...prev, undo: undefined }));
+  });
 </script>
 
 <main

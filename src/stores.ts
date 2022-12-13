@@ -23,3 +23,11 @@ export const settings = writable(userSettings ?? defaultSettings);
 settings.subscribe((value) =>
   localStorage.setItem(settingsKey, JSON.stringify(value))
 );
+
+export interface IActions {
+  undo?: (e: MouseEvent) => void;
+}
+
+const defaultActions: IActions = {};
+
+export const actions = writable(defaultActions);

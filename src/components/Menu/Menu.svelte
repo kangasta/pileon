@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { actions } from "../../stores";
   import IconButton from "./IconButton.svelte";
   import SettingToggle from "./SettingToggle.svelte";
 
@@ -46,6 +47,9 @@
     </table>
   </div>
   <IconButton icon={open ? "ChevronUp" : "ChevronDown"} {label} {onClick} />
+  {#if $actions.undo !== undefined}
+    <IconButton icon="Undo" label="Undo" onClick={$actions.undo} />
+  {/if}
 </div>
 
 <style lang="sass">
