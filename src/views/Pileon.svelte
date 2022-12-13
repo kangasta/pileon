@@ -6,12 +6,12 @@
   import { getCardAppearance, setCardAppearance } from "../utils/card";
   import { getStackDataTransfer } from "../utils/stack";
   import {
-    canDropFn,
     deal,
     getDonePiles,
     tableHeightEm,
     tableWidthEm,
     isDraggableFn,
+    drop,
   } from "../utils/pileon";
 
   setCardAppearance((settings: ISettings) => ({
@@ -40,21 +40,18 @@
       return;
     }
 
-    const nextPiles = pilesHistory[pilesHistory.length - 1].map((pile) => [
-      ...pile,
-    ]);
+    try {
+      const nextPiles = drop(
+        pilesHistory[pilesHistory.length - 1],
+        sourceStack,
+        index,
+        cards
+      );
 
-    if (!canDropFn(cards, nextPiles[index])) {
-      return;
+      pilesHistory = [...pilesHistory, nextPiles];
+    } catch (_) {
+      // Ignore error for now. The error message could be displayed to the user as well.
     }
-
-    nextPiles[sourceStack] = nextPiles[sourceStack].slice(
-      0,
-      nextPiles[sourceStack].length - cards.length
-    );
-    nextPiles[index] = [...nextPiles[index], ...cards];
-
-    pilesHistory = [...pilesHistory, nextPiles];
   };
 
   const cardAppearance = getCardAppearance();

@@ -1,4 +1,5 @@
 import { Deck, Card } from "two-to-seven-triple-draw";
+import { CardStringType } from "two-to-seven-triple-draw/dist/card";
 import { stackWidthEm } from "./stack";
 
 export const tableWidthEm = (bridge: boolean) =>
@@ -43,6 +44,34 @@ export const canDropFn = (cards: Card[], stack: Card[]): boolean => {
   }
 
   return false;
+};
+
+/** Handle moving cards from source stack to target stack.
+ *
+ * Checks if cards can be dropped to target pile and returns new piles array without modifying the current piles. Throws an error if move is not valid. */
+export const drop = (
+  piles: Card[][],
+  source: number,
+  target: number,
+  cards: Card[]
+): Card[][] => {
+  const nextPiles = piles.map((pile) => [...pile]);
+
+  if (!canDropFn(cards, nextPiles[target])) {
+    throw new Error(
+      `Can not move cards ${cards.map((card) =>
+        card.toString(CardStringType.ShortEmoji)
+      )} from pile ${source} to pile ${target}`
+    );
+  }
+
+  nextPiles[source] = nextPiles[source].slice(
+    0,
+    nextPiles[source].length - cards.length
+  );
+  nextPiles[target] = [...nextPiles[target], ...cards];
+
+  return nextPiles;
 };
 
 /** Determine done piles: pile is done (or ready) when all four cards with the same rank are in the pile. */
