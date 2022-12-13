@@ -117,6 +117,9 @@
     margin: 0.5em
     margin-bottom: 1em
 
+    // Disable blue tap-highlight on mobile chrome
+    -webkit-tap-highlight-color: transparent
+
     &.shuffling
       cursor: default
 
