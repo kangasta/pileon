@@ -12,6 +12,7 @@
     tableWidthEm,
     isDraggableFn,
     drop,
+    autoMove,
   } from "../utils/pileon";
 
   setCardAppearance((settings: ISettings) => ({
@@ -54,6 +55,18 @@
     }
   };
 
+  const handleDoubleClick = (index: number) => (e: MouseEvent) => {
+    e.preventDefault();
+
+    try {
+      const nextPiles = autoMove(pilesHistory[pilesHistory.length - 1], index);
+
+      pilesHistory = [...pilesHistory, nextPiles];
+    } catch (e) {
+      // Ignore error for now. The error message could be displayed to the user as well.
+    }
+  };
+
   const cardAppearance = getCardAppearance();
   $: bridge = $cardAppearance.bridge;
 
@@ -86,6 +99,7 @@
         {index}
         {isDraggableFn}
         on:drop={handleDrop(index)}
+        on:dblclick={handleDoubleClick(index)}
       />
     </div>
   {/each}

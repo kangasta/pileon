@@ -31,6 +31,7 @@
   class="stack"
   {style}
   {draggable}
+  on:dblclick
   on:dragstart={onDragStart}
   on:dragover={onDragOver}
   on:drop
