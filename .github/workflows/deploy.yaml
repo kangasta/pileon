@@ -20,6 +20,7 @@ jobs:
         echo "COMMIT=\"${GITHUB_SHA}\"" >> .env
         npm run build
         cp public/index.html public/404.html
+        touch public/.nojekyll
     - name: Deploy to pages
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
