@@ -25,7 +25,7 @@ settings.subscribe((value) =>
 );
 
 export interface IActions {
-  undo?: (e: MouseEvent) => void;
+  undo?: (e: KeyboardEvent | MouseEvent) => void;
 }
 
 const defaultActions: IActions = {};

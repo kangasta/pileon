@@ -21,7 +21,7 @@
   }));
 
   let pilesHistory = [deal()];
-  const undo = (e: MouseEvent) => {
+  const undo = (e: KeyboardEvent | MouseEvent) => {
     e.stopPropagation();
 
     if (pilesHistory.length > 1) {
