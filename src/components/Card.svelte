@@ -53,7 +53,7 @@
   .card
     border-radius: 0.25em
     box-sizing: border-box
-    display: inline-block
+    display: block
     font-family: sans-serif
     position: relative
     user-select: none
