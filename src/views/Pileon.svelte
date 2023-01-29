@@ -13,7 +13,9 @@
     isDraggableFn,
     drop,
     autoMove,
+    getEqualValues,
   } from "../utils/pileon";
+  import type { Card } from "two-to-seven-triple-draw";
 
   setCardAppearance((settings: ISettings) => ({
     bridge: settings.size !== "poker",
@@ -32,20 +34,15 @@
   $: piles = pilesHistory[pilesHistory.length - 1];
   $: donePiles = getDonePiles(piles);
 
-  const handleDrop = (index: number) => (e: DragEvent) => {
-    e.preventDefault();
+  let selected: [number, Card[]] = [undefined, []];
 
-    const { sourceStack, cards } = getStackDataTransfer(e);
-
-    if (sourceStack === index) {
-      return;
-    }
-
+  const moveCards = (source: number, target: number, cards: Card[]) => {
     try {
+      selected = [undefined, []];
       const nextPiles = drop(
         pilesHistory[pilesHistory.length - 1],
-        sourceStack,
-        index,
+        source,
+        target,
         cards
       );
 
@@ -55,10 +52,45 @@
     }
   };
 
+  const onSelect = (e: CustomEvent<{ index: number }>) => {
+    const [source, cards] = selected;
+    const target = e.detail.index;
+
+    if (donePiles.includes(target)) {
+      return;
+    } else if (source === undefined || cards.length === 0) {
+      // Select all moveable cards from the pile
+      selected = [target, getEqualValues(piles[target])];
+    } else if (source === target) {
+      // Reduce amount of selected cards by one
+      selected = [target, cards.slice(1)];
+    } else if (source !== target) {
+      // Move cards to the target stack
+      moveCards(source, target, cards);
+      selected = [undefined, []];
+    }
+  };
+
+  $: selectedPile = selected[0];
+  $: selectedCards = selected[1];
+
+  const handleDrop = (index: number) => (e: DragEvent) => {
+    e.preventDefault();
+
+    const { sourceStack, cards } = getStackDataTransfer(e);
+
+    if (sourceStack === index) {
+      return;
+    }
+
+    moveCards(sourceStack, index, cards);
+  };
+
   const handleDoubleClick = (index: number) => (e: MouseEvent) => {
     e.preventDefault();
 
     try {
+      selected = [undefined, []];
       const nextPiles = autoMove(pilesHistory[pilesHistory.length - 1], index);
 
       pilesHistory = [...pilesHistory, nextPiles];
@@ -96,10 +128,12 @@
       <Stack
         cards={pile}
         closed={donePiles.includes(index)}
+        selectedCardsN={selectedPile === index ? selectedCards.length : 0}
         {index}
         {isDraggableFn}
         on:drop={handleDrop(index)}
         on:dblclick={handleDoubleClick(index)}
+        on:select={onSelect}
       />
     </div>
   {/each}
