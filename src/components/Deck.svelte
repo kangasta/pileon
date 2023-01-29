@@ -1,5 +1,6 @@
 <script lang="ts">
   import { getCardAppearance } from "../utils/card";
+  import { onSpecificKey } from "../utils/events";
   import Card from "./Card.svelte";
 
   const cardAppearance = getCardAppearance();
@@ -78,11 +79,6 @@
     handleShuffleStep();
   }
 
-  $: onKeyDown = (e: KeyboardEvent) => {
-    if (["Space", "Enter"].includes(e.code)) {
-      onClick();
-    }
-  };
   $: deckLabel = topCard === undefined ? "Shuffle the deck" : "Draw a card";
 </script>
 
@@ -92,7 +88,7 @@
   class:bridge
   class:shuffling
   role="button"
-  on:keydown={onKeyDown}
+  on:keydown={onSpecificKey(["Space", "Enter"], onClick)}
   on:click={onClick}
   tabindex="0"
 >
