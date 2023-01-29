@@ -76,7 +76,8 @@ export const drop = (
   return nextPiles;
 };
 
-const getEqualValues = (stack: Card[]): Card[] => {
+/** Get all cards with equal values from the top of the stack. I.e. cards that can be moved from the stack. */
+export const getEqualValues = (stack: Card[]): Card[] => {
   if (stack.length === 1 || haveEqualValues(stack)) {
     return stack;
   }

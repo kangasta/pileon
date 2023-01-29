@@ -88,7 +88,9 @@
   class:bridge
   class:shuffling
   role="button"
-  on:keydown={onSpecificKey(["Space", "Enter"], onClick)}
+  on:keydown={onSpecificKey(["Space", "Enter"], onClick, {
+    preventDefault: true,
+  })}
   on:click={onClick}
   tabindex="0"
 >
