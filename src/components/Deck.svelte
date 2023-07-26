@@ -4,8 +4,8 @@
   import Card from "./Card.svelte";
 
   const cardAppearance = getCardAppearance();
-  $: bridge = $cardAppearance.size === "bridge";
-  $: small = $cardAppearance.size === "small";
+  $: bridge = $cardAppearance?.size === "bridge";
+  $: small = $cardAppearance?.size === "small";
 
   export let numCards = 52;
   export let numDecks = 1;

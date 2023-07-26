@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { settings } from "../stores";
   import Deck from "../components/Deck.svelte";
   import { Deck as DeckUtils, Card } from "two-to-seven-triple-draw";
-  import { defaultAppearanceFn, setCardAppearance } from "../utils/card";
+  import { createCardAppearance, defaultAppearanceFn } from "../utils/card";
 
-  setCardAppearance(defaultAppearanceFn);
+  createCardAppearance(defaultAppearanceFn);
 
   let source = new DeckUtils();
   let numCards = source.cardsRemaining;

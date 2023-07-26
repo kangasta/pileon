@@ -4,9 +4,9 @@ import { stackWidthEm } from "./stack";
 import { getCardDimensionsEm, type ICardSize } from "./card";
 
 export const tableWidthEm = (size: ICardSize) =>
-  stackWidthEm(4, size) * 5 + 0.666 * 10;
+  stackWidthEm(4, size) * 5 + (size !== "small" ? 0.666 : 0.333) * 10;
 export const tableHeightEm = (size: ICardSize) =>
-  getCardDimensionsEm(size).height * 3 + 0.5 * 6;
+  getCardDimensionsEm(size).height * 3 + (size !== "small" ? 0.5 : 0.25) * 6;
 
 type Piles = Card[][];
 

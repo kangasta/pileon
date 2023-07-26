@@ -1,6 +1,6 @@
 import { settings as settingsStore, type ISettings } from "../stores";
 import { getContext, setContext } from "svelte";
-import { readable, type Readable } from "svelte/store";
+import { get, writable, type Writable } from "svelte/store";
 
 const bridgeCardWidthEm = 4.5;
 const pokerCardWidthEm = 5;
@@ -40,20 +40,27 @@ export const defaultAppearanceFn: IAppearanceFn = ({ size, colors }) => ({
   fourColor: colors === "four-color",
 });
 
-const createReadableAppearance = (
+export const createCardAppearance = (
   appearanceFn: IAppearanceFn
-): Readable<ICardAppearance> =>
-  readable<ICardAppearance>(defaultCardAppearance, (set) => {
+): Writable<ICardAppearance> => {
+  const appearance = writable<ICardAppearance>(defaultCardAppearance, (set) => {
     settingsStore.subscribe((settings) => set(appearanceFn(settings)));
     return () => undefined;
   });
+  setContext<Writable<ICardAppearance>>(cardAppearanceKey, appearance);
 
-export const setCardAppearance = (appearanceFn: IAppearanceFn): void => {
-  const appearance = createReadableAppearance(appearanceFn);
-  setContext<Readable<ICardAppearance>>(cardAppearanceKey, appearance);
+  return appearance;
 };
 
-export const getCardAppearance = (): Readable<ICardAppearance> => {
-  const data = getContext<Readable<ICardAppearance>>(cardAppearanceKey);
-  return data ?? createReadableAppearance(defaultAppearanceFn);
+export const getCardAppearance = (): Writable<ICardAppearance> => {
+  const appearance = getContext<Writable<ICardAppearance>>(cardAppearanceKey);
+  return appearance;
+};
+
+export const setCardAppearance = (appearanceFn: IAppearanceFn): void => {
+  const appearance = getContext<Writable<ICardAppearance>>(cardAppearanceKey);
+  if (appearance) {
+    const settings = get(settingsStore);
+    appearance.set(appearanceFn(settings));
+  }
 };
