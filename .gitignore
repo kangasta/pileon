@@ -1,7 +1,5 @@
 /coverage/
+/dist/
 /node_modules/
 
-/public/build/
-/public/index.html
-/public/sw*
-/public/workbox*
+vite.config.ts.timestamp-*.mjs

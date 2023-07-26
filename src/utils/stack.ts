@@ -12,7 +12,7 @@ export interface IStackDataTransfer {
 export const setStackDataTransfer = (
   e: DragEvent,
   sourceStack: number,
-  cards: Card[]
+  cards: Card[],
 ): void => {
   const data: IStackDataTransfer = { sourceStack, cards };
   e.dataTransfer.setData("application/json", JSON.stringify(data));
@@ -21,7 +21,7 @@ export const setStackDataTransfer = (
 
 export const getStackDataTransfer = (e: DragEvent): IStackDataTransfer => {
   const { sourceStack, cards: raw_cards } = JSON.parse(
-    e.dataTransfer.getData("application/json")
+    e.dataTransfer.getData("application/json"),
   );
   return { sourceStack, cards: raw_cards.map(Card.fromJSON) };
 };

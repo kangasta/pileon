@@ -60,7 +60,7 @@
         pilesHistory[pilesHistory.length - 1],
         source,
         target,
-        cards
+        cards,
       );
 
       pilesHistory = [...pilesHistory, nextPiles];

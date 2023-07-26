@@ -15,13 +15,13 @@ const defaultSettings: ISettings = {
 };
 
 const userSettings = JSON.parse(
-  localStorage.getItem(settingsKey)
+  localStorage.getItem(settingsKey),
 ) as ISettings | null;
 
 export const settings = writable(userSettings ?? defaultSettings);
 
 settings.subscribe((value) =>
-  localStorage.setItem(settingsKey, JSON.stringify(value))
+  localStorage.setItem(settingsKey, JSON.stringify(value)),
 );
 
 export interface IActions {

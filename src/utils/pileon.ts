@@ -57,21 +57,21 @@ export const drop = (
   piles: Piles,
   source: number,
   target: number,
-  cards: Card[]
+  cards: Card[],
 ): Piles => {
   const nextPiles = piles.map((pile) => [...pile]);
 
   if (!canDropFn(cards, nextPiles[target])) {
     throw new Error(
       `Can not move cards ${cards.map((card) =>
-        card.toString(CardStringType.ShortEmoji)
-      )} from pile ${source} to pile ${target}`
+        card.toString(CardStringType.ShortEmoji),
+      )} from pile ${source} to pile ${target}`,
     );
   }
 
   nextPiles[source] = nextPiles[source].slice(
     0,
-    nextPiles[source].length - cards.length
+    nextPiles[source].length - cards.length,
   );
   nextPiles[target] = [...nextPiles[target], ...cards];
 
@@ -100,7 +100,7 @@ export const autoMove = (piles: Piles, source: number): Piles => {
   const possibleTargets = piles.reduce(
     (targets, pile, i) =>
       i !== source && canDropFn(cards, pile) ? [...targets, i] : targets,
-    [] as number[]
+    [] as number[],
   );
   if (possibleTargets.length === 0) {
     throw new Error(`Cannot move cards from pile ${source} to any other pile`);

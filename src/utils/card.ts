@@ -41,7 +41,7 @@ export const defaultAppearanceFn: IAppearanceFn = ({ size, colors }) => ({
 });
 
 export const createCardAppearance = (
-  appearanceFn: IAppearanceFn
+  appearanceFn: IAppearanceFn,
 ): Writable<ICardAppearance> => {
   const appearance = writable<ICardAppearance>(defaultCardAppearance, (set) => {
     settingsStore.subscribe((settings) => set(appearanceFn(settings)));
