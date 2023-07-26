@@ -3,7 +3,11 @@
 
   import { actions, type ISettings } from "../stores";
   import Stack from "../components/Stack.svelte";
-  import { getCardAppearance, setCardAppearance } from "../utils/card";
+  import {
+    setCardAppearance,
+    type ICardSize,
+    createCardAppearance,
+  } from "../utils/card";
   import { getStackDataTransfer } from "../utils/stack";
   import {
     deal,
@@ -17,10 +21,23 @@
   } from "../utils/pileon";
   import type { Card } from "two-to-seven-triple-draw";
 
-  setCardAppearance((settings: ISettings) => ({
+  let tableWidthPx: number;
+  let tableHeightPx: number;
+
+  let appearance = createCardAppearance((settings: ISettings) => ({
     size: settings.size === "default" ? "bridge" : settings.size,
     fourColor: settings.colors === "four-color",
   }));
+
+  $: {
+    const defaultSize: ICardSize =
+      tableWidthPx < 800 || tableHeightPx < 500 ? "small" : "bridge";
+
+    setCardAppearance((settings: ISettings) => ({
+      size: settings.size === "default" ? defaultSize : settings.size,
+      fourColor: settings.colors === "four-color",
+    }));
+  }
 
   let pilesHistory = [deal()];
   const undo = (e: KeyboardEvent | MouseEvent) => {
@@ -99,11 +116,7 @@
     }
   };
 
-  const cardAppearance = getCardAppearance();
-  $: size = $cardAppearance.size;
-
-  let tableWidthPx: number;
-  let tableHeightPx: number;
+  $: size = $appearance.size;
   $: fontSizeW = (tableWidthPx * 0.95) / tableWidthEm(size);
   $: fontSizeH = (tableHeightPx * 0.95) / tableHeightEm(size);
   $: style = `font-size: ${Math.min(fontSizeW, fontSizeH)}px`;
@@ -117,14 +130,14 @@
   });
 </script>
 
-<main
-  bind:clientWidth={tableWidthPx}
-  bind:clientHeight={tableHeightPx}
-  class="pileon"
-  {style}
->
+<svelte:window
+  bind:innerWidth={tableWidthPx}
+  bind:innerHeight={tableHeightPx}
+/>
+
+<main class="pileon" {style}>
   {#each piles as pile, index}
-    <div class="pile">
+    <div class="pile" class:small={size === "small"}>
       <Stack
         cards={pile}
         closed={donePiles.includes(index)}
@@ -152,4 +165,8 @@
   .pile
     margin: 0.5em 0.666em
     flex-basis: 16.7% /* Just above 1/6 */
+
+    &.small
+      margin: 0.25em 0.333em
+
 </style>
