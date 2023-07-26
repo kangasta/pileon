@@ -18,12 +18,12 @@ jobs:
       run: |
         echo "VITE_COMMIT=\"${GITHUB_SHA}\"" >> .env
         npm run build -- --base https://kangasta.github.io/pakka
-        cp public/index.html public/404.html
-        touch public/.nojekyll
+        cp dist/index.html dist/404.html
+        touch dist/.nojekyll
     - name: Deploy to pages
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: public
+        FOLDER: dist
         CLEAN: true
