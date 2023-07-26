@@ -22,7 +22,7 @@
     iShadow: number,
     numCards: number,
     numDecks: number,
-    numShadows: number
+    numShadows: number,
   ) {
     const i = (iShadow / numShadows) * numCards;
     const x = (0.5 * i) / (numDecks * 52);
@@ -61,7 +61,7 @@
           shadow: false,
           transform: getShuffleTranslate(
             shuffleAnimationStep,
-            shuffleAnimationSteps
+            shuffleAnimationSteps,
           ),
         }))
       : [...Array(numShadows)].map((_, i) => ({

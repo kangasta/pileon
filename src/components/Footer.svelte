@@ -1,17 +1,8 @@
 <script lang="ts">
-  const getFromEnv = (key: string): string => {
-    try {
-      // @ts-ignore
-      const { env } = process ?? {};
-      const value = env[key] ?? "";
-      return String(value);
-    } catch (_) {
-      return "";
-    }
-  };
-
-  const tag = getFromEnv("TAG");
-  const commit = getFromEnv("COMMIT").slice(0, 8);
+  // @ts-ignore
+  const tag = import.meta.env.VITE_TAG ?? "";
+  // @ts-ignore
+  const commit = (import.meta.env.VITE_COMMIT ?? "").slice(0, 8);
 </script>
 
 <footer>
