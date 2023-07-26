@@ -5,7 +5,7 @@ const settingsKey = "settings";
 export interface ISettings {
   game: "deck" | "pileon";
   colors: "default" | "standard" | "four-color";
-  size: "default" | "bridge" | "poker";
+  size: "default" | "bridge" | "poker" | "small";
 }
 
 const defaultSettings: ISettings = {

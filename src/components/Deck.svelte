@@ -4,7 +4,8 @@
   import Card from "./Card.svelte";
 
   const cardAppearance = getCardAppearance();
-  $: bridge = $cardAppearance.bridge;
+  $: bridge = $cardAppearance.size === "bridge";
+  $: small = $cardAppearance.size === "small";
 
   export let numCards = 52;
   export let numDecks = 1;
@@ -86,6 +87,7 @@
   aria-label={deckLabel}
   class="deck"
   class:bridge
+  class:small
   class:shuffling
   role="button"
   on:keydown={onSpecificKey(["Space", "Enter"], onClick, {
@@ -123,6 +125,10 @@
 
     &.bridge
       width: 4.5em
+
+    &.small
+      height: 5em
+      width: 3em
 
   .deck:focus-visible
     border-radius: 0.25em

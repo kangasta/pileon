@@ -18,7 +18,7 @@
   import type { Card } from "two-to-seven-triple-draw";
 
   setCardAppearance((settings: ISettings) => ({
-    bridge: settings.size !== "poker",
+    size: settings.size === "default" ? "bridge" : settings.size,
     fourColor: settings.colors === "four-color",
   }));
 
@@ -100,12 +100,12 @@
   };
 
   const cardAppearance = getCardAppearance();
-  $: bridge = $cardAppearance.bridge;
+  $: size = $cardAppearance.size;
 
   let tableWidthPx: number;
   let tableHeightPx: number;
-  $: fontSizeW = (tableWidthPx * 0.95) / tableWidthEm(bridge);
-  $: fontSizeH = (tableHeightPx * 0.95) / tableHeightEm();
+  $: fontSizeW = (tableWidthPx * 0.95) / tableWidthEm(size);
+  $: fontSizeH = (tableHeightPx * 0.95) / tableHeightEm(size);
   $: style = `font-size: ${Math.min(fontSizeW, fontSizeH)}px`;
 
   onMount(() => {

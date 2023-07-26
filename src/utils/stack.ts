@@ -1,8 +1,8 @@
 import { Card } from "two-to-seven-triple-draw";
-import { bridgeCardWidthEm, pokerCardWidthEm } from "./card";
+import { getCardDimensionsEm, type ICardSize } from "./card";
 
-export const stackWidthEm = (capacity: number, bridge: boolean) =>
-  (bridge ? bridgeCardWidthEm : pokerCardWidthEm) + (capacity - 1) * 1.125;
+export const stackWidthEm = (capacity: number, size: ICardSize) =>
+  getCardDimensionsEm(size).width + (capacity - 1) * 1.125;
 
 export interface IStackDataTransfer {
   sourceStack: number;

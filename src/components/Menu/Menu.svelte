@@ -41,7 +41,10 @@
           ><SettingToggle target="size" value="default" /> / <SettingToggle
             target="size"
             value="bridge"
-          /> / <SettingToggle target="size" value="poker" /></td
+          /> / <SettingToggle target="size" value="poker" /> / <SettingToggle
+            target="size"
+            value="small"
+          /></td
         >
       </tr>
     </table>

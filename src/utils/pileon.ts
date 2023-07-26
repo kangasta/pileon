@@ -1,10 +1,12 @@
 import { Deck, Card } from "two-to-seven-triple-draw";
 import { CardStringType } from "two-to-seven-triple-draw/dist/card";
 import { stackWidthEm } from "./stack";
+import { getCardDimensionsEm, type ICardSize } from "./card";
 
-export const tableWidthEm = (bridge: boolean) =>
-  stackWidthEm(4, bridge) * 5 + 0.666 * 10;
-export const tableHeightEm = () => 7 * 3 + 0.5 * 6;
+export const tableWidthEm = (size: ICardSize) =>
+  stackWidthEm(4, size) * 5 + 0.666 * 10;
+export const tableHeightEm = (size: ICardSize) =>
+  getCardDimensionsEm(size).height * 3 + 0.5 * 6;
 
 type Piles = Card[][];
 
