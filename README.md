@@ -8,7 +8,7 @@
 Lint code by running `npm run lint`.
 
 ```sh
-npm run build
+npm run lint
 ```
 
 Automatically format code by running `npm run format`.

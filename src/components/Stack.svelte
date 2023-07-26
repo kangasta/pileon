@@ -7,7 +7,7 @@
   import { onSpecificKey } from "../utils/events";
 
   const cardAppearance = getCardAppearance();
-  $: bridge = $cardAppearance.bridge;
+  $: size = $cardAppearance.size;
 
   export let cards: ICard[] = [];
   export let capacity = 4;
@@ -18,7 +18,7 @@
   /** Internal prop used to detect if component is the top-level component. */
   export let nested = false;
 
-  $: style = `width: ${stackWidthEm(capacity, bridge)}em`;
+  $: style = `width: ${stackWidthEm(capacity, size)}em`;
   $: draggable = !closed && isDraggableFn(cards);
   $: selected = selectedCardsN > 0 && selectedCardsN === cards.length;
   $: hidden = closed && cards.length === 1;

@@ -6,7 +6,8 @@
   import Suit from "./Suit.svelte";
 
   const cardAppearance = getCardAppearance();
-  $: bridge = $cardAppearance.bridge;
+  $: bridge = $cardAppearance.size === "bridge";
+  $: small = $cardAppearance.size === "small";
   $: fourColor = $cardAppearance.fourColor;
 
   export let card: Card = null;
@@ -29,6 +30,7 @@
 <div
   class="card {suit} stack-{stack}"
   class:bridge
+  class:small
   class:fourColor
   class:empty
   class:hidden
@@ -43,7 +45,11 @@
       <div class="rank rank-{rank}">{rank}</div>
       <div class="suit"><Suit {suit} /></div>
     </div>
-    <div class="center" class:face><CenterPattern {suit} {rank} /></div>
+    <div class="center" class:face>
+      {#if !small}
+        <CenterPattern {suit} {rank} />
+      {/if}
+    </div>
   {/each}
 </div>
 
@@ -57,7 +63,7 @@
     font-family: sans-serif
     position: relative
     user-select: none
-    transition: width 250ms
+    transition: height 250ms, width 250ms
 
     width: 5em
     height: 7em
@@ -67,6 +73,10 @@
 
     &.bridge
       width: 4.5em
+
+    &.small
+      width: 3em
+      height: 5em
 
     &.visible
       border-width: 0
@@ -142,6 +152,10 @@
 
     .card.bridge &
       width: 1.7em
+
+    .card.small &
+      height: 3.5em
+      width: 0.3em
 
     &.face
       background: var(--background-highlight)

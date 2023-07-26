@@ -2,24 +2,41 @@ import { settings as settingsStore, type ISettings } from "../stores";
 import { getContext, setContext } from "svelte";
 import { readable, type Readable } from "svelte/store";
 
-export const bridgeCardWidthEm = 4.5;
-export const pokerCardWidthEm = 5;
+const bridgeCardWidthEm = 4.5;
+const pokerCardWidthEm = 5;
+const smallCardWidthEm = 3;
+
+const cardHeightEm = 7;
+const smallCardHeightEm = 5;
+
+export type ICardSize = "bridge" | "poker" | "small";
+
+export const getCardDimensionsEm = (size: ICardSize) => {
+  switch (size) {
+    case "bridge":
+      return { height: cardHeightEm, width: bridgeCardWidthEm };
+    case "poker":
+      return { height: cardHeightEm, width: pokerCardWidthEm };
+    case "small":
+      return { height: smallCardHeightEm, width: smallCardWidthEm };
+  }
+};
 
 const cardAppearanceKey = "card-appearance";
 
 export interface ICardAppearance {
-  bridge: boolean;
+  size: ICardSize;
   fourColor: boolean;
 }
 
 const defaultCardAppearance: ICardAppearance = {
-  bridge: false,
+  size: "bridge",
   fourColor: false,
 };
 
 type IAppearanceFn = (settings: ISettings) => ICardAppearance;
 export const defaultAppearanceFn: IAppearanceFn = ({ size, colors }) => ({
-  bridge: size === "bridge",
+  size: size === "default" ? "poker" : size,
   fourColor: colors === "four-color",
 });
 
