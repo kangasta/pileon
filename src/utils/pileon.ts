@@ -3,10 +3,43 @@ import { CardStringType } from "two-to-seven-triple-draw/dist/card";
 import { stackWidthEm } from "./stack";
 import { getCardDimensionsEm, type ICardSize } from "./card";
 
-export const tableWidthEm = (size: ICardSize) =>
-  stackWidthEm(4, size) * 5 + (size !== "small" ? 0.666 : 0.333) * 10;
-export const tableHeightEm = (size: ICardSize) =>
-  getCardDimensionsEm(size).height * 3 + (size !== "small" ? 0.5 : 0.25) * 6;
+const getStacksGrid = (
+  mainWidth: number,
+  innerHeight: number,
+): [number, number] => {
+  const aspectRatio = mainWidth / innerHeight;
+
+  if (aspectRatio < 3 / 4) return [3, 5];
+  if (aspectRatio < 4 / 3) return [4, 4];
+  return [5, 3];
+};
+
+export const fillerStacks = (
+  mainWidth: number,
+  innerHeight: number,
+): { length: number } => {
+  const [i, j] = getStacksGrid(mainWidth, innerHeight);
+  return { length: i * j - 15 };
+};
+
+export const calculateFontSize = (
+  size: ICardSize,
+  mainWidth: number,
+  mainHeight: number,
+  innerHeight: number,
+): number => {
+  const [i, j] = getStacksGrid(mainWidth, innerHeight);
+  const tableWidthEm =
+    stackWidthEm(4, size) * i + (size !== "small" ? 0.666 : 0.333) * 10;
+  const fontSizeW = (mainWidth * 0.95) / tableWidthEm;
+
+  const tableHeightEm =
+    getCardDimensionsEm(size).height * j + (size !== "small" ? 0.5 : 0.25) * 6;
+  const tableHeight = mainHeight > 600 ? mainHeight : innerHeight;
+  const fontSizeH = (tableHeight * 0.95) / tableHeightEm;
+
+  return Math.min(fontSizeW, fontSizeH);
+};
 
 type Piles = Card[][];
 
