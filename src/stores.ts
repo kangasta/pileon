@@ -9,7 +9,7 @@ export interface ISettings {
 }
 
 const defaultSettings: ISettings = {
-  game: "deck",
+  game: "pileon",
   colors: "default",
   size: "default",
 };
