@@ -1,1 +1,1 @@
-if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('https://kangasta.github.io/pakka/sw.js', { scope: 'https://kangasta.github.io/pakka/' })})}
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('https://pileon.net/sw.js', { scope: 'https://pileon.net/' })})}
