@@ -6,8 +6,8 @@
 </script>
 
 <footer>
-  <a href="https://github.com/kangasta/pakka.git" target="_blank">
-    kangasta / pakka
+  <a href="https://github.com/kangasta/pileon.git" target="_blank">
+    kangasta / pileon
   </a>
   {#if commit || tag}
     <span>at {tag} {commit}</span>
