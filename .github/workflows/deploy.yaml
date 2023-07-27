@@ -17,7 +17,7 @@ jobs:
     - name: Build static file bundle
       run: |
         echo "VITE_COMMIT=\"${GITHUB_SHA}\"" >> .env
-        npm run build -- --base https://kangasta.github.io/pakka
+        npm run build -- --base https://pileon.net/
         cp dist/index.html dist/404.html
         touch dist/.nojekyll
     - name: Deploy to pages

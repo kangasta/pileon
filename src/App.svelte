@@ -5,7 +5,7 @@
   import Menu from "./components/Menu/Menu.svelte";
   import { actions, settings } from "./stores";
 
-  $: View = $settings.game === "pileon" ? Pileon : Deck;
+  $: View = $settings.game === "deck" ? Deck : Pileon;
 
   // Handle global keyboard shortcuts, e.g. undo with ctrl+z.
   const onKeyDown = (e: KeyboardEvent) => {
