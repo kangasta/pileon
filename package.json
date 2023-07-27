@@ -8,17 +8,20 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "eslint": "eslint .",
+    "test": "vitest",
     "format": "prettier --write --plugin-search-dir=. **{.html,.svelte,.ts}",
     "format:check": "prettier --check --plugin-search-dir=. **{.html,.svelte,.ts}",
     "lint": "npm run check && npm run format:check && npm run eslint"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.4.2",
+    "@testing-library/svelte": "^4.0.3",
     "@tsconfig/svelte": "^5.0.0",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "eslint": "^8.24",
     "eslint-plugin-svelte": "^2.32.4",
+    "jsdom": "^22.1.0",
     "prettier": "^3.0.0",
     "prettier-plugin-svelte": "^3.0.1",
     "sass": "^1.55.0",
@@ -28,6 +31,7 @@
     "two-to-seven-triple-draw": "^0.6.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
-    "vite-plugin-pwa": "^0.16.4"
+    "vite-plugin-pwa": "^0.16.4",
+    "vitest": "^0.33.0"
   }
 }
