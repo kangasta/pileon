@@ -12,17 +12,18 @@
   import {
     deal,
     getDonePiles,
-    tableHeightEm,
-    tableWidthEm,
     isDraggableFn,
     drop,
     autoMove,
     getEqualValues,
+    calculateFontSize,
+    fillerStacks,
   } from "../utils/pileon";
   import type { Card } from "two-to-seven-triple-draw";
 
-  let tableWidthPx: number;
-  let tableHeightPx: number;
+  let mainWidth: number;
+  let mainHeight: number;
+  let innerHeight: number;
 
   let appearance = createCardAppearance((settings: ISettings) => ({
     size: settings.size === "default" ? "bridge" : settings.size,
@@ -31,7 +32,7 @@
 
   $: {
     const defaultSize: ICardSize =
-      tableWidthPx < 800 || tableHeightPx < 500 ? "small" : "bridge";
+      mainWidth < 800 || innerHeight < 500 ? "small" : "bridge";
 
     setCardAppearance((settings: ISettings) => ({
       size: settings.size === "default" ? defaultSize : settings.size,
@@ -117,9 +118,8 @@
   };
 
   $: size = $appearance.size;
-  $: fontSizeW = (tableWidthPx * 0.95) / tableWidthEm(size);
-  $: fontSizeH = (tableHeightPx * 0.95) / tableHeightEm(size);
-  $: style = `font-size: ${Math.min(fontSizeW, fontSizeH)}px`;
+  $: fontSize = calculateFontSize(size, mainWidth, mainHeight, innerHeight);
+  $: style = `font-size: ${fontSize}px`;
 
   onMount(() => {
     actions.update((prev) => ({ ...prev, undo }));
@@ -130,12 +130,14 @@
   });
 </script>
 
-<svelte:window
-  bind:innerWidth={tableWidthPx}
-  bind:innerHeight={tableHeightPx}
-/>
+<svelte:window bind:innerHeight />
 
-<main class="pileon" {style}>
+<main
+  bind:clientHeight={mainHeight}
+  bind:clientWidth={mainWidth}
+  class="pileon"
+  {style}
+>
   {#each piles as pile, index}
     <div class="pile" class:small={size === "small"}>
       <Stack
@@ -149,6 +151,9 @@
         on:select={onSelect}
       />
     </div>
+  {/each}
+  {#each fillerStacks(mainWidth, innerHeight) as _}
+    <div class="pile" />
   {/each}
 </main>
 
@@ -169,4 +174,9 @@
     &.small
       margin: 0.25em 0.333em
 
+    @media (max-aspect-ratio: 4/3)
+      flex-basis: 20.1% /* Just above 1/5 */
+
+    @media (max-aspect-ratio: 3/4)
+      flex-basis: 25.1% /* Just above 1/4 */
 </style>
