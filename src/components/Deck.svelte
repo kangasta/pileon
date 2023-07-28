@@ -52,6 +52,12 @@
     }
   }
 
+  function handleClick() {
+    if (!shuffling) {
+      return onClick();
+    }
+  }
+
   $: shadows =
     topCard === undefined
       ? []
@@ -85,15 +91,16 @@
 
 <div
   aria-label={deckLabel}
+  aria-disabled={shuffling}
   class="deck"
   class:bridge
   class:small
   class:shuffling
   role="button"
-  on:keydown={onSpecificKey(["Space", "Enter"], onClick, {
+  on:keydown={onSpecificKey(["Space", "Enter"], handleClick, {
     preventDefault: true,
   })}
-  on:click={onClick}
+  on:click={handleClick}
   tabindex="0"
 >
   <div aria-atomic="true" aria-live="polite">
