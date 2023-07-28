@@ -1,21 +1,33 @@
 <script lang="ts">
   import { actions } from "../../stores";
+  import Modal from "../Modal.svelte";
   import IconButton from "./IconButton.svelte";
   import SettingToggle from "./SettingToggle.svelte";
 
   let open = false;
-  const labelId = "menu-toggle-label";
 
-  const onClick = (e: MouseEvent) => {
-    open = !open;
-    e.stopPropagation();
-  };
+  const handleClick =
+    (action: "open" | "close") => (e: MouseEvent | CustomEvent) => {
+      open = action === "open";
+      e.stopPropagation();
+    };
 
   $: label = open ? "Close menu" : "Open menu";
 </script>
 
 <div class="menu">
-  <div class="content" class:open>
+  <IconButton
+    icon={open ? "ChevronUp" : "ChevronDown"}
+    {label}
+    onClick={handleClick("open")}
+  />
+  {#if $actions.undo !== undefined}
+    <IconButton icon="Undo" label="Undo" onClick={$actions.undo} />
+  {/if}
+</div>
+
+{#if open}
+  <Modal on:close={handleClick("close")} title="Settings">
     <table>
       <tr>
         <th>Game:</th>
@@ -48,37 +60,21 @@
         >
       </tr>
     </table>
-  </div>
-  <IconButton icon={open ? "ChevronUp" : "ChevronDown"} {label} {onClick} />
-  {#if $actions.undo !== undefined}
-    <IconButton icon="Undo" label="Undo" onClick={$actions.undo} />
-  {/if}
-</div>
+  </Modal>
+{/if}
 
 <style lang="sass">
   .menu
     text-align: center
 
-  .content
+  table
     font-size: 1rem
-    margin: 0 auto
-    max-height: 0
-    max-width: 90%
-    transform: scaleY(0)
-    width: 480px
-    transition: all 0.4s ease-in-out, transform 0.2s ease-in-out
+    width: 100%
 
-    &.open
-      margin-top: 1.5rem
-      max-height: 100vh
-      transform: scale(1)
+    th,td
+      padding: 0.5em 0
 
-    table
-      width: 100%
-
-      th,td
-        padding: 0.5em 0
-
-      th
-        text-align: left
+    th
+      padding-right: 1em
+      text-align: left
 </style>
