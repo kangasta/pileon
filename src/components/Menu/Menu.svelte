@@ -14,6 +14,9 @@
 </script>
 
 <div class="menu">
+  {#if $actions.shuffle !== undefined}
+    <IconButton icon="Shuffle" label="Shuffle" onClick={$actions.shuffle} />
+  {/if}
   <IconButton icon={"Menu"} label={"Settings"} onClick={handleClick("open")} />
   {#if $actions.undo !== undefined}
     <IconButton icon="Undo" label="Undo" onClick={$actions.undo} />

@@ -9,8 +9,11 @@
     Menu: {
       path: "M 2 4 L 14 4 M 2 8 L 14 8 M 2 12 L 14 12",
     },
+    Shuffle: {
+      path: "M 5 2 L 2 5 L 5 8 M 2 5 L 12 5 M 11 14 L 14 11 L 11 8 M 14 11 L 4 11",
+    },
     Undo: {
-      path: "M 6 2 L 2 6 L 6 10 M 2 6 L 10 6 A 4 4 0 1 1 10 14 L 8 14",
+      path: "M 5 3 L 2 6 L 5 9 M 2 6 L 10 6 A 3 3 0 1 1 10 13 L 8 13",
     },
   };
 

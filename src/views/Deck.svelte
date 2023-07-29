@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { onDestroy, onMount } from "svelte";
+
+  import { actions } from "../stores";
   import Deck from "../components/Deck.svelte";
   import { Deck as DeckUtils, Card } from "two-to-seven-triple-draw";
   import { createCardAppearance, defaultAppearanceFn } from "../utils/card";
@@ -20,6 +23,25 @@
     }
     numCards = source.cardsRemaining;
   }
+
+  const shuffle = (e: KeyboardEvent | MouseEvent) => {
+    e.stopPropagation();
+
+    source = new DeckUtils();
+    card = null;
+    numCards = source.cardsRemaining;
+  };
+
+  onMount(() => {
+    actions.update((prev) => ({ ...prev, shuffle }));
+  });
+
+  onDestroy(() => {
+    actions.update((prev) => ({
+      ...prev,
+      shuffle: undefined,
+    }));
+  });
 </script>
 
 <main>
