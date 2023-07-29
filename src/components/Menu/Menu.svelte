@@ -14,11 +14,7 @@
 </script>
 
 <div class="menu">
-  <IconButton
-    icon={"Menu"}
-    label={"Settings"}
-    onClick={handleClick("open")}
-  />
+  <IconButton icon={"Menu"} label={"Settings"} onClick={handleClick("open")} />
   {#if $actions.undo !== undefined}
     <IconButton icon="Undo" label="Undo" onClick={$actions.undo} />
   {/if}
