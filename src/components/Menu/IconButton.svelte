@@ -1,18 +1,16 @@
 <script lang="ts">
   import { randomString } from "../../utils/components";
 
-  type IIconName = "Undo" | "ChevronDown" | "ChevronUp";
-  const icons: { [key in IIconName]: { path: string; class?: string } } = {
+  type IIconName = "Menu" | "Undo";
+  const icons: { [key in IIconName]: { path: string } } = {
+    Close: {
+      path: "M 3 3 L 13 13 M 3 13 L 13 3"
+    },
+    Menu: {
+      path: "M 2 4 L 14 4 M 2 8 L 14 8 M 2 12 L 14 12"
+    },
     Undo: {
       path: "M 6 2 L 2 6 L 6 10 M 2 6 L 10 6 A 4 4 0 1 1 10 14 L 8 14",
-    },
-    ChevronDown: {
-      path: "M 4 6 L 8 10 L 12 6",
-      class: "transition-transform",
-    },
-    ChevronUp: {
-      path: "M 4 6 L 8 10 L 12 6",
-      class: "transition-transform mirror-y",
     },
   };
 
@@ -30,7 +28,7 @@
     class:open
     on:click={onClick}
   >
-    <svg viewBox="0 0 16 16 " class={icons[icon].class}>
+    <svg viewBox="0 0 16 16">
       <path
         fill="none"
         stroke="currentColor"

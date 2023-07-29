@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as focusTrap from "focus-trap";
   import { createEventDispatcher, onMount } from "svelte";
+  import IconButton from "./Menu/IconButton.svelte";
   import { randomString } from "../utils/components";
 
   export let title: string;
@@ -27,11 +28,11 @@
 
 <div class="backdrop" />
 <div class="modal" {id}>
-  <h2>{title}</h2>
-  <slot />
-  <div class="actions">
-    <button on:click={onClose} type="button">OK</button>
+  <div class="header">
+    <h2>{title}</h2>
+    <IconButton icon="Close" label="Close" onClick={onClose} />
   </div>
+  <slot />
 </div>
 
 <style lang="sass">
@@ -57,7 +58,7 @@
     z-index: 4
 
     font-size: 1rem
-    padding: 0.75em
+    padding: 0 0.75em 2em
 
     box-sizing: border-box
     width: 400px
@@ -68,11 +69,12 @@
     @media (min-width: 400px)
       border-radius: 0.25em
 
-    h2
-      margin: 0.75em 0 1.5em
-      font-size: 1.5em
+    .header
+      display: flex
+      align-items: center
 
-    .actions
-      margin: 1.5em 0 1em
-      text-align: right
+    h2
+      flex: 1
+      font-size: 1.5em
+      margin: 1em 0
 </style>

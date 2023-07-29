@@ -11,14 +11,12 @@
       open = action === "open";
       e.stopPropagation();
     };
-
-  $: label = open ? "Close menu" : "Open menu";
 </script>
 
 <div class="menu">
   <IconButton
-    icon={open ? "ChevronUp" : "ChevronDown"}
-    {label}
+    icon={"Menu"}
+    label={"Settings"}
     onClick={handleClick("open")}
   />
   {#if $actions.undo !== undefined}
