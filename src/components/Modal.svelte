@@ -14,9 +14,12 @@
       onDeactivate: () => onClose(),
     });
     trap.activate();
+    const bodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     return () => {
       trap.deactivate();
+      document.body.style.overflow = bodyOverflow;
     };
   });
 
@@ -44,8 +47,7 @@
     height: 100vh
     width: 100vw
 
-    background: black
-    opacity: 0.5
+    backdrop-filter: blur(5px) brightness(0.5)
     z-index: 4
 
   .modal
