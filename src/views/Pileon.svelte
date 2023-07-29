@@ -49,6 +49,12 @@
     }
   };
 
+  const shuffle = (e: KeyboardEvent | MouseEvent) => {
+    e.stopPropagation();
+
+    pilesHistory = [deal()];
+  };
+
   $: piles = pilesHistory[pilesHistory.length - 1];
   $: donePiles = getDonePiles(piles);
 
@@ -122,11 +128,15 @@
   $: style = `font-size: ${fontSize}px`;
 
   onMount(() => {
-    actions.update((prev) => ({ ...prev, undo }));
+    actions.update((prev) => ({ ...prev, shuffle, undo }));
   });
 
   onDestroy(() => {
-    actions.update((prev) => ({ ...prev, undo: undefined }));
+    actions.update((prev) => ({
+      ...prev,
+      shuffle: undefined,
+      undo: undefined,
+    }));
   });
 </script>
 
