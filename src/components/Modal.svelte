@@ -61,7 +61,7 @@
     padding: 0 0.75em 2em
 
     box-sizing: border-box
-    width: 400px
+    width: 500px
     max-width: 100%
 
     box-shadow: 0 2.5px 5px rgba(0, 0, 0, 0.333)
