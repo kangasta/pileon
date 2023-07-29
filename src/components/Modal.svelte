@@ -68,7 +68,7 @@
 
     box-shadow: 0 2.5px 5px rgba(0, 0, 0, 0.333)
 
-    @media (min-width: 400px)
+    @media (min-width: 501px)
       border-radius: 0.25em
 
     .header
