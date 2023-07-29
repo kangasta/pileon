@@ -1,7 +1,7 @@
 <script lang="ts">
   import { randomString } from "../../utils/components";
 
-  type IIconName = "Close" | "Menu" | "Undo";
+  type IIconName = "Close" | "Menu" | "Shuffle" | "Undo";
   const icons: { [key in IIconName]: { path: string } } = {
     Close: {
       path: "M 3 3 L 13 13 M 3 13 L 13 3",
