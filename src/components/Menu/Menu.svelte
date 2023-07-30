@@ -65,6 +65,7 @@
 
 <style lang="sass">
   .menu
+    margin-bottom: 0.25em
     text-align: center
 
   table
