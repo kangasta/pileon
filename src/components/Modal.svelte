@@ -35,7 +35,9 @@
     <h2>{title}</h2>
     <IconButton icon="Close" label="Close" onClick={onClose} />
   </div>
-  <slot />
+  <div class="content">
+    <slot />
+  </div>
 </div>
 
 <style lang="sass">
@@ -51,6 +53,9 @@
     z-index: 4
 
   .modal
+    display: flex
+    flex-direction: column
+
     position: fixed
     top: 50%
     left: 50%
@@ -61,8 +66,10 @@
 
     font-size: 1rem
     padding: 0 0.75em 2em
+    overflow: hidden
 
     box-sizing: border-box
+    max-height: 90%
     width: 500px
     max-width: 100%
 
@@ -74,6 +81,9 @@
     .header
       display: flex
       align-items: center
+
+    .content
+      overflow: scroll
 
     h2
       flex: 1
