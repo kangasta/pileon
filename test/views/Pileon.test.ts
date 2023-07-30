@@ -1,5 +1,5 @@
 import { render } from "@testing-library/svelte";
-import Pileon from "../../src/views/Pileon.svelte";
+import Pileon from "../../src/views/Pileon";
 
 it("renders the pileon game", async () => {
   const { container } = render(Pileon);

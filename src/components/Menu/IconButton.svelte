@@ -1,10 +1,13 @@
 <script lang="ts">
   import { randomString } from "../../utils/components";
 
-  type IIconName = "Close" | "Menu" | "Shuffle" | "Undo";
+  type IIconName = "Close" | "Help" | "Menu" | "Shuffle" | "Undo";
   const icons: { [key in IIconName]: { path: string } } = {
     Close: {
       path: "M 3 3 L 13 13 M 3 13 L 13 3",
+    },
+    Help: {
+      path: "M 8 12 L 8 12 M 8 10 L 8 9 C 8 7 10 8 10 6 A 2 2 0 1 0 6 6 M 8 1.5 A 6.5 6.5 0 0 1 8 14.5 A 6.5 6.5 0 0 1 8 1.5",
     },
     Menu: {
       path: "M 2 4 L 14 4 M 2 8 L 14 8 M 2 12 L 14 12",

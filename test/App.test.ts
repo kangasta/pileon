@@ -21,6 +21,18 @@ it("displays shuffle and undo buttons", async () => {
   await screen.findByLabelText("Undo");
 });
 
+it("has an help dialog for pileon", async () => {
+  render(App);
+
+  const helpButton = await screen.findByLabelText("Help");
+
+  const helpTitle = "Pileon solitaire";
+  expect(screen.queryByText(helpTitle)).not.toBeInTheDocument();
+
+  await userEvent.click(helpButton);
+  await screen.findByText(helpTitle);
+});
+
 it("allows shuffling the deck", async () => {
   render(App);
 

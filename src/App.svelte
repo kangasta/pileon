@@ -1,6 +1,6 @@
 <script lang="ts">
   import Deck from "./views/Deck.svelte";
-  import Pileon from "./views/Pileon.svelte";
+  import Pileon from "./views/Pileon";
   import Footer from "./components/Footer.svelte";
   import Menu from "./components/Menu/Menu.svelte";
   import { actions, settings } from "./stores";

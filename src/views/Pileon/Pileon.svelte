@@ -1,14 +1,14 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
 
-  import { actions, type ISettings } from "../stores";
-  import Stack from "../components/Stack.svelte";
+  import { actions, type ISettings } from "../../stores";
+  import Stack from "../../components/Stack.svelte";
   import {
     setCardAppearance,
     type ICardSize,
     createCardAppearance,
-  } from "../utils/card";
-  import { getStackDataTransfer } from "../utils/stack";
+  } from "../../utils/card";
+  import { getStackDataTransfer } from "../../utils/stack";
   import {
     deal,
     getDonePiles,
@@ -18,8 +18,9 @@
     getEqualValues,
     calculateFontSize,
     fillerStacks,
-  } from "../utils/pileon";
+  } from "../../utils/pileon";
   import type { Card } from "two-to-seven-triple-draw";
+  import PileonHelp from "./PileonHelp.svelte";
 
   let mainWidth: number;
   let mainHeight: number;
@@ -41,18 +42,26 @@
   }
 
   let pilesHistory = [deal()];
-  const undo = (e: KeyboardEvent | MouseEvent) => {
+
+  let helpOpen = false;
+  const help = (e: KeyboardEvent | MouseEvent) => {
     e.stopPropagation();
 
-    if (pilesHistory.length > 1) {
-      pilesHistory = pilesHistory.slice(0, pilesHistory.length - 1);
-    }
+    helpOpen = true;
   };
 
   const shuffle = (e: KeyboardEvent | MouseEvent) => {
     e.stopPropagation();
 
     pilesHistory = [deal()];
+  };
+
+  const undo = (e: KeyboardEvent | MouseEvent) => {
+    e.stopPropagation();
+
+    if (pilesHistory.length > 1) {
+      pilesHistory = pilesHistory.slice(0, pilesHistory.length - 1);
+    }
   };
 
   $: piles = pilesHistory[pilesHistory.length - 1];
@@ -128,12 +137,13 @@
   $: style = `font-size: ${fontSize}px`;
 
   onMount(() => {
-    actions.update((prev) => ({ ...prev, shuffle, undo }));
+    actions.update((prev) => ({ ...prev, help, shuffle, undo }));
   });
 
   onDestroy(() => {
     actions.update((prev) => ({
       ...prev,
+      help: undefined,
       shuffle: undefined,
       undo: undefined,
     }));
@@ -166,6 +176,13 @@
     <div class="pile" />
   {/each}
 </main>
+{#if helpOpen}
+  <PileonHelp
+    on:close={() => {
+      helpOpen = false;
+    }}
+  />
+{/if}
 
 <style lang="sass">
   .pileon

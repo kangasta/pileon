@@ -25,6 +25,7 @@ settings.subscribe((value) =>
 );
 
 export interface IActions {
+  help?: (e: KeyboardEvent | MouseEvent) => void;
   shuffle?: (e: KeyboardEvent | MouseEvent) => void;
   undo?: (e: KeyboardEvent | MouseEvent) => void;
 }

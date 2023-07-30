@@ -14,6 +14,9 @@
 </script>
 
 <div class="menu">
+  {#if $actions.help !== undefined}
+    <IconButton icon="Help" label="Help" onClick={$actions.help} />
+  {/if}
   {#if $actions.shuffle !== undefined}
     <IconButton icon="Shuffle" label="Shuffle" onClick={$actions.shuffle} />
   {/if}
