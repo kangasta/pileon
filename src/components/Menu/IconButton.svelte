@@ -27,6 +27,8 @@
   const labelId = `${randomString()}-label`;
 </script>
 
+<!-- The <div> element has a child <button> element that handles keyboard interaction -->
+<!-- svelte-ignore a11y-no-static-element-interactions a11y-click-events-have-key-events -->
 <div on:click={onClick} class="icon-button clickable">
   <button
     aria-labelledby={labelId}

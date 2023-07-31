@@ -1,6 +1,10 @@
 module.exports = {
   parser: "@typescript-eslint/parser",
-  extends: ["plugin:svelte/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:svelte/recommended"
+  ],
   plugins: [
     "@typescript-eslint"
   ],
@@ -14,6 +18,6 @@ module.exports = {
     },
   ],
   rules: {
-    "svelte/valid-compile": "warn",
+    'no-undef': 'off',
   },
 };
