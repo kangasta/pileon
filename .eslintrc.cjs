@@ -13,7 +13,4 @@ module.exports = {
       },
     },
   ],
-  rules: {
-    "svelte/valid-compile": "warn",
-  },
 };

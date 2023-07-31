@@ -54,6 +54,7 @@
   on:keydown={onSpecificKey(["Enter", "Space"], onSelect, {
     preventDefault: true,
   })}
+  role="button"
   tabindex={nested ? undefined : 0}
 >
   {#if cards.length === 0}
