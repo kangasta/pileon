@@ -26,7 +26,10 @@ export const checkDeckHasAceOfSpades = async (deck: HTMLElement) => {
   expect(aceOfSpadesN).toEqual(1);
 };
 
-const noop = () => {/* No operation */}; 
+const noop = () => {
+  /* No operation */
+};
+
 export const createFocusTrapMock: any = () => ({
   activate: noop,
   deactivate: noop,
