@@ -30,7 +30,7 @@
 </script>
 
 <div class="backdrop" />
-<div class="modal" {id}>
+<div class="modal" role="dialog" {id}>
   <div class="header">
     <h2>{title}</h2>
     <IconButton icon="Close" label="Close" onClick={onClose} />
@@ -65,7 +65,7 @@
     z-index: 4
 
     font-size: 1rem
-    padding: 0 0.75em 2em
+    padding: 0 1em 2em
     overflow: hidden
 
     box-sizing: border-box

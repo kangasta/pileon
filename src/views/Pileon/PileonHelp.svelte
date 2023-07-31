@@ -7,7 +7,7 @@
     The goal of the pileon solitaire is to rearrange a deck of cards into piles
     of equal ranks from thirteen random piles of four using fifteen piles.
   </p>
-  <p>Rules:</p>
+  <h3>Rules</h3>
   <ul>
     <li>Each pile can contain up to four cards.</li>
     <li>
@@ -20,7 +20,7 @@
       Pile is complete when it contains all four cards with the same rank.
     </li>
   </ul>
-  <p>Moving cards:</p>
+  <h3>Moving cards</h3>
   <ol>
     <li>
       Select the source pile by clicking a pile. Cards to be moved are
