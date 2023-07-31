@@ -2,7 +2,7 @@
   import Modal from "../../components/Modal.svelte";
 </script>
 
-<Modal on:close title="Pileon solitaire">
+<Modal on:close title="How to play?">
   <p>
     The goal of the pileon solitaire is to rearrange a deck of cards into piles
     of equal ranks from thirteen random piles of four using fifteen piles.
