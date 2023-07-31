@@ -1,6 +1,6 @@
 <script lang="ts">
   export let suit: string = null;
-  export let flip: boolean = false;
+  export let flip = false;
 
   const getPath = (suit: string) => {
     switch (suit) {

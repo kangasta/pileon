@@ -1,6 +1,8 @@
 <script lang="ts">
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const tag = import.meta.env.VITE_TAG ?? "";
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const commit = (import.meta.env.VITE_COMMIT ?? "").slice(0, 8);
 </script>

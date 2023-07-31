@@ -62,7 +62,7 @@
     topCard === undefined
       ? []
       : shuffling
-      ? [...Array(numShadows)].map((_, i) => ({
+      ? [...Array(numShadows)].map(() => ({
           card: null,
           shadow: false,
           transform: getShuffleTranslate(
