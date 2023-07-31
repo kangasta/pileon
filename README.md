@@ -7,6 +7,12 @@ Progressive web app that implements Pileon solitaire from the [Aisleriot solitai
 
 ## Development
 
+Install dependencies by running `npm ci`.
+
+```sh
+npm ci
+```
+
 Lint and test code by running `npm run lint` and `npm test`, respectively.
 
 ```sh
