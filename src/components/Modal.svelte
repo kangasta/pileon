@@ -7,6 +7,7 @@
   export let title: string;
 
   const id = `modal-${randomString()}`;
+  const titleId = `${id}-title`;
 
   onMount(() => {
     const trap = focusTrap.createFocusTrap(`#${id}`, {
@@ -30,9 +31,9 @@
 </script>
 
 <div class="backdrop" />
-<div class="modal" {id}>
+<div class="modal" role="dialog" aria-labelledby={titleId} {id}>
   <div class="header">
-    <h2>{title}</h2>
+    <h2 id={titleId}>{title}</h2>
     <IconButton icon="Close" label="Close" onClick={onClose} />
   </div>
   <div class="content">
@@ -65,7 +66,7 @@
     z-index: 4
 
     font-size: 1rem
-    padding: 0 0.75em 2em
+    padding: 0 1em 2em
     overflow: hidden
 
     box-sizing: border-box

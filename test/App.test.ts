@@ -26,11 +26,14 @@ it("has an help dialog for pileon", async () => {
 
   const helpButton = await screen.findByLabelText("Help");
 
-  const helpTitle = "Pileon solitaire";
+  const helpTitle = "How to play?";
   expect(screen.queryByText(helpTitle)).not.toBeInTheDocument();
 
   await userEvent.click(helpButton);
   await screen.findByText(helpTitle);
+
+  // Check dialog role and label
+  expect(await screen.findByRole("dialog")).toHaveAccessibleName(helpTitle);
 });
 
 it("allows shuffling the deck", async () => {
