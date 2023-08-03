@@ -60,6 +60,7 @@
     e.stopPropagation();
 
     if (pilesHistory.length > 1) {
+      selected = [undefined, []];
       pilesHistory = pilesHistory.slice(0, pilesHistory.length - 1);
     }
   };

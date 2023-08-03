@@ -36,6 +36,33 @@ it("has an help dialog for pileon", async () => {
   expect(await screen.findByRole("dialog")).toHaveAccessibleName(helpTitle);
 });
 
+it("clears selected cards on undo in pileon", async () => {
+  render(App);
+
+  // Move card(s) from stack 1 to stack 14
+  const stack1 = await screen.findByLabelText(/Stack 1:.*/);
+  await userEvent.click(stack1);
+  await screen.findByLabelText(/Stack 1:.*[1-4] cards selected.*/);
+  const stack14 = await screen.findByLabelText(/Stack 14:.*/);
+  await userEvent.click(stack14);
+  expect(
+    screen.queryByLabelText(/Stack 1.*cards selected.*/),
+  ).not.toBeInTheDocument();
+
+  // Select cards from stack 2
+  const stack2 = await screen.findByLabelText(/Stack 2:.*/);
+  await userEvent.click(stack2);
+  await screen.findByLabelText(/Stack 2:.*[1-4] cards selected.*/);
+
+  // Undo first move
+  const undoButton = await screen.findByLabelText("Undo");
+  await userEvent.click(undoButton);
+  await screen.findByLabelText(/Stack 14: empty.*/);
+
+  // No cards should be selected
+  expect(screen.queryByLabelText(/.*cards selected.*/)).not.toBeInTheDocument();
+});
+
 it("allows shuffling the deck", async () => {
   render(App);
 
