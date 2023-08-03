@@ -18,6 +18,9 @@ Lint and test code by running `npm run lint` and `npm test`, respectively.
 ```sh
 npm run lint
 npm test
+
+# With coverage analysis
+npm test -- --coverage
 ```
 
 Automatically format code by running `npm run format`.
