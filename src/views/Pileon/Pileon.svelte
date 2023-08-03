@@ -60,6 +60,7 @@
     e.stopPropagation();
 
     if (pilesHistory.length > 1) {
+      selected = [undefined, []];
       pilesHistory = pilesHistory.slice(0, pilesHistory.length - 1);
     }
   };
@@ -164,6 +165,7 @@
         cards={pile}
         closed={donePiles.includes(index)}
         selectedCardsN={selectedPile === index ? selectedCards.length : 0}
+        labelOptions={{ title: `Stack ${index + 1}`, closed: "rank" }}
         {index}
         {isDraggableFn}
         on:drop={handleDrop(index)}

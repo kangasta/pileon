@@ -2,7 +2,11 @@
   import { createEventDispatcher } from "svelte";
   import type { Card as ICard } from "two-to-seven-triple-draw";
   import Card from "./Card.svelte";
-  import { setStackDataTransfer, stackWidthEm } from "../utils/stack";
+  import {
+    setStackDataTransfer,
+    stackLabel,
+    stackWidthEm,
+  } from "../utils/stack";
   import { getCardAppearance } from "../utils/card";
   import { onSpecificKey } from "../utils/events";
 
@@ -15,6 +19,9 @@
   export let index = 0;
   export let isDraggableFn: (cards: ICard[]) => boolean = () => false;
   export let selectedCardsN = 0;
+  export let labelOptions: { title: string; closed?: false | "rank" } = {
+    title: "Stack",
+  };
   /** Internal prop used to detect if component is the top-level component. */
   export let nested = false;
 
@@ -39,9 +46,19 @@
       dispatch("select", { index });
     }
   };
+  $: label = nested
+    ? undefined
+    : stackLabel(
+        labelOptions.title,
+        cards,
+        selectedCardsN,
+        closed,
+        labelOptions.closed,
+      );
 </script>
 
 <div
+  aria-label={label}
   class="stack"
   class:selected
   {style}
@@ -57,24 +74,26 @@
   role="button"
   tabindex={nested ? undefined : 0}
 >
-  {#if cards.length === 0}
-    <Card empty />
-  {:else}
-    <Card card={hidden ? null : cards[0]} stack="left" />
-  {/if}
-  {#if cards.length > 1}
-    <div class="nested">
-      <svelte:self
-        cards={cards.slice(1)}
-        capacity={capacity - 1}
-        nested={true}
-        {closed}
-        {index}
-        {isDraggableFn}
-        {selectedCardsN}
-      />
-    </div>
-  {/if}
+  <div aria-hidden={nested ? undefined : "true"}>
+    {#if cards.length === 0}
+      <Card empty />
+    {:else}
+      <Card card={hidden ? null : cards[0]} stack="left" />
+    {/if}
+    {#if cards.length > 1}
+      <div class="nested">
+        <svelte:self
+          cards={cards.slice(1)}
+          capacity={capacity - 1}
+          nested={true}
+          {closed}
+          {index}
+          {isDraggableFn}
+          {selectedCardsN}
+        />
+      </div>
+    {/if}
+  </div>
 </div>
 
 <style lang="sass">
