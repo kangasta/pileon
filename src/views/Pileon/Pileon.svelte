@@ -164,6 +164,7 @@
         cards={pile}
         closed={donePiles.includes(index)}
         selectedCardsN={selectedPile === index ? selectedCards.length : 0}
+        labelOptions={{ title: `Stack ${index + 1}`, closed: "rank" }}
         {index}
         {isDraggableFn}
         on:drop={handleDrop(index)}
