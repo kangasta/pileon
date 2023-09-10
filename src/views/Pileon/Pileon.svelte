@@ -53,6 +53,7 @@
   const shuffle = (e: KeyboardEvent | MouseEvent) => {
     e.stopPropagation();
 
+    selected = [undefined, []];
     pilesHistory = [deal()];
   };
 
