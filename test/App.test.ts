@@ -63,6 +63,22 @@ it("clears selected cards on undo in pileon", async () => {
   expect(screen.queryByLabelText(/.*cards selected.*/)).not.toBeInTheDocument();
 });
 
+it("clears selected cards on shuffle in pileon", async () => {
+  render(App);
+
+  // Select card(s) from stack 1
+  const stack1 = await screen.findByLabelText(/Stack 1:.*/);
+  await userEvent.click(stack1);
+  await screen.findByLabelText(/Stack 1:.*[1-4] cards selected.*/);
+
+  // Shuffle the cards
+  const shuffleButton = await screen.findByLabelText("Shuffle");
+  await userEvent.click(shuffleButton);
+
+  // No cards should be selected
+  expect(screen.queryByLabelText(/.*cards selected.*/)).not.toBeInTheDocument();
+});
+
 it("allows shuffling the deck", async () => {
   render(App);
 
