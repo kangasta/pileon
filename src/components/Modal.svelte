@@ -84,7 +84,7 @@
       align-items: center
 
     .content
-      overflow: scroll
+      overflow: auto
 
     h2
       flex: 1
