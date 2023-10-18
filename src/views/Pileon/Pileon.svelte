@@ -18,9 +18,11 @@
     getEqualValues,
     calculateFontSize,
     fillerStacks,
+    isDeadEnd,
   } from "../../utils/pileon";
   import type { Card } from "two-to-seven-triple-draw";
   import PileonHelp from "./PileonHelp.svelte";
+  import DeadEndModal from "./DeadEndModal.svelte";
 
   let mainWidth: number;
   let mainHeight: number;
@@ -50,14 +52,14 @@
     helpOpen = true;
   };
 
-  const shuffle = (e: KeyboardEvent | MouseEvent) => {
+  const shuffle = (e: CustomEvent | KeyboardEvent | MouseEvent) => {
     e.stopPropagation();
 
     selected = [undefined, []];
     pilesHistory = [deal()];
   };
 
-  const undo = (e: KeyboardEvent | MouseEvent) => {
+  const undo = (e: CustomEvent | KeyboardEvent | MouseEvent) => {
     e.stopPropagation();
 
     if (pilesHistory.length > 1) {
@@ -186,6 +188,7 @@
     }}
   />
 {/if}
+<DeadEndModal {piles} on:shuffle={shuffle} on:undo={undo} />
 
 <style lang="sass">
   .pileon
