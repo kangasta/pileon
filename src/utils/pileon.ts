@@ -41,7 +41,7 @@ export const calculateFontSize = (
   return Math.min(fontSizeW, fontSizeH);
 };
 
-type Piles = Card[][];
+export type Piles = Card[][];
 
 /** Deal initial pileon solitaire cards: 13 stacks of 4 cards and 2 empty stacks. */
 export const deal = (): Piles => {
@@ -144,6 +144,63 @@ export const autoMove = (piles: Piles, source: number): Piles => {
     nonEmptyTargets.length > 0 ? nonEmptyTargets[0] : possibleTargets[0];
 
   return drop(piles, source, target, cards);
+};
+
+const canMoveCardsFromPileTo = (piles: Piles, source: number): number[] => {
+  const cards = piles[source].slice(-1);
+  if (cards.length === 0) {
+    return [];
+  }
+
+  const possibleTargets = piles.reduce(
+    (targets, pile, i) =>
+      i !== source && canDropFn(cards, pile) ? [...targets, i] : targets,
+    [] as number[],
+  );
+  return possibleTargets;
+};
+
+type PossibleMove = [number, number[]];
+type PossibleMoves = PossibleMove[];
+const getPossibleMoves = (piles: Piles) =>
+  piles.reduce((prev, _, i): PossibleMoves => {
+    const targets = canMoveCardsFromPileTo(piles, i);
+    return targets.length === 0 ? prev : [...prev, [i, targets]];
+  }, [] as PossibleMoves);
+
+const hasExactlyOnePossibleMove = (possibleMoves: PossibleMoves) =>
+  possibleMoves.length === 1 && possibleMoves[0][1].length === 1;
+
+const isInfiniteLoop = (a: PossibleMove, b: PossibleMove): boolean => {
+  if (a[1].length !== 1 || b[1].length !== 1) {
+    return false;
+  }
+  return a[0] === b[1][0] && b[0] === a[1][0];
+};
+
+type DeadEndType = "dead-end" | "infinite-loop";
+export const isDeadEnd = (piles: Piles): DeadEndType | false => {
+  const possibleMoves = getPossibleMoves(piles);
+
+  if (possibleMoves.length === 0) {
+    return "dead-end";
+  }
+
+  // Check for infinite loop
+  if (hasExactlyOnePossibleMove(possibleMoves)) {
+    const [source, targets] = possibleMoves[0];
+
+    const nextPiles = drop(piles, source, targets[0], piles[source].slice(-1));
+    const nextPossibleMoves = getPossibleMoves(nextPiles);
+    if (
+      hasExactlyOnePossibleMove(nextPossibleMoves) &&
+      isInfiniteLoop(possibleMoves[0], nextPossibleMoves[0])
+    ) {
+      return "infinite-loop";
+    }
+  }
+
+  return false;
 };
 
 const isDone = (pile: Card[]): boolean =>
