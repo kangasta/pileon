@@ -29,4 +29,11 @@ describe("isDeadEnd", () => {
     ];
     expect(isDeadEnd(piles)).toEqual("multi-infinite-loop");
   });
+  it("recognizes multi-card infinite loops", () => {
+    const piles = [
+      new Cards("J♠ 7♥ 7♦ 7♠"),
+      new Cards("K♥ 7♣"),
+    ];
+    expect(isDeadEnd(piles)).toEqual("multi-infinite-loop");
+  });
 });
