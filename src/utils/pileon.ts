@@ -1,5 +1,5 @@
 import { Deck, Card } from "two-to-seven-triple-draw";
-import { CardStringType } from "two-to-seven-triple-draw/dist/card";
+import { CardStringType, Cards } from "two-to-seven-triple-draw/dist/card";
 import { stackWidthEm } from "./stack";
 import { getCardDimensionsEm, type ICardSize } from "./card";
 
@@ -146,10 +146,13 @@ export const autoMove = (piles: Piles, source: number): Piles => {
   return drop(piles, source, target, cards);
 };
 
-const canMoveCardsFromPileTo = (piles: Piles, source: number): number[] => {
+const canMoveCardsFromPileTo = (
+  piles: Piles,
+  source: number,
+): [number[], Card[]] => {
   const cards = piles[source].slice(-1);
   if (cards.length === 0) {
-    return [];
+    return [[], cards];
   }
 
   const possibleTargets = piles.reduce(
@@ -157,28 +160,60 @@ const canMoveCardsFromPileTo = (piles: Piles, source: number): number[] => {
       i !== source && canDropFn(cards, pile) ? [...targets, i] : targets,
     [] as number[],
   );
-  return possibleTargets;
+  return [possibleTargets, cards];
 };
 
-type PossibleMove = [number, number[]];
+type PossibleMove = [number, number[], Card[]];
 type PossibleMoves = PossibleMove[];
 const getPossibleMoves = (piles: Piles) =>
   piles.reduce((prev, _, i): PossibleMoves => {
-    const targets = canMoveCardsFromPileTo(piles, i);
-    return targets.length === 0 ? prev : [...prev, [i, targets]];
+    const [targets, cards] = canMoveCardsFromPileTo(piles, i);
+    return targets.length === 0 ? prev : [...prev, [i, targets, cards]];
   }, [] as PossibleMoves);
 
-const hasExactlyOnePossibleMove = (possibleMoves: PossibleMoves) =>
-  possibleMoves.length === 1 && possibleMoves[0][1].length === 1;
+const movesEqual = (a: PossibleMove, b: PossibleMove): boolean => {
+  // Source:
+  console.log("source", a[0] !== b[0]);
+  if (a[0] !== b[0]) return false;
 
-const isInfiniteLoop = (a: PossibleMove, b: PossibleMove): boolean => {
-  if (a[1].length !== 1 || b[1].length !== 1) {
-    return false;
+  // Targets:
+  if (a[1].length !== b[1].length) return false;
+  for (let i = 0; i < a[1].length; i++) {
+    if (a[1][i] !== b[1][i]) return false;
   }
-  return a[0] === b[1][0] && b[0] === a[1][0];
+
+  // Cards
+  if (new Cards(a[2]).toString() !== new Cards(b[2]).toString()) return false;
+
+  return true;
 };
 
-type DeadEndType = "dead-end" | "infinite-loop";
+const getIsInfiniteLoop =
+  (piles: Piles) =>
+  (move: PossibleMove, _: number, possibleMoves: PossibleMoves): boolean => {
+    const [source, targets, cards] = move;
+    if (targets.length > 1) {
+      return false;
+    }
+
+    const target = targets[0];
+    const nextPiles = drop(piles, source, target, cards);
+    const nextPossibleMoves = getPossibleMoves(nextPiles);
+
+    const nextPossibleMovesIfLoop = possibleMoves
+      .map(
+        (i): PossibleMove => (i[0] === source ? [target, [source], cards] : i),
+      )
+      .sort((a, b) => a[0] - b[0]);
+
+    if (nextPossibleMoves.length !== nextPossibleMovesIfLoop.length)
+      return false;
+    return nextPossibleMovesIfLoop.every((move, i) =>
+      movesEqual(move, nextPossibleMoves[i]),
+    );
+  };
+
+type DeadEndType = "dead-end" | "infinite-loop" | "multi-infinite-loop";
 export const isDeadEnd = (piles: Piles): DeadEndType | false => {
   const possibleMoves = getPossibleMoves(piles);
 
@@ -186,18 +221,12 @@ export const isDeadEnd = (piles: Piles): DeadEndType | false => {
     return "dead-end";
   }
 
-  // Check for infinite loop
-  if (hasExactlyOnePossibleMove(possibleMoves)) {
-    const [source, targets] = possibleMoves[0];
-
-    const nextPiles = drop(piles, source, targets[0], piles[source].slice(-1));
-    const nextPossibleMoves = getPossibleMoves(nextPiles);
-    if (
-      hasExactlyOnePossibleMove(nextPossibleMoves) &&
-      isInfiniteLoop(possibleMoves[0], nextPossibleMoves[0])
-    ) {
-      return "infinite-loop";
-    }
+  // Check for infinite loops
+  const possibleLoops = possibleMoves.map(getIsInfiniteLoop(piles));
+  if (possibleLoops.every((i) => i)) {
+    const n = possibleLoops.length;
+    if (n === 1) return "infinite-loop";
+    if (n > 1) return "multi-infinite-loop";
   }
 
   return false;

@@ -18,7 +18,6 @@
     getEqualValues,
     calculateFontSize,
     fillerStacks,
-    isDeadEnd,
   } from "../../utils/pileon";
   import type { Card } from "two-to-seven-triple-draw";
   import PileonHelp from "./PileonHelp.svelte";

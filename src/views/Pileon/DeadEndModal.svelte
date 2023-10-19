@@ -30,6 +30,12 @@
         other possible moves. Undo the last move or start a new game.
       </p>
     {/if}
+    {#if deadEnd === "multi-infinite-loop"}
+      <p>
+        Multiple cards can be moved back and forth between two piles. There are
+        no other possible moves. Undo the last move or start a new game.
+      </p>
+    {/if}
     <div class="actions">
       <IconButton
         icon="Shuffle"
