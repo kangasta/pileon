@@ -1,5 +1,11 @@
-import { render } from "@testing-library/svelte";
+import { render, screen } from "@testing-library/svelte";
 import Pileon from "../../src/views/Pileon";
+import DeadEndModal from "../../src/views/Pileon/DeadEndModal.svelte";
+import { Cards } from "two-to-seven-triple-draw";
+import * as focusTrap from "focus-trap";
+import { createFocusTrapMock } from "../utils";
+
+vi.spyOn(focusTrap, "createFocusTrap").mockImplementation(createFocusTrapMock);
 
 it("renders the pileon game", async () => {
   const { container } = render(Pileon);
@@ -9,4 +15,17 @@ it("renders the pileon game", async () => {
 
   const piles = container.getElementsByClassName("pile");
   expect(piles).toHaveLength(15);
+});
+
+it("has related cards in infinite loop alert", async () => {
+  const piles = [
+    new Cards("J♠ Q♠ 7♥ 7♦"),
+    new Cards("K♥ 4♣ 7♠"),
+    new Cards("J♥ J♦ Q♦ Q♣"),
+    new Cards("4♦ K♠ Q♥"),
+  ];
+  render(DeadEndModal, { piles });
+  await screen.findByText(
+    /Seven of diamonds and queen of clubs can be moved back and forth between two piles\..*/,
+  );
 });

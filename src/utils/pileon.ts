@@ -173,7 +173,6 @@ const getPossibleMoves = (piles: Piles) =>
 
 const movesEqual = (a: PossibleMove, b: PossibleMove): boolean => {
   // Source:
-  console.log("source", a[0] !== b[0]);
   if (a[0] !== b[0]) return false;
 
   // Targets:
@@ -190,10 +189,15 @@ const movesEqual = (a: PossibleMove, b: PossibleMove): boolean => {
 
 const getIsInfiniteLoop =
   (piles: Piles) =>
-  (move: PossibleMove, _: number, possibleMoves: PossibleMoves): boolean => {
+  (
+    move: PossibleMove,
+    _: number,
+    possibleMoves: PossibleMoves,
+  ): [boolean, Card[]] => {
     const [source, targets, cards] = move;
+    const loopCards = [...cards];
     if (targets.length > 1) {
-      return false;
+      return [false, []];
     }
 
     const target = targets[0];
@@ -201,35 +205,61 @@ const getIsInfiniteLoop =
     const nextPossibleMoves = getPossibleMoves(nextPiles);
 
     const nextPossibleMovesIfLoop = possibleMoves
+      // Remove duplicate revert move (e.g., "J♠ 7♥ 7♦", "K♥ 7♣ 7♠")
+      .filter(([source]) => source !== target)
       .map(
         (i): PossibleMove => (i[0] === source ? [target, [source], cards] : i),
       )
       .sort((a, b) => a[0] - b[0]);
 
-    if (nextPossibleMoves.length !== nextPossibleMovesIfLoop.length)
-      return false;
-    return nextPossibleMovesIfLoop.every((move, i) =>
-      movesEqual(move, nextPossibleMoves[i]),
-    );
+    // Check for two card infinite loop (e.g., "J♠ 7♥ 7♦ 7♠", "K♥ 7♣")
+    if (nextPossibleMoves.length - nextPossibleMovesIfLoop.length === 1) {
+      const nextSourceCards = nextPiles[source].slice(-2);
+      if (
+        nextSourceCards.length === 2 &&
+        nextSourceCards.every((i) => i.value === cards[0].value)
+      ) {
+        nextPossibleMovesIfLoop.push([source, targets, [nextSourceCards[1]]]);
+        nextPossibleMovesIfLoop.sort((a, b) => a[0] - b[0]);
+        loopCards.push(nextSourceCards[1]);
+      } else {
+        return [false, []];
+      }
+    }
+
+    if (nextPossibleMoves.length !== nextPossibleMovesIfLoop.length) {
+      return [false, []];
+    }
+
+    return [
+      nextPossibleMovesIfLoop.every((move, i) =>
+        movesEqual(move, nextPossibleMoves[i]),
+      ),
+      loopCards,
+    ];
   };
 
 type DeadEndType = "dead-end" | "infinite-loop" | "multi-infinite-loop";
-export const isDeadEnd = (piles: Piles): DeadEndType | false => {
+export const isDeadEnd = (piles: Piles): [DeadEndType | false, Card[]] => {
   const possibleMoves = getPossibleMoves(piles);
 
   if (possibleMoves.length === 0) {
-    return "dead-end";
+    return ["dead-end", []];
   }
 
   // Check for infinite loops
   const possibleLoops = possibleMoves.map(getIsInfiniteLoop(piles));
-  if (possibleLoops.every((i) => i)) {
-    const n = possibleLoops.length;
-    if (n === 1) return "infinite-loop";
-    if (n > 1) return "multi-infinite-loop";
+  if (possibleLoops.every(([i]) => i)) {
+    if (possibleLoops.length > 0) {
+      const loopCards = possibleLoops.reduce(
+        (prev, curr): Card[] => [...prev, ...curr[1]],
+        [] as Card[],
+      );
+      return ["infinite-loop", loopCards];
+    }
   }
 
-  return false;
+  return [false, []];
 };
 
 const isDone = (pile: Card[]): boolean =>
