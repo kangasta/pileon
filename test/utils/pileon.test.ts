@@ -14,21 +14,25 @@ describe("isDeadEnd", () => {
     expect(t).toEqual(false);
     expect(c).toHaveLength(0);
   });
-  it("returns false if there is no infinite loop", () => {
-    const piles = [new Cards("2♣ 3♥ 10♣ 10♦"), new Cards("8♣ 10♥")];
-    const [t, c] = isDeadEnd(piles);
-    expect(t).toEqual(false);
-    expect(c).toHaveLength(0);
-  });
+  it.each([[["2♣ 3♥ 10♣ 10♦", "8♣ 10♥"]], [["A♦", "5♦ A♠ A♥ A♣"]]])(
+    "returns false if there is no infinite loop %s",
+    (piles: string[]) => {
+      const [t, c] = isDeadEnd(piles.map((i) => new Cards(i)));
+      expect(t).toEqual(false);
+      expect(c).toHaveLength(0);
+    },
+  );
   it("recognizes dead end", () => {
     const piles = [new Cards("8♠ 5♦ J♣ 4♥"), new Cards("3♠ Q♦ J♠ 4♠")];
     const [t, c] = isDeadEnd(piles);
     expect(t).toEqual("dead-end");
     expect(c).toHaveLength(0);
   });
-  it("recognizes infinite loop", () => {
-    const piles = [new Cards("K♥ A♣ 7♦"), new Cards("8♠ 5♥ 7♥ 7♠")];
-    const [t, c] = isDeadEnd(piles);
+  it.each([
+    [["K♥ A♣ 7♦", "8♠ 5♥ 7♥ 7♠"]],
+    [["K♥ A♣ 7♦ 7♠", "7♣ 5♥ 7♥"]],
+  ])("recognizes infinite loop %s", (piles: string[]) => {
+    const [t, c] = isDeadEnd(piles.map((i) => new Cards(i)));
     expect(t).toEqual("infinite-loop");
     expect(c).toEqual(new Cards("7♠"));
   });
