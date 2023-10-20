@@ -18,6 +18,7 @@ module.exports = {
     },
   ],
   rules: {
+    'no-console': 'error',
     'no-undef': 'off',
   },
 };
