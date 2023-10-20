@@ -216,6 +216,7 @@ const getIsInfiniteLoop =
     if (nextPossibleMoves.length - nextPossibleMovesIfLoop.length === 1) {
       const nextSourceCards = nextPiles[source].slice(-2);
       if (
+        nextPiles[target][0]?.value !== cards[0].value &&
         nextSourceCards.length === 2 &&
         nextSourceCards.every((i) => i.value === cards[0].value)
       ) {
