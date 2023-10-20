@@ -10,7 +10,7 @@
 
   let show = true;
   $: [deadEnd, loopCards] = isDeadEnd(piles);
-  $: loopCardsStr = cardsToPrettyString(loopCards)
+  $: loopCardsStr = cardsToPrettyString(loopCards);
   $: piles, (show = true);
 
   const dispatch = createEventDispatcher();

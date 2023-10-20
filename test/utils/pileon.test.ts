@@ -5,7 +5,11 @@ import { isDeadEnd } from "../../src/utils/pileon";
 
 describe("isDeadEnd", () => {
   it("returns false if there is an empty pile", () => {
-    const piles = [new Cards("8♠ 5♦ J♣ 4♥"), new Cards("3♠ Q♦ J♠ 4♠"), []];
+    const piles = [
+      new Cards("8♠ 5♦ J♣ 4♥"),
+      new Cards("3♠ Q♦ J♠ 4♠"),
+      [],
+    ];
     const [t, c] = isDeadEnd(piles);
     expect(t).toEqual(false);
     expect(c).toHaveLength(0);
@@ -45,6 +49,6 @@ describe("isDeadEnd", () => {
       const [t, c] = isDeadEnd(piles.map((i) => new Cards(i)));
       expect(t).toEqual("infinite-loop");
       expect(c.sort()).toEqual(new Cards("7♦ 7♠").sort());
-    }
+    },
   );
 });

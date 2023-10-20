@@ -24,6 +24,8 @@ it("has related cards in infinite loop alert", async () => {
     new Cards("J♥ J♦ Q♦ Q♣"),
     new Cards("4♦ K♠ Q♥"),
   ];
-  render(DeadEndModal, {piles});
-  await screen.findByText(/Seven of diamonds and queen of clubs can be moved back and forth between two piles\..*/);
+  render(DeadEndModal, { piles });
+  await screen.findByText(
+    /Seven of diamonds and queen of clubs can be moved back and forth between two piles\..*/,
+  );
 });
