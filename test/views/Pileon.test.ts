@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/svelte";
+import * as focusTrap from "focus-trap"; // eslint-disable-line import/namespace
+import { Cards } from "two-to-seven-triple-draw";
+
 import Pileon from "../../src/views/Pileon";
 import DeadEndModal from "../../src/views/Pileon/DeadEndModal.svelte";
-import { Cards } from "two-to-seven-triple-draw";
-import * as focusTrap from "focus-trap";
 import { createFocusTrapMock } from "../utils";
 
 vi.spyOn(focusTrap, "createFocusTrap").mockImplementation(createFocusTrapMock);

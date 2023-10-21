@@ -1,14 +1,14 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
+  import type { Card } from "two-to-seven-triple-draw";
 
-  import { actions, type ISettings } from "../../stores";
   import Stack from "../../components/Stack.svelte";
+  import { actions, type ISettings } from "../../stores";
   import {
     setCardAppearance,
     type ICardSize,
     createCardAppearance,
   } from "../../utils/card";
-  import { getStackDataTransfer } from "../../utils/stack";
   import {
     deal,
     getDonePiles,
@@ -19,9 +19,10 @@
     calculateFontSize,
     fillerStacks,
   } from "../../utils/pileon";
-  import type { Card } from "two-to-seven-triple-draw";
-  import PileonHelp from "./PileonHelp.svelte";
+  import { getStackDataTransfer } from "../../utils/stack";
+
   import DeadEndModal from "./DeadEndModal.svelte";
+  import PileonHelp from "./PileonHelp.svelte";
 
   let mainWidth: number;
   let mainHeight: number;

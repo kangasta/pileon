@@ -1,6 +1,8 @@
 <script lang="ts">
   import { Card } from "two-to-seven-triple-draw";
+
   import { getCardAppearance } from "../utils/card";
+
   import CenterPattern from "./CenterPattern.svelte";
   import ScreenReaderOnly from "./ScreenReaderOnly.svelte";
   import Suit from "./Suit.svelte";

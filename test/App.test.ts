@@ -1,13 +1,15 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/svelte";
 import userEvent from "@testing-library/user-event";
+import * as focusTrap from "focus-trap"; // eslint-disable-line import/namespace
+
 import App from "../src/App.svelte";
+
 import {
   checkDeckHasAceOfSpades,
   createFocusTrapMock,
   waitShuffleAnimation,
 } from "./utils";
-import * as focusTrap from "focus-trap";
 
 vi.spyOn(focusTrap, "createFocusTrap").mockImplementation(createFocusTrapMock);
 

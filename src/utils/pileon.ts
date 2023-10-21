@@ -1,7 +1,8 @@
 import { Deck, Card } from "two-to-seven-triple-draw";
 import { CardStringType, Cards } from "two-to-seven-triple-draw/dist/card";
-import { stackWidthEm } from "./stack";
+
 import { getCardDimensionsEm, type ICardSize } from "./card";
+import { stackWidthEm } from "./stack";
 
 const getStacksGrid = (
   mainWidth: number,

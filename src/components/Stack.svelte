@@ -1,14 +1,16 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import type { Card as ICard } from "two-to-seven-triple-draw";
-  import Card from "./Card.svelte";
+
+  import { getCardAppearance } from "../utils/card";
+  import { onSpecificKey } from "../utils/events";
   import {
     setStackDataTransfer,
     stackLabel,
     stackWidthEm,
   } from "../utils/stack";
-  import { getCardAppearance } from "../utils/card";
-  import { onSpecificKey } from "../utils/events";
+
+  import Card from "./Card.svelte";
 
   const cardAppearance = getCardAppearance();
   $: size = $cardAppearance.size;

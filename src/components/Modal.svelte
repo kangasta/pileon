@@ -1,8 +1,10 @@
 <script lang="ts">
   import * as focusTrap from "focus-trap";
   import { createEventDispatcher, onMount } from "svelte";
-  import IconButton from "./Menu/IconButton.svelte";
+
   import { randomString } from "../utils/components";
+
+  import IconButton from "./Menu/IconButton.svelte";
 
   export let title: string;
 
