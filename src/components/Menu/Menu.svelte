@@ -1,6 +1,7 @@
 <script lang="ts">
   import { actions } from "../../stores";
   import Modal from "../Modal.svelte";
+
   import IconButton from "./IconButton.svelte";
   import SettingToggle from "./SettingToggle.svelte";
 

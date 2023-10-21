@@ -1,6 +1,7 @@
-import { settings as settingsStore, type ISettings } from "../stores";
 import { getContext, setContext } from "svelte";
 import { get, writable, type Writable } from "svelte/store";
+
+import { settings as settingsStore, type ISettings } from "../stores";
 
 const bridgeCardWidthEm = 4.5;
 const pokerCardWidthEm = 5;

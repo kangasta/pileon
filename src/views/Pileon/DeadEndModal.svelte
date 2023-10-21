@@ -1,9 +1,9 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
 
-  import { isDeadEnd, type Piles } from "../../utils/pileon";
-  import Modal from "../../components/Modal.svelte";
   import IconButton from "../../components/Menu/IconButton.svelte";
+  import Modal from "../../components/Modal.svelte";
+  import { isDeadEnd, type Piles } from "../../utils/pileon";
   import { cardsToPrettyString } from "../../utils/text";
 
   export let piles: Piles;

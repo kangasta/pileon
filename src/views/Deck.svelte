@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
-
-  import { actions } from "../stores";
-  import Deck from "../components/Deck.svelte";
   import { Deck as DeckUtils, Card } from "two-to-seven-triple-draw";
+
+  import Deck from "../components/Deck.svelte";
+  import { actions } from "../stores";
   import { createCardAppearance, defaultAppearanceFn } from "../utils/card";
 
   createCardAppearance(defaultAppearanceFn);

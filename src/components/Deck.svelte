@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getCardAppearance } from "../utils/card";
   import { onSpecificKey } from "../utils/events";
+
   import Card from "./Card.svelte";
 
   const cardAppearance = getCardAppearance();
