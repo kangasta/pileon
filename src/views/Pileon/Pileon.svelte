@@ -16,7 +16,7 @@
     drop,
     autoMove,
     getEqualValues,
-    calculateFontSize,
+    calculateDimensions,
     fillerStacks,
   } from "../../utils/pileon";
   import { getStackDataTransfer } from "../../utils/stack";
@@ -137,8 +137,7 @@
   };
 
   $: size = $appearance.size;
-  $: fontSize = calculateFontSize(size, mainWidth, mainHeight, innerHeight);
-  $: style = `font-size: ${fontSize}px`;
+  $: d = calculateDimensions(size, mainWidth, mainHeight, innerHeight);
 
   onMount(() => {
     actions.update((prev) => ({ ...prev, help, shuffle, undo }));
@@ -160,7 +159,8 @@
   bind:clientHeight={mainHeight}
   bind:clientWidth={mainWidth}
   class="pileon"
-  {style}
+  style:font-size="{d.fontSize}px"
+  style:width="{d.tableWidthEm * 1.25}em"
 >
   {#each piles as pile, index}
     <div class="pile" class:small={size === "small"}>
@@ -196,12 +196,17 @@
     flex-wrap: wrap
     font-size: 0.7em
     display: flex
+    align-content: center
     align-items: center
     justify-content: center
     max-width: 100vw
+    row-gap: 0.5em
+    margin: auto
+
+    @media (max-aspect-ratio: 9/17)
+      row-gap: 1em
 
   .pile
-    margin: 0.5em 0.666em
     flex-basis: 16.7% /* Just above 1/6 */
 
     &.small

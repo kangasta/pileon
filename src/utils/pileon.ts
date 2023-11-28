@@ -23,23 +23,56 @@ export const fillerStacks = (
   return { length: i * j - 15 };
 };
 
-export const calculateFontSize = (
+const calculateTableEmSize = (
+  size: ICardSize,
+  columns: number,
+  rows: number,
+): [number, number] => {
+  const tableWidthEm =
+    stackWidthEm(4, size) * columns +
+    (size !== "small" ? 0.666 : 0.333) * columns * 2;
+  const tableHeightEm =
+    getCardDimensionsEm(size).height * rows +
+    (size !== "small" ? 0.5 : 0.25) * rows * 2;
+
+  return [tableWidthEm, tableHeightEm];
+};
+
+interface TableDimensions {
+  fontSize: number;
+  columns: number;
+  rows: number;
+  tableWidthEm: number;
+  tableHeightEm: number;
+}
+
+export const calculateDimensions = (
   size: ICardSize,
   mainWidth: number,
   mainHeight: number,
   innerHeight: number,
-): number => {
-  const [i, j] = getStacksGrid(mainWidth, innerHeight);
-  const tableWidthEm =
-    stackWidthEm(4, size) * i + (size !== "small" ? 0.666 : 0.333) * 10;
-  const fontSizeW = (mainWidth * 0.95) / tableWidthEm;
-
-  const tableHeightEm =
-    getCardDimensionsEm(size).height * j + (size !== "small" ? 0.5 : 0.25) * 6;
+): TableDimensions => {
+  // Limit play area aspect ratio to 16:9
   const tableHeight = mainHeight > 600 ? mainHeight : innerHeight;
+  const tableWidth = Math.min(mainWidth, tableHeight * (16 / 9));
+
+  const [columns, rows] = getStacksGrid(mainWidth, innerHeight);
+  const [tableWidthEm, tableHeightEm] = calculateTableEmSize(
+    size,
+    columns,
+    rows,
+  );
+
+  const fontSizeW = (tableWidth * 0.95) / tableWidthEm;
   const fontSizeH = (tableHeight * 0.95) / tableHeightEm;
 
-  return Math.min(fontSizeW, fontSizeH);
+  return {
+    fontSize: Math.min(fontSizeW, fontSizeH),
+    columns,
+    rows,
+    tableWidthEm,
+    tableHeightEm,
+  };
 };
 
 export type Piles = Card[][];
