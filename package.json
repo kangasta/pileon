@@ -36,7 +36,7 @@
     "tslib": "^2.6.0",
     "two-to-seven-triple-draw": "^0.7.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5",
+    "vite": "^4.4.12",
     "vite-plugin-pwa": "^0.16.4",
     "vitest": "^0.33.0"
   }
