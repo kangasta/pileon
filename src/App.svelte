@@ -16,6 +16,9 @@
     ) {
       $actions.undo(e);
     }
+    if (e.key === "F1" && $actions.help !== undefined) {
+      $actions.help(e);
+    }
   };
 </script>
 
