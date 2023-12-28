@@ -19,7 +19,7 @@
     calculateDimensions,
     fillerStacks,
   } from "../../utils/pileon";
-  import { getStackDataTransfer } from "../../utils/stack";
+  import { getStackDataTransfer, stackWidthEm } from "../../utils/stack";
 
   import DeadEndModal from "./DeadEndModal.svelte";
   import PileonHelp from "./PileonHelp.svelte";
@@ -163,7 +163,7 @@
   style:width="{d.tableWidthEm * 1.25}em"
 >
   {#each piles as pile, index}
-    <div class="pile" class:small={size === "small"}>
+    <div class="pile">
       <Stack
         cards={pile}
         closed={donePiles.includes(index)}
@@ -178,7 +178,7 @@
     </div>
   {/each}
   {#each fillerStacks(mainWidth, innerHeight) as _}
-    <div class="pile" />
+    <div class="pile" style={`min-width: ${stackWidthEm(4, size)}em`} />
   {/each}
 </main>
 {#if helpOpen}
@@ -200,6 +200,7 @@
     align-items: center
     justify-content: center
     max-width: 100vw
+    column-gap: 0.5em
     row-gap: 0.5em
     margin: auto
 
@@ -208,9 +209,6 @@
 
   .pile
     flex-basis: 16.7% /* Just above 1/6 */
-
-    &.small
-      margin: 0.25em 0.333em
 
     @media (max-aspect-ratio: 4/3)
       flex-basis: 20.1% /* Just above 1/5 */
