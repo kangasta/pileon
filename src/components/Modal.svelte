@@ -45,6 +45,7 @@
 
 <style lang="sass">
   .backdrop
+    animation: blur-background 125ms forwards
     position: fixed
     top: 0
     left: 0
@@ -52,17 +53,23 @@
     height: 100vh
     width: 100vw
 
-    backdrop-filter: blur(5px) brightness(0.5)
     z-index: 4
 
+    @keyframes blur-background
+      from
+        backdrop-filter: none
+
+      to
+        backdrop-filter: blur(4px)
+
   .modal
+    animation: open-modal 125ms forwards
     display: flex
     flex-direction: column
 
     position: fixed
     top: 50%
     left: 50%
-    transform: translate(-50%, -50%)
 
     background: white
     z-index: 4
@@ -76,7 +83,16 @@
     width: 500px
     max-width: 100%
 
-    box-shadow: 0 2.5px 5px rgba(0, 0, 0, 0.333)
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.75)
+
+    @keyframes open-modal
+      from
+        opacity: 0
+        transform: translate(-50%, -25%) scale(0.25)
+
+      to
+        opacity: 1
+        transform: translate(-50%, -50%) scale(1)
 
     @media (min-width: 501px)
       border-radius: 0.25em
