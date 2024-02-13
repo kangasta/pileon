@@ -56,6 +56,14 @@
     flex-direction: column
     align-items: center
 
+    transition: transform 125ms
+
+    &:hover
+      transform: scale(1.125) translateY(-0.25rem)
+
+    &:active svg
+      transform: translateY(0.25rem)
+
   .clickable
     cursor: pointer
 
