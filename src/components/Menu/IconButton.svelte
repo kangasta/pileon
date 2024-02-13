@@ -59,10 +59,10 @@
     transition: transform 125ms
 
     &:hover
-      transform: scale(1.125) translateY(-0.25rem)
+      transform: scale(1.1) translateY(-0.05em)
 
     &:active svg
-      transform: translateY(0.25rem)
+      transform: translateY(0.15rem)
 
   .clickable
     cursor: pointer
