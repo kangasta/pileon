@@ -59,6 +59,9 @@
     justify-content: center
     height: 4.5626rem
 
+    // Disable blue tap-highlight on mobile chrome
+    -webkit-tap-highlight-color: transparent
+
     &:hover .content
       transform: scale(1.1) translateY(-0.15rem)
 
