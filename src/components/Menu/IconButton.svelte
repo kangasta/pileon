@@ -30,39 +30,46 @@
 <!-- The <div> element has a child <button> element that handles keyboard interaction -->
 <!-- svelte-ignore a11y-no-static-element-interactions a11y-click-events-have-key-events -->
 <div on:click={onClick} class="icon-button clickable">
-  <button
-    aria-labelledby={labelId}
-    class="clickable"
-    class:open
-    on:click={onClick}
-  >
-    <svg viewBox="0 0 16 16">
-      <path
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="1"
-        d={icons[icon].path}
-      />
-    </svg>
-  </button>
-  <div class="label" id={labelId}>{label}</div>
+  <div class="content">
+    <button
+      aria-labelledby={labelId}
+      class="clickable"
+      class:open
+      on:click={onClick}
+    >
+      <svg viewBox="0 0 16 16">
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1"
+          d={icons[icon].path}
+        />
+      </svg>
+    </button>
+    <div class="label" id={labelId}>{label}</div>
+  </div>
 </div>
 
 <style lang="sass">
   div.icon-button
     display: inline-flex
     flex-direction: column
-    align-items: center
+    justify-content: center
+    height: 4.5626rem
 
-    transition: transform 125ms
-
-    &:hover
-      transform: scale(1.1) translateY(-0.05em)
+    &:hover .content
+      transform: scale(1.1) translateY(-0.15rem)
 
     &:active svg
       transform: translateY(0.15rem)
+
+  div.content
+    display: inline-flex
+    flex-direction: column
+    align-items: center
+    transition: transform 125ms
 
   .clickable
     cursor: pointer
