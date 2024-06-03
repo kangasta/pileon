@@ -19,7 +19,6 @@
 </script>
 
 {#if completed && show}
-  <!-- {#if show} -->
   <Modal
     title="Completed"
     on:close={() => {

@@ -12,23 +12,34 @@
   $: [_, elapsed] = countElapsed(events);
 </script>
 
-<p>Here are statistics about the completed game:</p>
+<p>
+  Here are statistics about the completed game. <i>Significant moves</i> is the
+  number of moves done excluding undo moves and undone moves. <i>Total moves</i>
+  includes also undo moves and undone moves.
+</p>
 <table>
   <tr>
-    <th>Time:</th>
+    <th>Elapsed time:</th>
     <td>{prettyElapsed(elapsed)}</td>
   </tr>
   <tr>
-    <th>Moves:</th>
-    <td>{count.move ?? 0}</td>
+    <th>Significant moves:</th>
+    <td>{(count.move ?? 0) - (count.undo ?? 0)} </td>
   </tr>
   <tr>
-    <th>Undos:</th>
+    <th>Total moves:</th>
+    <td>{(count.move ?? 0) + (count.undo ?? 0)} </td>
+  </tr>
+  <tr>
+    <th>Undone moves:</th>
     <td>{count.undo ?? 0}</td>
   </tr>
 </table>
 
 <style lang="sass">
+  table
+    margin: 1em 0
+
   th,td
     padding: 0
 
