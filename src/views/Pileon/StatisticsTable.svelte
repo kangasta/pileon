@@ -13,9 +13,8 @@
 </script>
 
 <p>
-  Here are statistics about the completed game. <i>Significant moves</i> is the
-  number of moves done excluding undo moves and undone moves. <i>Total moves</i>
-  includes also undo moves and undone moves.
+  Here are statistics about the completed game. Undo and undone moves are
+  excluded from <i>Significant moves</i> but included in <i>Total moves</i>.
 </p>
 <table>
   <tr>
