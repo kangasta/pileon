@@ -36,13 +36,14 @@ export const countElapsed = (events: IEvent[]): [number, number] => {
 
 const withUnit = (value: number, unit: string): string =>
   value > 0 ? `${value}\u202f${unit}` : "";
+
 export const prettyElapsed = (ms: number): string => {
   if (ms < 1000) {
     return withUnit(ms, "ms");
   }
   const h = Math.floor(ms / 3600000);
   const min = Math.floor(ms / 60000 - h * 60);
-  const s = Math.floor(ms / 1000 - min * 60);
+  const s = Math.floor(ms / 1000 - min * 60 - h * 3600);
 
   return [withUnit(h, "h"), withUnit(min, "min"), withUnit(s, "s")]
     .join(" ")

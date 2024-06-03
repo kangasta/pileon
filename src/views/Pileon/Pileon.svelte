@@ -20,11 +20,11 @@
     fillerStacks,
   } from "../../utils/pileon";
   import { getStackDataTransfer, stackWidthEm } from "../../utils/stack";
+  import { newEvent } from "../../utils/statistics";
 
+  import CompletedModal from "./CompletedModal.svelte";
   import DeadEndModal from "./DeadEndModal.svelte";
   import PileonHelp from "./PileonHelp.svelte";
-  import { newEvent } from "../../utils/statistics";
-  import CompletedModal from "./CompletedModal.svelte";
 
   let mainWidth: number;
   let mainHeight: number;

@@ -3,8 +3,9 @@
 
   import IconButton from "../../components/Menu/IconButton.svelte";
   import Modal from "../../components/Modal.svelte";
-  import { type IEvent } from "../../utils/statistics";
   import { isCompleted, type Piles } from "../../utils/pileon";
+  import { type IEvent } from "../../utils/statistics";
+
   import StatisticsTable from "./StatisticsTable.svelte";
 
   export let events: IEvent[];
