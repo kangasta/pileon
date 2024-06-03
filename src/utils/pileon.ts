@@ -300,6 +300,9 @@ export const isDeadEnd = (piles: Piles): [DeadEndType | false, Card[]] => {
 const isDone = (pile: Card[]): boolean =>
   pile.length === 4 && haveEqualValues(pile);
 
+export const isCompleted = (piles: Piles): boolean =>
+  piles.every((i) => isDone(i) || i.length === 0);
+
 /** Determine done piles: pile is done (or ready) when all four cards with the same rank are in the pile. */
 export const getDonePiles = (piles: Piles): number[] => {
   return piles.reduce((dones, pile, index) => {

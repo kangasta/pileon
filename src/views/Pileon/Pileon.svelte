@@ -20,7 +20,9 @@
     fillerStacks,
   } from "../../utils/pileon";
   import { getStackDataTransfer, stackWidthEm } from "../../utils/stack";
+  import { newEvent } from "../../utils/statistics";
 
+  import CompletedModal from "./CompletedModal.svelte";
   import DeadEndModal from "./DeadEndModal.svelte";
   import PileonHelp from "./PileonHelp.svelte";
 
@@ -44,6 +46,7 @@
   }
 
   let pilesHistory = [deal()];
+  let events = [newEvent("start")];
 
   let helpOpen = false;
   const help = (e: KeyboardEvent | MouseEvent) => {
@@ -57,6 +60,7 @@
 
     selected = [undefined, []];
     pilesHistory = [deal()];
+    events = [newEvent("start")];
   };
 
   const undo = (e: CustomEvent | KeyboardEvent | MouseEvent) => {
@@ -65,6 +69,7 @@
     if (pilesHistory.length > 1) {
       selected = [undefined, []];
       pilesHistory = pilesHistory.slice(0, pilesHistory.length - 1);
+      events = [...events, newEvent("undo")];
     }
   };
 
@@ -84,6 +89,7 @@
       );
 
       pilesHistory = [...pilesHistory, nextPiles];
+      events = [...events, newEvent("move")];
     } catch (_) {
       // Ignore error for now. The error message could be displayed to the user as well.
     }
@@ -131,6 +137,7 @@
       const nextPiles = autoMove(pilesHistory[pilesHistory.length - 1], index);
 
       pilesHistory = [...pilesHistory, nextPiles];
+      events = [...events, newEvent("move")];
     } catch (e) {
       // Ignore error for now. The error message could be displayed to the user as well.
     }
@@ -188,6 +195,7 @@
     }}
   />
 {/if}
+<CompletedModal {events} {piles} on:shuffle={shuffle} />
 <DeadEndModal {piles} on:shuffle={shuffle} on:undo={undo} />
 
 <style lang="sass">
