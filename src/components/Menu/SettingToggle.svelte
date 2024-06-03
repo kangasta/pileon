@@ -20,7 +20,7 @@
   disabled={pressed}
   on:click={onClick}
 >
-  {value}
+  <slot>{value}</slot>
 </button>
 
 <style lang="sass">
@@ -29,6 +29,7 @@
     background: transparent
     border: none
     color: inherit
+    font: inherit
     padding: 0
     text-decoration: underline
     cursor: pointer
