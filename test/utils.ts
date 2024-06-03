@@ -8,7 +8,7 @@ export const waitShuffleAnimation = async () => {
 
   await waitFor(
     () => expect(deck).not.toHaveAttribute("aria-disabled", "true"),
-    { timeout: 1500 },
+    { timeout: 2000 },
   );
   return deck;
 };

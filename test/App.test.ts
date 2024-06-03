@@ -85,8 +85,10 @@ it("allows shuffling the deck", async () => {
   render(App);
 
   // Change game to deck
-  await userEvent.click(await screen.findByLabelText("Settings"));
-  await userEvent.click(await screen.findByRole("button", { name: "deck" }));
+  await userEvent.click(await screen.findByLabelText("Menu"));
+  await userEvent.click(
+    await screen.findByRole("button", { name: "Deck of cards" }),
+  );
   await userEvent.click(await screen.findByLabelText("Close"));
 
   const deck = await waitShuffleAnimation();
