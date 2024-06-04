@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   import { actions } from "../../stores";
   import Modal from "../Modal.svelte";
 
@@ -12,19 +14,47 @@
       open = action === "open";
       e.stopPropagation();
     };
+
+  let menuEl: Element;
+  let belowTitlebar = "";
+  const handleResize = () => {
+    if (!(navigator as any).windowControlsOverlay?.visible) {
+      return;
+    }
+
+    const menuRect = menuEl.getBoundingClientRect();
+    const titlebarRect = (
+      navigator as any
+    ).windowControlsOverlay?.getTitlebarAreaRect();
+
+    if (
+      titlebarRect.left > menuRect.left ||
+      titlebarRect.right < menuRect.right
+    ) {
+      belowTitlebar = "below-titlebar";
+    } else {
+      belowTitlebar = "";
+    }
+  };
+  onMount(handleResize);
 </script>
 
-<div class="menu">
-  <IconButton icon={"Menu"} label={"Menu"} onClick={handleClick("open")} />
-  {#if $actions.help !== undefined}
-    <IconButton icon="Help" label="Help" onClick={$actions.help} />
-  {/if}
-  {#if $actions.shuffle !== undefined}
-    <IconButton icon="Shuffle" label="Shuffle" onClick={$actions.shuffle} />
-  {/if}
-  {#if $actions.undo !== undefined}
-    <IconButton icon="Undo" label="Undo" onClick={$actions.undo} />
-  {/if}
+<svelte:window on:resize={handleResize} />
+<div class="titlebar">
+  <div class="window-controls"></div>
+  <div bind:this={menuEl} class="menu {belowTitlebar}">
+    <IconButton icon={"Menu"} label={"Menu"} onClick={handleClick("open")} />
+    {#if $actions.help !== undefined}
+      <IconButton icon="Help" label="Help" onClick={$actions.help} />
+    {/if}
+    {#if $actions.shuffle !== undefined}
+      <IconButton icon="Shuffle" label="Shuffle" onClick={$actions.shuffle} />
+    {/if}
+    {#if $actions.undo !== undefined}
+      <IconButton icon="Undo" label="Undo" onClick={$actions.undo} />
+    {/if}
+  </div>
+  <div class="window-controls"></div>
 </div>
 
 {#if open}
@@ -71,13 +101,19 @@
 {/if}
 
 <style lang="sass">
+  .titlebar
+    display: flex
+
+  .window-controls
+    flex: 1
+    height: env(titlebar-area-height, auto)
+
   .menu
     margin-bottom: 0.25em
-    margin-top: env(titlebar-area-height)
-    text-align: center
+    transition: margin-top 125ms
 
-    @media (min-width: 750px)
-      margin-top: 0
+    &.below-titlebar
+      margin-top: env(titlebar-area-height)
 
   .drawer
     display: flex
