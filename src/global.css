@@ -31,25 +31,25 @@ body {
 	flex-direction: column;
 }
 
-@media (max-width: 5em) and (max-height: 7em) {
+@media (max-width: 5rem) and (max-height: 7rem) {
 	body {
 		font-size: 50%;
 	}
 }
 
-@media (min-width: 10em) and (min-height: 14em) {
+@media (min-width: 10rem) and (min-height: 14rem) {
 	body {
 		font-size: 150%;
 	}
 }
 
-@media (min-width: 15em) and (min-height: 21em) {
+@media (min-width: 15rem) and (min-height: 21rem) {
 	body {
 		font-size: 200%;
 	}
 }
 
-@media (min-width: 20em) and (min-height: 28em) {
+@media (min-width: 20rem) and (min-height: 28rem) {
 	body {
 		font-size: 300%;
 	}
