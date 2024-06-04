@@ -207,8 +207,8 @@
     align-items: center
     justify-content: center
     width: 100vw
-    column-gap: 0.5em
-    row-gap: 0.5em
+    column-gap: 1em
+    row-gap: 1em
     margin: auto
 
     @media (max-aspect-ratio: 9/17)
