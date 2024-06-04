@@ -102,14 +102,16 @@
 
 <style lang="sass">
   .titlebar
+    app-region: drag
     display: flex
+    margin-bottom: 0.25em
 
   .window-controls
     flex: 1
     height: env(titlebar-area-height, auto)
 
   .menu
-    margin-bottom: 0.25em
+    app-region: no-drag
     transition: margin-top 125ms
 
     &.below-titlebar
