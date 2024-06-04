@@ -23,6 +23,9 @@
   ],
   "start_url": "./index.html",
   "display": "fullscreen",
+  "display_override": [
+    "window-controls-overlay"
+  ],
   "theme_color": "seagreen",
   "background_color": "seagreen"
 }

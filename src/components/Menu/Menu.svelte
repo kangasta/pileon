@@ -73,7 +73,11 @@
 <style lang="sass">
   .menu
     margin-bottom: 0.25em
+    margin-top: env(titlebar-area-height)
     text-align: center
+
+    @media (min-width: 750px)
+      margin-top: 0
 
   .drawer
     display: flex

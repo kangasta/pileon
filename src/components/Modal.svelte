@@ -124,6 +124,10 @@
         opacity: 1
         transform: translateX(0)
 
+      h2
+        @media (display-mode: window-controls-overlay)
+          margin-top: min(env(titlebar-area-height), 1em)
+
     background: white
     z-index: 4
 
