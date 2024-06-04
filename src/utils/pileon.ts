@@ -24,9 +24,8 @@ export const calculateTableEmSize = (
   columns: number,
   rows: number,
 ): [number, number] => {
-  const tableWidthEm = stackWidthEm(4, size) * columns + 0.5 * (columns - 1);
-  const tableHeightEm =
-    getCardDimensionsEm(size).height * rows + 0.5 * (rows - 1);
+  const tableWidthEm = stackWidthEm(4, size) * columns + (columns - 1);
+  const tableHeightEm = getCardDimensionsEm(size).height * rows + (rows - 1);
 
   return [tableWidthEm, tableHeightEm];
 };
