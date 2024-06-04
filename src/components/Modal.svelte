@@ -37,11 +37,17 @@
     open = false;
     setTimeout(() => dispatch("close"), 125);
   };
+
+  let windowControlsOnLeft =
+    (navigator as any).windowControlsOverlay?.visible &&
+    (navigator as any).windowControlsOverlay?.getTitlebarAreaRect().left > 0;
 </script>
 
 <div class="backdrop" class:open />
 <div
-  class="modal {position}"
+  class="modal {position} {windowControlsOnLeft
+    ? 'window-controls-on-left'
+    : ''}"
   class:open
   role="dialog"
   aria-labelledby={titleId}
@@ -124,9 +130,12 @@
         opacity: 1
         transform: translateX(0)
 
-      h2
+      &.window-controls-on-left
         @media (display-mode: window-controls-overlay)
-          margin-top: min(env(titlebar-area-height), 1em)
+          border-radius: 0 0.25em 0 0
+          height: calc(102vh - env(titlebar-area-height) - 1rem)
+          padding: 0 1em 2vh
+          top: calc(env(titlebar-area-height) + 1rem)
 
     background: white
     z-index: 4
