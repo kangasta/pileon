@@ -21,6 +21,22 @@
       "purpose": "any maskable"
     }
   ],
+  "screenshots" : [
+    {
+      "src": "screenshot-pileon-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "New deal of Pileon solitaire"
+    },
+    {
+      "src": "screenshot-pileon-narrow.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "New deal of Pileon solitaire"
+    }
+  ],
   "start_url": "./index.html",
   "display": "fullscreen",
   "display_override": [
