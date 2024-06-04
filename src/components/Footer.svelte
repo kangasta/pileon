@@ -19,7 +19,7 @@
 <style>
   footer {
     font-size: 1rem;
-    padding: 2rem 0 1rem 0;
+    padding: 1rem 0 0.5rem;
     text-align: center;
   }
 </style>

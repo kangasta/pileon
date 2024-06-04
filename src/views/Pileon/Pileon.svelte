@@ -18,6 +18,7 @@
     getEqualValues,
     calculateDimensions,
     fillerStacks,
+    calculateTableEmSize,
   } from "../../utils/pileon";
   import { getStackDataTransfer, stackWidthEm } from "../../utils/stack";
   import { newEvent } from "../../utils/statistics";
@@ -28,7 +29,6 @@
 
   let mainWidth: number;
   let mainHeight: number;
-  let innerHeight: number;
 
   let appearance = createCardAppearance((settings: ISettings) => ({
     size: settings.size === "default" ? "bridge" : settings.size,
@@ -37,7 +37,7 @@
 
   $: {
     const defaultSize: ICardSize =
-      mainWidth < 800 || innerHeight < 500 ? "small" : "bridge";
+      mainWidth < 800 || mainHeight < 400 ? "small" : "bridge";
 
     setCardAppearance((settings: ISettings) => ({
       size: settings.size === "default" ? defaultSize : settings.size,
@@ -144,7 +144,7 @@
   };
 
   $: size = $appearance.size;
-  $: d = calculateDimensions(size, mainWidth, mainHeight, innerHeight);
+  $: d = calculateDimensions(size, mainWidth, mainHeight);
 
   onMount(() => {
     actions.update((prev) => ({ ...prev, help, shuffle, undo }));
@@ -158,16 +158,15 @@
       undo: undefined,
     }));
   });
+  $: [tableWidth5x3, _] = calculateTableEmSize(size, 5, 3);
 </script>
-
-<svelte:window bind:innerHeight />
 
 <main
   bind:clientHeight={mainHeight}
   bind:clientWidth={mainWidth}
-  class="pileon"
+  class="pileon deal-{d.columns}x{d.rows}"
   style:font-size="{d.fontSize}px"
-  style:width="{d.tableWidthEm * 1.25}em"
+  style:max-width="{tableWidth5x3 * 1.25}em"
 >
   {#each piles as pile, index}
     <div class="pile">
@@ -184,7 +183,7 @@
       />
     </div>
   {/each}
-  {#each fillerStacks(mainWidth, innerHeight) as _}
+  {#each fillerStacks(d.columns, d.rows) as _}
     <div class="pile" style={`min-width: ${stackWidthEm(4, size)}em`} />
   {/each}
 </main>
@@ -202,12 +201,12 @@
   .pileon
     flex: 1
     flex-wrap: wrap
-    font-size: 0.7em
+    font-size: 10px
     display: flex
     align-content: center
     align-items: center
     justify-content: center
-    max-width: 100vw
+    width: 100vw
     column-gap: 0.5em
     row-gap: 0.5em
     margin: auto
@@ -218,9 +217,9 @@
   .pile
     flex-basis: 16.7% /* Just above 1/6 */
 
-    @media (max-aspect-ratio: 4/3)
+    &.deal-4x4
       flex-basis: 20.1% /* Just above 1/5 */
 
-    @media (max-aspect-ratio: 3/4)
+    &.deal-3x5
       flex-basis: 25.1% /* Just above 1/4 */
 </style>
