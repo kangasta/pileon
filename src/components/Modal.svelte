@@ -5,9 +5,11 @@
   import { randomString } from "../utils/components";
 
   import IconButton from "./Menu/IconButton.svelte";
+  import type { IIconName } from "./Menu/icons";
 
   export let title: string;
   export let position: "left" | "center" = "center";
+  export let closeIcon: IIconName = "Close";
 
   const id = `modal-${randomString()}`;
   const titleId = `${id}-title`;
@@ -55,7 +57,7 @@
 >
   <div class="header">
     <h2 id={titleId}>{title}</h2>
-    <IconButton icon="Close" label="Close" onClick={onClose} />
+    <IconButton icon={closeIcon} label="Close" onClick={onClose} />
   </div>
   <div class="content">
     <slot />
@@ -138,7 +140,7 @@
           top: calc(env(titlebar-area-height) + 1rem)
 
     background: white
-    z-index: 4
+    z-index: 6
 
     font-size: 1rem
     overflow: hidden

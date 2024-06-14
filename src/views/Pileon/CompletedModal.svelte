@@ -2,7 +2,7 @@
   import { createEventDispatcher } from "svelte";
 
   import IconButton from "../../components/Menu/IconButton.svelte";
-  import Modal from "../../components/Modal.svelte";
+  import MinimizeableModal from "../../components/MinimizeableModal.svelte";
   import { isCompleted, type Piles } from "../../utils/pileon";
   import { type IEvent } from "../../utils/statistics";
 
@@ -11,20 +11,13 @@
   export let events: IEvent[];
   export let piles: Piles;
 
-  let show = true;
   $: completed = isCompleted(piles);
-  $: events, (show = true);
 
   const dispatch = createEventDispatcher();
 </script>
 
-{#if completed && show}
-  <Modal
-    title="Completed"
-    on:close={() => {
-      show = false;
-    }}
-  >
+{#if completed}
+  <MinimizeableModal title="Completed">
     <StatisticsTable {events} />
     <div class="actions">
       <IconButton
@@ -33,7 +26,7 @@
         onClick={() => dispatch("shuffle")}
       />
     </div>
-  </Modal>
+  </MinimizeableModal>
 {/if}
 
 <style lang="sass">

@@ -2,27 +2,20 @@
   import { createEventDispatcher } from "svelte";
 
   import IconButton from "../../components/Menu/IconButton.svelte";
-  import Modal from "../../components/Modal.svelte";
+  import MinimizeableModal from "../../components/MinimizeableModal.svelte";
   import { isDeadEnd, type Piles } from "../../utils/pileon";
   import { cardsToPrettyString } from "../../utils/text";
 
   export let piles: Piles;
 
-  let show = true;
   $: [deadEnd, loopCards] = isDeadEnd(piles);
   $: loopCardsStr = cardsToPrettyString(loopCards);
-  $: piles, (show = true);
 
   const dispatch = createEventDispatcher();
 </script>
 
-{#if deadEnd && show}
-  <Modal
-    title="Dead end"
-    on:close={() => {
-      show = false;
-    }}
-  >
+{#if deadEnd}
+  <MinimizeableModal title="Dead end">
     {#if deadEnd === "dead-end"}
       <p>No more possible moves. Undo the last move or start a new game.</p>
     {/if}
@@ -40,7 +33,7 @@
       />
       <IconButton icon="Undo" label="Undo" onClick={() => dispatch("undo")} />
     </div>
-  </Modal>
+  </MinimizeableModal>
 {/if}
 
 <style lang="sass">

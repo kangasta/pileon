@@ -19,6 +19,7 @@
     calculateDimensions,
     fillerStacks,
     calculateTableEmSize,
+    isCompleted,
   } from "../../utils/pileon";
   import { getStackDataTransfer, stackWidthEm } from "../../utils/stack";
   import { newEvent } from "../../utils/statistics";
@@ -75,6 +76,7 @@
 
   $: piles = pilesHistory[pilesHistory.length - 1];
   $: donePiles = getDonePiles(piles);
+  $: isCompleted(piles) && events.push(newEvent("stop"));
 
   let selected: [number, Card[]] = [undefined, []];
 
