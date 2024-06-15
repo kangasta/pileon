@@ -5,23 +5,26 @@
   export let title: string;
   export let position: "left" | "center" = "center";
 
-  let open = true;
+  let modalOpen = true;
+  let minOpen = false;
 
   const onClose = () => {
-    setTimeout(() => (open = false), 25);
+    modalOpen = false;
+    setTimeout(() => (minOpen = true), 25);
   };
 
   const onOpen = () => {
-    open = true;
+    minOpen = false;
+    setTimeout(() => (modalOpen = true), 100);
   };
 </script>
 
-{#if open}
+{#if modalOpen}
   <Modal {title} {position} closeIcon="Minimize" on:close={onClose}>
     <slot />
   </Modal>
 {/if}
-<button class="minimized-modal {open ? '' : 'open'}" on:click={onOpen}>
+<button class="minimized-modal {minOpen ? 'open' : ''}" on:click={onOpen}>
   <Icon icon="OpenModal" />
   <span class="title">{title}</span>
 </button>
@@ -48,7 +51,6 @@
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.75)
 
     transition: transform 100ms, box-shadow 100ms
-
     transform: translateY(110%)
 
     &.open
