@@ -5,26 +5,23 @@
   export let title: string;
   export let position: "left" | "center" = "center";
 
-  let modalOpen = true;
-  let minOpen = false;
+  let open = true;
 
   const onClose = () => {
-    modalOpen = false;
-    setTimeout(() => (minOpen = true), 25);
+    open = false;
   };
 
   const onOpen = () => {
-    minOpen = false;
-    setTimeout(() => (modalOpen = true), 100);
+    open = true;
   };
 </script>
 
-{#if modalOpen}
+{#if open}
   <Modal {title} {position} closeIcon="Minimize" on:close={onClose}>
     <slot />
   </Modal>
 {/if}
-<button class="minimized-modal {minOpen ? 'open' : ''}" on:click={onOpen}>
+<button class="minimized-modal {open ? '' : 'open'}" on:click={onOpen}>
   <Icon icon="OpenModal" />
   <span class="title">{title}</span>
 </button>
@@ -32,7 +29,7 @@
 <style lang="sass">
   .minimized-modal
     position: fixed
-    bottom: -1rem
+    bottom: -4rem
     right: 1.5rem
     z-index: 2
 
@@ -50,11 +47,10 @@
 
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.75)
 
-    transition: transform 100ms, box-shadow 100ms
-    transform: translateY(110%)
+    transition: bottom 125ms, box-shadow 125ms, transform 125ms
 
     &.open
-      transform: translateY(0)
+      bottom: -1rem
 
     &:hover
       transform: translateY(-0.15rem)
