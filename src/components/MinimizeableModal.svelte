@@ -40,6 +40,9 @@
     cursor: pointer
     padding: 0.33em 0.66em 1.33rem 0.5em
 
+    // Disable blue tap-highlight on mobile chrome
+    -webkit-tap-highlight-color: transparent
+
     display: flex
     align-items: center
     gap: 0.25em
