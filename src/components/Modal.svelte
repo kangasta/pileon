@@ -87,6 +87,14 @@
 
     position: fixed
 
+    background: white
+    z-index: 6
+
+    font-size: 1rem
+    overflow: hidden
+
+    box-sizing: border-box
+
     &.center
       top: 50%
       left: 50%
@@ -138,14 +146,6 @@
           height: calc(102vh - env(titlebar-area-height) - 1rem)
           padding: 0 1em 2vh
           top: calc(env(titlebar-area-height) + 1rem)
-
-    background: white
-    z-index: 6
-
-    font-size: 1rem
-    overflow: hidden
-
-    box-sizing: border-box
 
     .header
       display: flex

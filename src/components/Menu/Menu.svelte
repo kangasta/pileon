@@ -74,27 +74,29 @@
       <div class="whitespace"></div>
       <h3>Settings</h3>
       <table>
-        <tr>
-          <th>Colors:</th>
-          <td
-            ><SettingToggle target="colors" value="default" /> / <SettingToggle
-              target="colors"
-              value="standard"
-            /> / <SettingToggle target="colors" value="four-color" /></td
-          >
-        </tr>
-        <tr>
-          <th>Size:</th>
-          <td
-            ><SettingToggle target="size" value="default" /> / <SettingToggle
-              target="size"
-              value="bridge"
-            /> / <SettingToggle target="size" value="poker" /> / <SettingToggle
-              target="size"
-              value="small"
-            /></td
-          >
-        </tr>
+        <tbody>
+          <tr>
+            <th>Colors:</th>
+            <td
+              ><SettingToggle target="colors" value="default" /> / <SettingToggle
+                target="colors"
+                value="standard"
+              /> / <SettingToggle target="colors" value="four-color" /></td
+            >
+          </tr>
+          <tr>
+            <th>Size:</th>
+            <td
+              ><SettingToggle target="size" value="default" /> / <SettingToggle
+                target="size"
+                value="bridge"
+              /> / <SettingToggle target="size" value="poker" /> / <SettingToggle
+                target="size"
+                value="small"
+              /></td
+            >
+          </tr>
+        </tbody>
       </table>
     </div>
   </Modal>
