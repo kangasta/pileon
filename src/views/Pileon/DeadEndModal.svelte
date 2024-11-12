@@ -1,17 +1,19 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
-
   import IconButton from "../../components/Menu/IconButton.svelte";
   import MinimizeableModal from "../../components/MinimizeableModal.svelte";
   import { isDeadEnd, type Piles } from "../../utils/pileon";
   import { cardsToPrettyString } from "../../utils/text";
 
-  export let piles: Piles;
+  interface IProps {
+    piles: Piles;
+    shuffle: (e: CustomEvent | KeyboardEvent | MouseEvent) => void;
+    undo: (e: CustomEvent | KeyboardEvent | MouseEvent) => void;
+  }
 
-  $: [deadEnd, loopCards] = isDeadEnd(piles);
-  $: loopCardsStr = cardsToPrettyString(loopCards);
+  let { piles, shuffle, undo} : IProps = $props();
 
-  const dispatch = createEventDispatcher();
+  const [deadEnd, loopCards] = $derived(isDeadEnd(piles));
+  const loopCardsStr = $derived(cardsToPrettyString(loopCards));
 </script>
 
 {#if deadEnd}
@@ -29,9 +31,9 @@
       <IconButton
         icon="Shuffle"
         label="Shuffle"
-        onClick={() => dispatch("shuffle")}
+        onClick={shuffle}
       />
-      <IconButton icon="Undo" label="Undo" onClick={() => dispatch("undo")} />
+      <IconButton icon="Undo" label="Undo" onClick={undo} />
     </div>
   </MinimizeableModal>
 {/if}

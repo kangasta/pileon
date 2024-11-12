@@ -25,8 +25,20 @@ it("has related cards in infinite loop alert", async () => {
     new Cards("J♥ J♦ Q♦ Q♣"),
     new Cards("4♦ K♠ Q♥"),
   ];
-  render(DeadEndModal, { piles });
+
+  const shuffle = vi.fn();
+  const undo = vi.fn();
+
+  render(DeadEndModal, { piles, shuffle, undo });
   await screen.findByText(
     /Seven of diamonds and queen of clubs can be moved back and forth between two piles\..*/,
   );
+
+  const shuffleButton = screen.getByText("Shuffle");
+  shuffleButton.click();
+  expect(shuffle).toHaveBeenCalledTimes(1);
+
+  const undoButton = screen.getByText("Undo");
+  undoButton.click();
+  expect(undo).toHaveBeenCalledTimes(1);
 });

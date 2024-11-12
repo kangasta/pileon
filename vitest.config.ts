@@ -4,6 +4,13 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [svelte()],
+  css: {
+    preprocessorOptions: {
+      sass: {
+        api: "modern-compiler",
+      },
+    },
+  },
   resolve: { conditions: ["browser"] },
-  test: { globals: true, environment: "jsdom" },
+  test: { globals: true, environment: "jsdom", setupFiles: ["test/setup.ts"] },
 });

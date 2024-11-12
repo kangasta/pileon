@@ -197,7 +197,7 @@
   />
 {/if}
 <CompletedModal {events} {piles} on:shuffle={shuffle} />
-<DeadEndModal {piles} on:shuffle={shuffle} on:undo={undo} />
+<DeadEndModal {piles} {shuffle} {undo} />
 
 <style lang="sass">
   .pileon
