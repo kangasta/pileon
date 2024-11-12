@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { settings } from "../../stores";
+  import { settings, type ISettings } from "../../stores";
 
-  export let target: string;
+  export let target: keyof ISettings;
   export let value: string;
 
   const { update } = settings;

@@ -3,7 +3,7 @@
   import type { Card } from "two-to-seven-triple-draw";
 
   import Stack from "../../components/Stack.svelte";
-  import { actions, type ISettings } from "../../stores";
+  import { actions, type IActions, type ISettings } from "../../stores";
   import {
     setCardAppearance,
     type ICardSize,
@@ -78,7 +78,7 @@
   $: donePiles = getDonePiles(piles);
   $: isCompleted(piles) && events.push(newEvent("stop"));
 
-  let selected: [number, Card[]] = [undefined, []];
+  let selected: [number | undefined, Card[]] = [undefined, []];
 
   const moveCards = (source: number, target: number, cards: Card[]) => {
     try {
@@ -149,11 +149,11 @@
   $: d = calculateDimensions(size, mainWidth, mainHeight);
 
   onMount(() => {
-    actions.update((prev) => ({ ...prev, help, shuffle, undo }));
+    actions.update((prev: IActions) => ({ ...prev, help, shuffle, undo }));
   });
 
   onDestroy(() => {
-    actions.update((prev) => ({
+    actions.update((prev: IActions) => ({
       ...prev,
       help: undefined,
       shuffle: undefined,
@@ -186,7 +186,7 @@
     </div>
   {/each}
   {#each fillerStacks(d.columns, d.rows) as _}
-    <div class="pile" style={`min-width: ${stackWidthEm(4, size)}em`} />
+    <div class="pile" style={`min-width: ${stackWidthEm(4, size)}em`}></div>
   {/each}
 </main>
 {#if helpOpen}

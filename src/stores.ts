@@ -15,7 +15,7 @@ const defaultSettings: ISettings = {
 };
 
 const userSettings = JSON.parse(
-  localStorage.getItem(settingsKey),
+  localStorage.getItem(settingsKey) ?? '',
 ) as ISettings | null;
 
 export const settings = writable(userSettings ?? defaultSettings);

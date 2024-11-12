@@ -45,7 +45,7 @@
     (navigator as any).windowControlsOverlay?.getTitlebarAreaRect().left > 0;
 </script>
 
-<div class="backdrop" class:open />
+<div class="backdrop" class:open></div>
 <div
   class="modal {position} {windowControlsOnLeft
     ? 'window-controls-on-left'
