@@ -18,14 +18,15 @@
   let menuEl: Element;
   let belowTitlebar = "";
   const handleResize = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (!(navigator as any).windowControlsOverlay?.visible) {
       return;
     }
 
     const menuRect = menuEl.getBoundingClientRect();
-    const titlebarRect = (
-      navigator as any
-    ).windowControlsOverlay?.getTitlebarAreaRect();
+    const titlebarRect =
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (navigator as any).windowControlsOverlay?.getTitlebarAreaRect();
 
     if (
       titlebarRect.left > menuRect.left ||

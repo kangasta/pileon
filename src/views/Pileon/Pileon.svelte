@@ -76,6 +76,7 @@
 
   $: piles = pilesHistory[pilesHistory.length - 1];
   $: donePiles = getDonePiles(piles);
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   $: isCompleted(piles) && events.push(newEvent("stop"));
 
   let selected: [number | undefined, Card[]] = [undefined, []];
@@ -140,7 +141,7 @@
 
       pilesHistory = [...pilesHistory, nextPiles];
       events = [...events, newEvent("move")];
-    } catch (e) {
+    } catch (_) {
       // Ignore error for now. The error message could be displayed to the user as well.
     }
   };

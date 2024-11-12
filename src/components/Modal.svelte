@@ -41,7 +41,9 @@
   };
 
   let windowControlsOnLeft =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (navigator as any).windowControlsOverlay?.visible &&
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (navigator as any).windowControlsOverlay?.getTitlebarAreaRect().left > 0;
 </script>
 
