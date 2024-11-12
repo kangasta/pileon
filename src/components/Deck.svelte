@@ -66,19 +66,19 @@
     topCard === undefined
       ? []
       : shuffling
-      ? [...Array(numShadows)].map(() => ({
-          card: null,
-          shadow: false,
-          transform: getShuffleTranslate(
-            shuffleAnimationStep,
-            shuffleAnimationSteps,
-          ),
-        }))
-      : [...Array(numShadows)].map((_, i) => ({
-          card: undefined,
-          shadow: true,
-          transform: getShadowTranslate(i, numCards, numDecks, numShadows),
-        }));
+        ? [...Array(numShadows)].map(() => ({
+            card: null,
+            shadow: false,
+            transform: getShuffleTranslate(
+              shuffleAnimationStep,
+              shuffleAnimationSteps,
+            ),
+          }))
+        : [...Array(numShadows)].map((_, i) => ({
+            card: undefined,
+            shadow: true,
+            transform: getShadowTranslate(i, numCards, numDecks, numShadows),
+          }));
   $: shuffling = shuffleAnimationStep > 0;
   $: if (
     topCard === null &&

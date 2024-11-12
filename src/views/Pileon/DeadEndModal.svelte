@@ -10,7 +10,7 @@
     undo: (e: CustomEvent | KeyboardEvent | MouseEvent) => void;
   }
 
-  let { piles, shuffle, undo} : IProps = $props();
+  let { piles, shuffle, undo }: IProps = $props();
 
   const [deadEnd, loopCards] = $derived(isDeadEnd(piles));
   const loopCardsStr = $derived(cardsToPrettyString(loopCards));
@@ -28,11 +28,7 @@
       </p>
     {/if}
     <div class="actions">
-      <IconButton
-        icon="Shuffle"
-        label="Shuffle"
-        onClick={shuffle}
-      />
+      <IconButton icon="Shuffle" label="Shuffle" onClick={shuffle} />
       <IconButton icon="Undo" label="Undo" onClick={undo} />
     </div>
   </MinimizeableModal>

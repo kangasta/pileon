@@ -23,10 +23,12 @@
   $: visible = !(empty || hidden || shadow);
 
   $: rank =
-    visible && card?.toString(Card.StringType.ShortValue).replace("T", "10") || "";
-  $: suit = visible && card?.toString(Card.StringType.LongSuit) || "";
+    (visible &&
+      card?.toString(Card.StringType.ShortValue).replace("T", "10")) ||
+    "";
+  $: suit = (visible && card?.toString(Card.StringType.LongSuit)) || "";
   $: face = visible && (card?.num ?? 0) % 13 > 9;
-  $: text = visible && card?.toString(Card.StringType.Long) || "";
+  $: text = (visible && card?.toString(Card.StringType.Long)) || "";
 </script>
 
 <div

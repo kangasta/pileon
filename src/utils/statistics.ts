@@ -15,7 +15,9 @@ export const countEvents = (events: IEvent[]): Record<string, number> => {
 };
 
 const sum = (a: number[]): number => a.reduce((sum, i) => sum + i, 0);
-export const countElapsed = (events: IEvent[]): [number | null, number | null] => {
+export const countElapsed = (
+  events: IEvent[],
+): [number | null, number | null] => {
   const starts = events
     .filter((i) => i.type === "start")
     .map((i) => i.timestamp);
