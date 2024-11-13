@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { Card as ICard } from "two-to-seven-triple-draw";
+
   import { getCardAppearance } from "../utils/card";
   import { onSpecificKey } from "../utils/events";
 
@@ -10,12 +12,13 @@
 
   export let numCards = 52;
   export let numDecks = 1;
-  export let topCard = null;
+  /** Which card to display: `null` for hidden card, `undefined` for empty deck. */
+  export let topCard: ICard | null | undefined = null;
   export let numShadows = 10;
   export let shuffleAnimationSteps = 4;
   export let shuffleAnimationMaxDistanceEm = 0.8;
   export let shuffleAnimationMaxRotateDeg = 7;
-  export let onClick = () => undefined;
+  export let onClick = () => {};
 
   let shuffleAnimationStep = 0;
 
@@ -63,19 +66,19 @@
     topCard === undefined
       ? []
       : shuffling
-      ? [...Array(numShadows)].map(() => ({
-          card: null,
-          shadow: false,
-          transform: getShuffleTranslate(
-            shuffleAnimationStep,
-            shuffleAnimationSteps,
-          ),
-        }))
-      : [...Array(numShadows)].map((_, i) => ({
-          card: undefined,
-          shadow: true,
-          transform: getShadowTranslate(i, numCards, numDecks, numShadows),
-        }));
+        ? [...Array(numShadows)].map(() => ({
+            card: null,
+            shadow: false,
+            transform: getShuffleTranslate(
+              shuffleAnimationStep,
+              shuffleAnimationSteps,
+            ),
+          }))
+        : [...Array(numShadows)].map((_, i) => ({
+            card: undefined,
+            shadow: true,
+            transform: getShadowTranslate(i, numCards, numDecks, numShadows),
+          }));
   $: shuffling = shuffleAnimationStep > 0;
   $: if (
     topCard === null &&

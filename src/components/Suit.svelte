@@ -1,8 +1,8 @@
 <script lang="ts">
-  export let suit: string = null;
+  export let suit: string | null = null;
   export let flip = false;
 
-  const getPath = (suit: string) => {
+  const getPath = (suit: string | null) => {
     switch (suit) {
       case "hearts":
         return "M 8 2 C 9 0 11 0 12 0 C 13 0 16 1 16 6 C 16 8 15.5 10 14 12 L 8 20 L 2 12 C 0.5 10 0 8 0 6 C 0 1 3 0 4 0 C 5 0 7 0 8 2";
@@ -20,9 +20,11 @@
   $: path = getPath(suit);
 </script>
 
-<svg class:flip viewBox="0 0 16 20">
-  <path d={path} fill="CurrentColor" />
-</svg>
+{#if path}
+  <svg class:flip viewBox="0 0 16 20">
+    <path d={path} fill="CurrentColor" />
+  </svg>
+{/if}
 
 <style lang="sass">
   svg

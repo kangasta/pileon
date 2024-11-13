@@ -17,22 +17,24 @@
   excluded from <i>Significant moves</i> but included in <i>Total moves</i>.
 </p>
 <table>
-  <tr>
-    <th>Elapsed time:</th>
-    <td>{prettyElapsed(elapsed)}</td>
-  </tr>
-  <tr>
-    <th>Significant moves:</th>
-    <td>{(count.move ?? 0) - (count.undo ?? 0)} </td>
-  </tr>
-  <tr>
-    <th>Total moves:</th>
-    <td>{(count.move ?? 0) + (count.undo ?? 0)} </td>
-  </tr>
-  <tr>
-    <th>Undone moves:</th>
-    <td>{count.undo ?? 0}</td>
-  </tr>
+  <tbody>
+    <tr>
+      <th>Elapsed time:</th>
+      <td>{prettyElapsed(elapsed)}</td>
+    </tr>
+    <tr>
+      <th>Significant moves:</th>
+      <td>{(count.move ?? 0) - (count.undo ?? 0)} </td>
+    </tr>
+    <tr>
+      <th>Total moves:</th>
+      <td>{(count.move ?? 0) + (count.undo ?? 0)} </td>
+    </tr>
+    <tr>
+      <th>Undone moves:</th>
+      <td>{count.undo ?? 0}</td>
+    </tr>
+  </tbody>
 </table>
 
 <style lang="sass">

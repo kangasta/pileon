@@ -41,11 +41,13 @@
   };
 
   let windowControlsOnLeft =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (navigator as any).windowControlsOverlay?.visible &&
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (navigator as any).windowControlsOverlay?.getTitlebarAreaRect().left > 0;
 </script>
 
-<div class="backdrop" class:open />
+<div class="backdrop" class:open></div>
 <div
   class="modal {position} {windowControlsOnLeft
     ? 'window-controls-on-left'
@@ -86,6 +88,14 @@
     flex-direction: column
 
     position: fixed
+
+    background: white
+    z-index: 6
+
+    font-size: 1rem
+    overflow: hidden
+
+    box-sizing: border-box
 
     &.center
       top: 50%
@@ -138,14 +148,6 @@
           height: calc(102vh - env(titlebar-area-height) - 1rem)
           padding: 0 1em 2vh
           top: calc(env(titlebar-area-height) + 1rem)
-
-    background: white
-    z-index: 6
-
-    font-size: 1rem
-    overflow: hidden
-
-    box-sizing: border-box
 
     .header
       display: flex

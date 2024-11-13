@@ -12,10 +12,10 @@
   $: small = $cardAppearance.size === "small";
   $: fourColor = $cardAppearance.fourColor;
 
-  export let card: Card = null;
+  export let card: Card | null = null;
   export let empty = false;
   export let shadow = false;
-  export let stack: "left" = undefined;
+  export let stack: "left" | undefined = undefined;
 
   const labels = ["top", "bottom"];
 
@@ -23,10 +23,12 @@
   $: visible = !(empty || hidden || shadow);
 
   $: rank =
-    visible && card.toString(Card.StringType.ShortValue).replace("T", "10");
-  $: suit = visible && card.toString(Card.StringType.LongSuit);
-  $: face = visible && card.num % 13 > 9;
-  $: text = visible && card.toString(Card.StringType.Long);
+    (visible &&
+      card?.toString(Card.StringType.ShortValue).replace("T", "10")) ||
+    "";
+  $: suit = (visible && card?.toString(Card.StringType.LongSuit)) || "";
+  $: face = visible && (card?.num ?? 0) % 13 > 9;
+  $: text = (visible && card?.toString(Card.StringType.Long)) || "";
 </script>
 
 <div

@@ -9,13 +9,15 @@ export const newEvent = (type: string): IEvent => ({
 });
 
 export const countEvents = (events: IEvent[]): Record<string, number> => {
-  const r = {};
+  const r = {} as Record<string, number>;
   events.forEach(({ type }) => (r[type] = (r[type] ?? 0) + 1));
   return r;
 };
 
 const sum = (a: number[]): number => a.reduce((sum, i) => sum + i, 0);
-export const countElapsed = (events: IEvent[]): [number, number] => {
+export const countElapsed = (
+  events: IEvent[],
+): [number | null, number | null] => {
   const starts = events
     .filter((i) => i.type === "start")
     .map((i) => i.timestamp);
@@ -37,7 +39,11 @@ export const countElapsed = (events: IEvent[]): [number, number] => {
 const withUnit = (value: number, unit: string): string =>
   value > 0 ? `${value}\u202f${unit}` : "";
 
-export const prettyElapsed = (ms: number): string => {
+export const prettyElapsed = (ms: number | null): string => {
+  if (ms === null) {
+    return "N/A";
+  }
+
   if (ms < 1000) {
     return withUnit(ms, "ms");
   }

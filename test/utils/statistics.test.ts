@@ -37,7 +37,7 @@ it("counts elapsed time until now if no stop events", async () => {
 
   const [paused, total] = countElapsed(events);
   expect(paused).toBeNull();
-  expect(total / 1000).toBeCloseTo(0.05);
+  expect((total ?? 0) / 1000).toBeCloseTo(0.05);
 });
 
 it.each([

@@ -10,7 +10,7 @@
 
   let source = new DeckUtils();
   let numCards = source.cardsRemaining;
-  let card: Card = null;
+  let card: Card | null | undefined = null;
 
   function onClick() {
     if (card !== undefined) {

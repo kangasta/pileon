@@ -51,13 +51,15 @@ export const setStackDataTransfer = (
   cards: Card[],
 ): void => {
   const data: IStackDataTransfer = { sourceStack, cards };
-  e.dataTransfer.setData("application/json", JSON.stringify(data));
-  e.dataTransfer.effectAllowed = "move";
+  if (e.dataTransfer) {
+    e.dataTransfer.setData("application/json", JSON.stringify(data));
+    e.dataTransfer.effectAllowed = "move";
+  }
 };
 
 export const getStackDataTransfer = (e: DragEvent): IStackDataTransfer => {
   const { sourceStack, cards: raw_cards } = JSON.parse(
-    e.dataTransfer.getData("application/json"),
+    e.dataTransfer?.getData("application/json") ?? "",
   );
   return { sourceStack, cards: raw_cards.map(Card.fromJSON) };
 };

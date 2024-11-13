@@ -18,14 +18,15 @@
   let menuEl: Element;
   let belowTitlebar = "";
   const handleResize = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (!(navigator as any).windowControlsOverlay?.visible) {
       return;
     }
 
     const menuRect = menuEl.getBoundingClientRect();
-    const titlebarRect = (
-      navigator as any
-    ).windowControlsOverlay?.getTitlebarAreaRect();
+    const titlebarRect =
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (navigator as any).windowControlsOverlay?.getTitlebarAreaRect();
 
     if (
       titlebarRect.left > menuRect.left ||
@@ -74,27 +75,29 @@
       <div class="whitespace"></div>
       <h3>Settings</h3>
       <table>
-        <tr>
-          <th>Colors:</th>
-          <td
-            ><SettingToggle target="colors" value="default" /> / <SettingToggle
-              target="colors"
-              value="standard"
-            /> / <SettingToggle target="colors" value="four-color" /></td
-          >
-        </tr>
-        <tr>
-          <th>Size:</th>
-          <td
-            ><SettingToggle target="size" value="default" /> / <SettingToggle
-              target="size"
-              value="bridge"
-            /> / <SettingToggle target="size" value="poker" /> / <SettingToggle
-              target="size"
-              value="small"
-            /></td
-          >
-        </tr>
+        <tbody>
+          <tr>
+            <th>Colors:</th>
+            <td
+              ><SettingToggle target="colors" value="default" /> / <SettingToggle
+                target="colors"
+                value="standard"
+              /> / <SettingToggle target="colors" value="four-color" /></td
+            >
+          </tr>
+          <tr>
+            <th>Size:</th>
+            <td
+              ><SettingToggle target="size" value="default" /> / <SettingToggle
+                target="size"
+                value="bridge"
+              /> / <SettingToggle target="size" value="poker" /> / <SettingToggle
+                target="size"
+                value="small"
+              /></td
+            >
+          </tr>
+        </tbody>
       </table>
     </div>
   </Modal>
