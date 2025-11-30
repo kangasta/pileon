@@ -11,7 +11,8 @@ import {
   waitShuffleAnimation,
 } from "./utils";
 
-vi.spyOn(focusTrap, "createFocusTrap").mockImplementation(createFocusTrapMock);
+vi.mock('focus-trap', { spy: true })
+vi.mocked(focusTrap.createFocusTrap).mockImplementation(createFocusTrapMock)
 
 it("displays shuffle and undo buttons", async () => {
   const { container } = render(App);
