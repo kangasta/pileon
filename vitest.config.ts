@@ -1,16 +1,9 @@
 /// <reference types="vitest" />
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [svelte()],
-  css: {
-    preprocessorOptions: {
-      sass: {
-        api: "modern-compiler",
-      },
-    },
-  },
   resolve: { conditions: ["browser"] },
   test: { globals: true, environment: "jsdom", setupFiles: ["test/setup.ts"] },
 });

@@ -1,22 +1,23 @@
 import js from "@eslint/js";
+import { defineConfig } from "eslint/config";
 import import_ from "eslint-plugin-import";
 import svelte from "eslint-plugin-svelte";
 import svelteParser from "svelte-eslint-parser";
-import ts from "typescript-eslint";
+import { configs as tsConfigs, parser as tsParser} from "typescript-eslint";
 
-export default [
+export default defineConfig([
   { ignores: ["dist/"] },
   js.configs.recommended,
   import_.flatConfigs.recommended,
   import_.flatConfigs.typescript,
-  ...ts.configs.recommended,
+  ...tsConfigs.recommended,
   ...svelte.configs["flat/recommended"],
   {
+    files: ["**/*.svelte"],
     languageOptions: {
       parser: svelteParser,
       parserOptions: {
-        parser: ts.parser,
-        extraFileExtensions: [".svelte"],
+        parser: tsParser,
       },
     },
   },
@@ -49,4 +50,4 @@ export default [
       ],
     },
   },
-];
+]);

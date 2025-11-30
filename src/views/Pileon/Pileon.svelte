@@ -171,7 +171,7 @@
   style:font-size="{d.fontSize}px"
   style:max-width="{tableWidth5x3 * 1.25}em"
 >
-  {#each piles as pile, index}
+  {#each piles as pile, index (index)}
     <div class="pile">
       <Stack
         cards={pile}
@@ -186,7 +186,7 @@
       />
     </div>
   {/each}
-  {#each fillerStacks(d.columns, d.rows) as _}
+  {#each fillerStacks(d.columns, d.rows) as _, i (i)}
     <div class="pile" style={`min-width: ${stackWidthEm(4, size)}em`}></div>
   {/each}
 </main>

@@ -111,7 +111,7 @@
     {#if !shuffling}
       <Card card={topCard} empty={topCard === undefined} />
     {/if}
-    {#each shadows as { card, shadow, transform }}
+    {#each shadows as { card, shadow, transform }, i (i)}
       <div class="shadow-container" style="transform: {transform}">
         <Card {card} {shadow} />
       </div>

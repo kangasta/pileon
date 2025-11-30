@@ -1,12 +1,13 @@
 import { render, screen } from "@testing-library/svelte";
-import * as focusTrap from "focus-trap"; // eslint-disable-line import/namespace
+import * as focusTrap from "focus-trap";
 import { Cards } from "two-to-seven-triple-draw";
 
 import Pileon from "../../src/views/Pileon";
 import DeadEndModal from "../../src/views/Pileon/DeadEndModal.svelte";
 import { createFocusTrapMock } from "../utils";
 
-vi.spyOn(focusTrap, "createFocusTrap").mockImplementation(createFocusTrapMock);
+vi.mock("focus-trap", { spy: true });
+vi.mocked(focusTrap.createFocusTrap).mockImplementation(createFocusTrapMock);
 
 it("renders the pileon game", async () => {
   const { container } = render(Pileon);

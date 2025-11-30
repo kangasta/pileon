@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/svelte";
 import userEvent from "@testing-library/user-event";
-import * as focusTrap from "focus-trap"; // eslint-disable-line import/namespace
+import * as focusTrap from "focus-trap";
 
 import App from "../src/App.svelte";
 
@@ -11,7 +11,8 @@ import {
   waitShuffleAnimation,
 } from "./utils";
 
-vi.spyOn(focusTrap, "createFocusTrap").mockImplementation(createFocusTrapMock);
+vi.mock("focus-trap", { spy: true });
+vi.mocked(focusTrap.createFocusTrap).mockImplementation(createFocusTrapMock);
 
 it("displays shuffle and undo buttons", async () => {
   const { container } = render(App);

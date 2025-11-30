@@ -22,9 +22,9 @@
 </script>
 
 <div class="center-pattern">
-  {#each getPattern(rank) as line}
+  {#each getPattern(rank) as line, i (i)}
     <div class="row {grow(line)}">
-      {#each line.split("") as char}
+      {#each line.split("") as char, i (i)}
         <span><Suit {suit} flip={char.toLowerCase() === "d"} /></span>
       {/each}
     </div>

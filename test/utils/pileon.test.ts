@@ -6,11 +6,7 @@ import { isDeadEnd } from "../../src/utils/pileon";
 
 describe("isDeadEnd", () => {
   it("returns false if there is an empty pile", () => {
-    const piles = [
-      new Cards("8♠ 5♦ J♣ 4♥"),
-      new Cards("3♠ Q♦ J♠ 4♠"),
-      [],
-    ];
+    const piles = [new Cards("8♠ 5♦ J♣ 4♥"), new Cards("3♠ Q♦ J♠ 4♠"), []];
     const [t, c] = isDeadEnd(piles);
     expect(t).toEqual(false);
     expect(c).toHaveLength(0);
@@ -29,14 +25,14 @@ describe("isDeadEnd", () => {
     expect(t).toEqual("dead-end");
     expect(c).toHaveLength(0);
   });
-  it.each([
-    [["K♥ A♣ 7♦", "8♠ 5♥ 7♥ 7♠"]],
-    [["K♥ A♣ 7♦ 7♠", "7♣ 5♥ 7♥"]],
-  ])("recognizes infinite loop %s", (piles: string[]) => {
-    const [t, c] = isDeadEnd(piles.map((i) => new Cards(i)));
-    expect(t).toEqual("infinite-loop");
-    expect(c).toEqual(new Cards("7♠"));
-  });
+  it.each([[["K♥ A♣ 7♦", "8♠ 5♥ 7♥ 7♠"]], [["K♥ A♣ 7♦ 7♠", "7♣ 5♥ 7♥"]]])(
+    "recognizes infinite loop %s",
+    (piles: string[]) => {
+      const [t, c] = isDeadEnd(piles.map((i) => new Cards(i)));
+      expect(t).toEqual("infinite-loop");
+      expect(c).toEqual(new Cards("7♠"));
+    },
+  );
   it("recognizes multiple infinite loops", () => {
     const piles = [
       new Cards("J♠ Q♠ 7♥ 7♦"),
