@@ -6,8 +6,8 @@ import Pileon from "../../src/views/Pileon";
 import DeadEndModal from "../../src/views/Pileon/DeadEndModal.svelte";
 import { createFocusTrapMock } from "../utils";
 
-vi.mock('focus-trap', { spy: true })
-vi.mocked(focusTrap.createFocusTrap).mockImplementation(createFocusTrapMock)
+vi.mock("focus-trap", { spy: true });
+vi.mocked(focusTrap.createFocusTrap).mockImplementation(createFocusTrapMock);
 
 it("renders the pileon game", async () => {
   const { container } = render(Pileon);

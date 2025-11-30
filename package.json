@@ -9,8 +9,8 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "eslint": "eslint .",
     "test": "vitest",
-    "format": "prettier --write **{.html,.svelte,.ts}",
-    "format:check": "prettier --check **{.html,.svelte,.ts}",
+    "format": "prettier --write '**{.html,.svelte,.ts}'",
+    "format:check": "prettier --check '**{.html,.svelte,.ts}'",
     "lint": "npm run check && npm run format:check && npm run eslint"
   },
   "devDependencies": {
