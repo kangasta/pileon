@@ -44,7 +44,7 @@
 <div class="titlebar">
   <div class="window-controls"></div>
   <div bind:this={menuEl} class="menu {belowTitlebar}">
-    <IconButton icon={"Menu"} label={"Menu"} onClick={handleClick("open")} />
+    <IconButton icon="Menu" label="Menu" onClick={handleClick("open")} />
     {#if $actions.help !== undefined}
       <IconButton icon="Help" label="Help" onClick={$actions.help} />
     {/if}

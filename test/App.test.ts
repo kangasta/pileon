@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/svelte";
 import userEvent from "@testing-library/user-event";
-import * as focusTrap from "focus-trap"; // eslint-disable-line import/namespace
+import * as focusTrap from "focus-trap";
 
 import App from "../src/App.svelte";
 

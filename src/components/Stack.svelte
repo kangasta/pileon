@@ -32,18 +32,18 @@
   $: selected = selectedCardsN > 0 && selectedCardsN === cards.length;
   $: hidden = closed && cards.length === 1;
 
-  $: onDragStart = (e: DragEvent) => {
+  const onDragStart = (e: DragEvent) => {
     e.stopPropagation();
     setStackDataTransfer(e, index, cards);
   };
 
-  $: onDragOver = (e: DragEvent) => {
+  const onDragOver = (e: DragEvent) => {
     e.preventDefault();
   };
 
   const dispatch = createEventDispatcher();
 
-  $: onSelect = () => {
+  const onSelect = () => {
     if (!nested) {
       dispatch("select", { index });
     }

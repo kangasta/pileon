@@ -44,7 +44,7 @@
   {#if visible}
     <ScreenReaderOnly>{text}</ScreenReaderOnly>
   {/if}
-  {#each labels as label}
+  {#each labels as label (label)}
     <div aria-hidden="true" class="{label} label">
       <div class="rank rank-{rank}">{rank}</div>
       <div class="suit"><Suit {suit} /></div>
