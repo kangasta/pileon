@@ -22,7 +22,7 @@ jobs:
         cp dist/index.html dist/404.html
         touch dist/.nojekyll
     - name: Deploy to pages
-      uses: JamesIves/github-pages-deploy-action@132898c54c57c7cc6b80eb3a89968de8fc283505 # 3.7.1
+      uses: JamesIves/github-pages-deploy-action@9d877eea73427180ae43cf98e8914934fe157a1a # 4.7.6
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
