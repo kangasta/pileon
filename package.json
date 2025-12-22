@@ -28,7 +28,7 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-svelte": "^3.13.0",
     "focus-trap": "^7.6.6",
-    "jsdom": "^27.2.0",
+    "jsdom": "^27.3.0",
     "prettier": "^3.7.3",
     "prettier-plugin-svelte": "^3.4.0",
     "sass": "^1.97.1",
